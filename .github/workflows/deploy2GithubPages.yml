@@ -1,0 +1,56 @@
+name: deploy2GithubPages
+
+on:
+  # 每当 push 到 master 分支时触发部署
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  # 手动触发部署
+  workflow_dispatch:
+
+jobs:
+  docs: # 作业的名称
+    # 运行环境
+    runs-on: ubuntu-latest
+    # 步骤
+    steps:
+      - name: "安装 tree 命令"
+        run: sudo apt-get install tree
+      - name: "拉取代码"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+      - name: "设置 Node.js 的版本"
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x' # node 的版本
+          registry-url: 'https://registry.npmjs.org'
+      - name: "缓存 node_modules "
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: "如果缓存没有命中，安装依赖"
+        if: ${{steps.yarn-cache.outputs.cache-hit != 'true'}}
+        run: yarn
+      - name: "项目构建"
+        run: yarn github
+      - name: '查看项目构建完毕的文件'
+        run: |
+          tree -L 3 ./dist
+      - name: "部署到GitHub Pages"
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为Vite项目的默认输出目录
+          build_dir: ./dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
