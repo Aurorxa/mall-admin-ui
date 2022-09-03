@@ -1,0 +1,1 @@
+import{aq as e}from"./index.183dfb95.js";const n={};function r(i,a){return" \u9996\u9875 "}const o=e(n,[["render",r],["__file","/home/runner/work/mall-admin-ui/mall-admin-ui/src/views/Home/index.vue"]]);export{o as default};

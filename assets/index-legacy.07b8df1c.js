@@ -1,0 +1,1 @@
+System.register(["./index-legacy.91e6c4da.js"],(function(e,n){"use strict";var r;return{setters:[e=>{r=e.aq}],execute:function(){e("default",r({},[["render",function(e,n){return" 首页 "}],["__file","/home/runner/work/mall-admin-ui/mall-admin-ui/src/views/Home/index.vue"]]))}}}));
