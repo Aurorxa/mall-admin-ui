@@ -1,9 +1,9 @@
 <template>
   <el-row class="min-h-screen">
-    <el-col :lg="16" :md="12" class="!flex !items-center !justify-center bg-img">
-      <div>
-        <h2 class="font-bold text-5xl text-light-50 mb-4">欢迎光临</h2>
-        <div class="text-2xl text-light-blue-400 mb-2">《基于 Vite + Vue3.x + Element Plus + Windi css 开发的商城后台系统》</div>
+    <el-col :lg="16" :md="12" class="!flex !items-center !justify-center flex-col bg-img ">
+      <div class="font-bold text-5xl text-light-50 mb-4">欢迎光临</div>
+      <div class="text-2xl text-light-blue-400 mb-2">《基于 Vite + Vue3.x + Element Plus + Windi css
+        开发的商城后台系统》
       </div>
     </el-col>
     <el-col :lg="8" :md="12" class="bg-light-50 !flex !items-center !justify-center !flex-col">
