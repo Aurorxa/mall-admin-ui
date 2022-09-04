@@ -1,12 +1,12 @@
 <template>
-  <el-row class="min-h-screen">
-    <el-col :lg="16" :md="12" class="!flex !items-center !justify-center flex-col bg-img ">
+  <el-row class="login-container">
+    <el-col :lg="16" :md="12" class="!flex items-center justify-center flex-col bg-img">
       <div class="font-bold text-5xl text-light-50 mb-4 select-none">欢迎光临</div>
       <div class="text-2xl text-light-blue-400 mb-2">《基于 Vite + Vue3.x + Element Plus + Windi css
         开发的商城后台系统》
       </div>
     </el-col>
-    <el-col :lg="8" :md="12" class="bg-light-50 !flex !items-center !justify-center !flex-col">
+    <el-col :lg="8" :md="12" class="bg-light-50 !flex items-center justify-center flex-col">
       <el-form
           ref="loginFormRef"
           :model="loginForm"
@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router'
 import type {FormInstance} from "element-plus"
+import {InternalRuleItem, SyncValidateResult, Value} from "async-validator"
 
 const router = useRouter()
 const store = useStore()
@@ -76,7 +77,7 @@ const loginForm: loginFormType = reactive<loginFormType>({
 })
 
 // 自定义验证规则
-const validateAgree = (rule: any, value: any, callback: any) => {
+const validateAgree = (rule: InternalRuleItem, value: Value, callback: (error?: string | Error) => void): SyncValidateResult | void => {
   if (value === '') {
     callback(new Error('同意协议没有选中'))
   } else {
@@ -154,6 +155,11 @@ const onSubmit = (formEl: FormInstance | undefined) => {
 </script>
 
 <style lang="scss" scoped>
+
+.login-container {
+  @apply min-h-screen;
+}
+
 .bg-img {
   background: url("@/assets/login_bg.jpg") no-repeat;
 }
