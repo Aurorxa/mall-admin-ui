@@ -48,7 +48,7 @@
         </el-form-item>
         <!-- 登录 -->
         <el-form-item>
-          <el-button :loading="loading" class="w-full" type="primary" @click="onSubmit(loginFormRef)">登录</el-button>
+          <el-button class="w-full" type="primary" @click="onSubmit(loginFormRef)">登录</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -59,8 +59,7 @@
 import {useRouter} from 'vue-router'
 import type {FormInstance, FormRules} from "element-plus"
 import type {loginFormType} from '@/utils/ums/admin'
-
-const router = useRouter()
+import useStore from '@/store'
 
 const loginFormRef = ref<FormInstance>()
 
