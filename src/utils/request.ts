@@ -33,7 +33,8 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
         } else {
             ElMessage.error(returnData.msg)
         }
-        return response.data
+        return new Promise(() => {
+        })
     }
 
 }, error => { // 请求失败
