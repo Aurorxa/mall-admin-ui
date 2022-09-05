@@ -61,6 +61,8 @@ import type {FormInstance, FormRules} from "element-plus"
 import type {loginFormType} from '@/utils/ums/admin'
 import useStore from '@/store'
 
+const router = useRouter()
+
 const loginFormRef = ref<FormInstance>()
 
 const loginForm: loginFormType = reactive<loginFormType>({
