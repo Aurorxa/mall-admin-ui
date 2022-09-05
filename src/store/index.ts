@@ -1,5 +1,6 @@
 import {InjectionKey} from 'vue'
-import {createStore, Store, useStore as baseUseStore} from 'vuex'
+import VuexPersistence from 'vuex-persist'
+import {createStore, Store, StoreOptions, useStore as baseUseStore} from 'vuex'
 
 // 为 store state 声明类型
 export interface State {
@@ -8,6 +9,12 @@ export interface State {
 
 // 定义 injection key
 export const key: InjectionKey<Store<State>> = Symbol()
+
+const vuexLocal = new VuexPersistence<State>({
+    key: 'test',
+    storage: window.localStorage,
+    reducer: (state) => ({count: state.count})
+})
 
 export default createStore<State>({
     state: {
@@ -22,7 +29,8 @@ export default createStore<State>({
         getCount(state: State) {
             return state.count
         }
-    }
+    },
+    plugins: [vuexLocal.plugin]
 })
 
 // 定义自己的 `useStore` 组合式函数

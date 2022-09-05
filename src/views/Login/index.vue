@@ -59,7 +59,9 @@
 import {useRouter} from 'vue-router'
 import type {FormInstance, FormRules} from "element-plus"
 
+
 const loginFormRef = ref<FormInstance>()
+
 
 const router = useRouter()
 const store = useStore()
@@ -128,7 +130,9 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
       loading.value = true
       try {
         // 触发登录动作
+        // store.dispatch('user/login', loginForm)
         // 关闭 loading 效果
+        router.push('/')
         loading.value = false
       } catch (e) {
         // 关闭 loading 效果
