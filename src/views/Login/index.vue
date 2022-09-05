@@ -57,8 +57,9 @@
 
 <script setup lang="ts">
 import {useRouter} from 'vue-router'
-import type {FormInstance} from "element-plus"
-import {InternalRuleItem, SyncValidateResult, Value} from "async-validator"
+import type {FormInstance, FormRules} from "element-plus"
+
+const loginFormRef = ref<FormInstance>()
 
 const router = useRouter()
 const store = useStore()
@@ -77,8 +78,8 @@ const loginForm: loginFormType = reactive<loginFormType>({
 })
 
 // 自定义验证规则
-const validateAgree = (rule: InternalRuleItem, value: Value, callback: (error?: string | Error) => void): SyncValidateResult | void => {
-  if (value === '') {
+const validateAgree = (rule: any, value: any, callback: any) => {
+  if (!value) {
     callback(new Error('同意协议没有选中'))
   } else {
     callback()
@@ -86,37 +87,26 @@ const validateAgree = (rule: InternalRuleItem, value: Value, callback: (error?: 
 }
 
 // 验证规则
-const loginRules = reactive({
+const loginRules = reactive<FormRules>({
   username: [
     {
-      required: true,
-      message: '用户名为必填项',
-      trigger: 'change'
+      required: true, message: '用户名为必填项', trigger: 'change'
     },
     {
-      min: 3,
-      max: 10,
-      message: '长度在 3 到 10 个字符',
-      trigger: 'change'
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
     }
   ],
   password: [
     {
-      required: true,
-      message: '密码为必填项',
-      trigger: 'change'
+      required: true, message: '密码为必填项', trigger: 'change'
     },
     {
-      min: 3,
-      max: 10,
-      message: '长度在 3 到 10 个字符',
-      trigger: 'change'
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
     }
   ],
   agree: [
     {
-      validator: validateAgree,
-      trigger: 'change'
+      validator: validateAgree, trigger: 'change'
     }
   ]
 })
@@ -124,30 +114,26 @@ const loginRules = reactive({
 // 处理登录
 const loading = ref<boolean>(false)
 
-const loginFormRef = ref<FormInstance>()
-
-const onSubmit = (formEl: FormInstance | undefined) => {
+const onSubmit = async (formEl: FormInstance | undefined) => {
   // 如果没有传递 ref ，就返回 false
   if (!formEl) {
     return false
   }
   // 进行表单验证
-  formEl.validate(async (valid) => {
+  await formEl.validate(valid => {
     if (!valid) { // 如果表单验证失败，就返回 false
       return false
-    }
-    // 开启 loading 效果
-    loading.value = true
-    try {
-      // 触发登录动作
-      await store.dispatch('user/login', {...loginForm})
-      // 关闭 loading 效果
-      loading.value = false
-      // 进行登录后操作
-      await router.push('/')
-    } catch (e) {
-      // 关闭 loading 效果
-      loading.value = false
+    } else {
+      // 开启 loading 效果
+      loading.value = true
+      try {
+        // 触发登录动作
+        // 关闭 loading 效果
+        loading.value = false
+      } catch (e) {
+        // 关闭 loading 效果
+        loading.value = false
+      }
     }
   })
 }
