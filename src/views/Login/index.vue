@@ -61,7 +61,6 @@ import type {FormInstance, FormRules} from "element-plus"
 import type {loginFormType} from '@/utils/ums/admin'
 
 const router = useRouter()
-const store = useStore()
 
 const loginFormRef = ref<FormInstance>()
 

@@ -28,7 +28,7 @@ export default defineConfig(({command, mode}) => {
             }),
             AutoImport({
                 // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-                imports: ['vue', 'vue-router', 'vuex', 'vue-i18n', '@vueuse/core'],
+                imports: ['vue', 'vue-router', 'pinia', 'vue-i18n', '@vueuse/core'],
                 dirs: [path.resolve(__dirname, 'src', 'composables')],
                 resolvers: [
                     // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
