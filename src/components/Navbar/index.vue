@@ -45,10 +45,8 @@
 </template>
 
 <script setup lang="ts">
-const store = useStore()
-const icon = computed(() => store.getters.sidebarOpened ? 'i-ep-expand' : 'i-ep-fold')
 // 处理个人设置、修改密码、退出登录等逻辑
-
+const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
   // 个人设置
   if (command === 'settings') {
@@ -60,7 +58,6 @@ const handleCommand = (command: string) => {
   }
   // 退出登录
   if (command === 'logout') {
-    store.dispatch('user/logout')
   }
 }
 

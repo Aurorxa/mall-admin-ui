@@ -1,7 +1,6 @@
 // 基于 axios 进行二次封装
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios"
 import {ElMessage} from 'element-plus'
-import store from '@/store'
 import {responseData, ResponseDataCodeEnum} from "@/utils/global";
 
 // 给 axios 配置全局默认值
@@ -13,7 +12,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
     // 在发送请求之前做些什么
-    const accessToken = store.getters.accessToken
+    const accessToken = null
     if (accessToken) {
         // config.headers.Authorization = `Bearer ${accessToken}`
     }
