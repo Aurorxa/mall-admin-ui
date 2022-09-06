@@ -48,7 +48,7 @@
         </el-form-item>
         <!-- 登录 -->
         <el-form-item>
-          <el-button class="w-full" type="primary" @click="onSubmit(loginFormRef)">登录</el-button>
+          <el-button class="w-full" :loading="loading" type="primary" @click="onSubmit()">登录</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -58,14 +58,17 @@
 <script lang="ts" setup>
 import {useRouter} from 'vue-router'
 import type {FormInstance, FormRules} from "element-plus"
-import type {loginFormType} from '@/utils/ums/admin'
-import useStore from '@/store'
+import {ElMessage} from 'element-plus'
+import {useAdminStore} from "@/store/ums/admin"
+import {LoginFormType} from "@/types/ums/admin"
+import {onBeforeUnmount} from "vue"
 
 const router = useRouter()
+const adminStore = useAdminStore()
 
 const loginFormRef = ref<FormInstance>()
 
-const loginForm: loginFormType = reactive<loginFormType>({
+const loginForm: LoginFormType = reactive<LoginFormType>({
   username: 'admin', // 用户名
   password: '123456', // 密码
   agree: true // 是否同意协议
@@ -108,31 +111,51 @@ const loginRules = reactive<FormRules>({
 // 处理登录
 const loading = ref<boolean>(false)
 
-const onSubmit = async (formEl: FormInstance | undefined) => {
-  // 如果没有传递 ref ，就返回 false
-  if (!formEl) {
-    return false
-  }
+const onSubmit = () => {
   // 进行表单验证
-  await formEl.validate(async valid => {
+  loginFormRef.value?.validate(async valid => {
     if (!valid) { // 如果表单验证失败，就返回 false
       return false
     } else {
-      // 开启 loading 效果
-      loading.value = true
       try {
-        // 触发登录动作
-        // store.dispatch('user/login', loginForm)
-        // 关闭 loading 效果
-        router.push('/')
-        loading.value = false
+        loading.value = true
+        // 触发登录操作
+        await adminStore.login(loginForm)
+        // 提示登录成功
+        ElMessage({
+          message: '登录成功',
+          type: 'success',
+          center: true,
+          onClose: () => {
+            loading.value = false
+            // 跳转到首页
+            router.push('/')
+          }
+        })
+
       } catch (e) {
-        // 关闭 loading 效果
         loading.value = false
+        console.log(e)
       }
     }
   })
 }
+
+// 键盘事件
+const onKeyUp = (e: KeyboardEvent) => {
+  if (e.key === 'Enter') {
+    onSubmit()
+  }
+}
+
+// 钩子函数，添加键盘监听
+onMounted(() => {
+  document.addEventListener('keyup', onKeyUp)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keyup', onKeyUp)
+})
 
 </script>
 

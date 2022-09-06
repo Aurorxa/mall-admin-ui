@@ -13,7 +13,8 @@
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
     "pinia": "^2.0.21",
-    "pinia-plugin-persistedstate": "^2.1.1",
+    "pinia-plugin-persist": "^1.0.0",
+    "qs": "^6.11.0",
     "reset-css": "^5.0.1",
     "vue": "^3.2.37",
     "vue-router": "4"
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@iconify-json/ep": "^1.1.7",
     "@types/node": "^18.7.14",
+    "@types/qs": "^6.9.7",
     "@vitejs/plugin-legacy": "^2.0.1",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.0",

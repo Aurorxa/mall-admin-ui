@@ -1,7 +1,7 @@
-import adminStore from "@/store/ums/admin";
+import {createPinia} from 'pinia'
+import persist from 'pinia-plugin-persist'
 
-export default function useStore() {
-    return {
-        adminStore: adminStore()
-    }
-}
+const store = createPinia()
+store.use(persist)
+
+export default store

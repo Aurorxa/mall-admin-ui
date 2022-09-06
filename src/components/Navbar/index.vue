@@ -45,6 +45,12 @@
 </template>
 
 <script setup lang="ts">
+import {useAdminStore} from "@/store/ums/admin"
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
+
+const adminStore = useAdminStore()
 // 处理个人设置、修改密码、退出登录等逻辑
 const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
@@ -58,6 +64,8 @@ const handleCommand = (command: string) => {
   }
   // 退出登录
   if (command === 'logout') {
+    adminStore.logout()
+    router.push('/login')
   }
 }
 

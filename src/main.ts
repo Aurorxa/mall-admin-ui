@@ -1,18 +1,14 @@
-import {createApp} from 'vue'
-import router from "@/router";
+import {App as Application, createApp} from 'vue'
+import router from "@/permission";
 import App from '@/App.vue'
-import {createPinia} from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import store from '@/store'
 import '@/styles/index.scss'
 import 'virtual:windi.css'
 import 'reset-css'
 import 'uno.css'
 import 'element-plus/theme-chalk/src/index.scss'
 
-const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
-
-const app = createApp(App)
+const app: Application = createApp(App)
 app.use(router)
-app.use(pinia)
+app.use(store)
 app.mount('#app')

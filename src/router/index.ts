@@ -1,4 +1,8 @@
-import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {
+    createRouter,
+    createWebHashHistory,
+    RouteRecordRaw
+} from 'vue-router'
 
 // 路由表
 const publicRoutes: Array<RouteRecordRaw> = [
@@ -36,6 +40,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [...publicRoutes]
 })
+
 
 // 暴露路由
 export default router

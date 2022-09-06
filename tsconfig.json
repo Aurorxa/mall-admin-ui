@@ -14,7 +14,11 @@
       "ESNext",
       "DOM"
     ],
-    "skipLibCheck": true, // 解决打包报 'vue-tsc --noEmit && vite build '的错误，忽略所有声明文件（*.d.ts）的类型检查
+    "types": [
+      "pinia-plugin-persist"
+    ],
+    "skipLibCheck": true,
+    // 解决打包报 'vue-tsc --noEmit && vite build '的错误，忽略所有声明文件（*.d.ts）的类型检查
     "baseUrl": ".",
     "paths": {
       "@/*": [
