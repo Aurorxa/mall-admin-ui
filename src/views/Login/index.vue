@@ -126,13 +126,11 @@ const onSubmit = () => {
           message: '登录成功',
           type: 'success',
           center: true,
-          onClose: () => {
-            loading.value = false
-            // 跳转到首页
-            router.push('/')
-          }
+          duration: 1000
         })
-
+        loading.value = false
+        // 跳转到首页
+        await router.push('/')
       } catch (e) {
         loading.value = false
         console.log(e)

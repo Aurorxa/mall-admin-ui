@@ -47,6 +47,7 @@
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
 import {useRouter} from 'vue-router'
+import {ElMessageBox} from "element-plus";
 
 const router = useRouter()
 
@@ -64,8 +65,17 @@ const handleCommand = (command: string) => {
   }
   // 退出登录
   if (command === 'logout') {
-    adminStore.logout()
-    router.push('/login')
+    ElMessageBox.confirm('确认退出登录吗？', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }).then(async () => {
+      // 触发退出登录操作
+      await adminStore.logout()
+      await router.push('/login')
+    }).catch(() => {
+
+    })
   }
 }
 

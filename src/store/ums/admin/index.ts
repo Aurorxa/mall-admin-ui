@@ -14,7 +14,8 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
                 const result: LoginReturnType = await login(value);
                 this.saToken = result.saToken
             },
-            logout() {
+            async logout(): Promise<void> {
+                // TODO 调用后端的退出登录方法
                 this.saToken = ''
             }
         },

@@ -12,7 +12,7 @@ export type LoginFormType = {
 export interface actionType {
     login(value: LoginFormType): Promise<void>
 
-    logout(): void
+    logout(): Promise<void>
 }
 
 // store 中 storeType 的类型
