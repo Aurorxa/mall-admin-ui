@@ -1,12 +1,15 @@
 import {NavigationGuardNext, RouteLocationNormalized} from "vue-router"
 import router from "@/router";
 import {useAdminStore} from '@/store/ums/admin'
+import NProgress from 'accessible-nprogress'
+import 'accessible-nprogress/dist/accessible-nprogress.min.css'
 
 // 白名单
 const whiteList = ['/login']
 
 // 路由前置守卫
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    NProgress.start()
     const {saToken} = useAdminStore()
     if (saToken) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
         if (to.path == '/login') {
@@ -22,6 +25,11 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
             next('/login')
         }
     }
+})
+
+
+router.afterEach(() => {
+    NProgress.done()
 })
 
 export default router

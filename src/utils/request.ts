@@ -5,6 +5,7 @@ import {useAdminStore} from '@/store/ums/admin'
 import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 import qs from 'qs'
 
+
 // 给 axios 配置全局默认值
 const instance: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
