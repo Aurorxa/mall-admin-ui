@@ -26,20 +26,16 @@ import Navbar from '@/components/Navbar/index.vue'</script>
   height: 100%;
 
   .aside {
+    overflow: hidden;
     height: 100%;
-    background-color: pink;
   }
 
-  el-aside {
-    height: 100%;
-  }
 
   .header {
     border-bottom: 1px solid #ccc;
   }
 
   .main {
-    //background-color: skyblue;
   }
 }
 </style>
