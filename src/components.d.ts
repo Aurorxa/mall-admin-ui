@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     ElResult: typeof import('element-plus/es')['ElResult']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     MenuItem: typeof import('./components/Sidebar/MenuItem/index.vue')['default']
     Navbar: typeof import('./components/Navbar/index.vue')['default']

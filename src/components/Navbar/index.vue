@@ -16,7 +16,14 @@
       </el-breadcrumb>
     </el-col>
     <el-col :span="1">
-      <el-icon class="i-ep-full-screen" :size="20" style="cursor: pointer"></el-icon>
+      <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="全屏"
+          placement="bottom"
+      >
+        <el-icon class="i-ep-full-screen" :size="20" style="cursor: pointer"></el-icon>
+      </el-tooltip>
     </el-col>
     <el-col :span="2">
       <!-- 头像 -->
