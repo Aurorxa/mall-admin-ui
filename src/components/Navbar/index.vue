@@ -1,9 +1,9 @@
 <template>
-  <el-row align="middle" justify="space-between" style="height: 100%">
+  <el-row align="middle" style="height: 100%">
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="icon"></el-icon>
     </el-col>
-    <el-col :span="20">
+    <el-col :span="21">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path:'/Home'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
