@@ -1,7 +1,7 @@
 <template>
   <el-row class="login-container">
     <el-col :lg="16" :md="12" class="!flex items-center justify-center flex-col bg-img">
-      <div class="font-bold text-5xl text-light-50 mb-4 select-none">商城后台系统</div>
+      <div class="font-bold text-5xl text-light-50 mb-4 select-none">商城后台管理系统</div>
       <div class="text-2xl text-light-blue-400 mb-2">
         《基于 Vite + Vue3.x + Element Plus + Windi css + pinia 等技术》
       </div>
