@@ -5,7 +5,7 @@
     </el-col>
     <el-col :span="20">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path:'/Home'}">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path:'/'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
           <a href="/">活动管理</a>
         </el-breadcrumb-item>
