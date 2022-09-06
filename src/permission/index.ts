@@ -30,7 +30,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 // 全局后置守卫
 router.afterEach((to: RouteLocationNormalized) => {
     NProgress.done()
-    window.document.title = to.meta.title as string || import.meta.env.VITE_APP_TITLE
+    document.title = to.meta.title as string || import.meta.env.VITE_APP_TITLE
 })
 
 export default router
