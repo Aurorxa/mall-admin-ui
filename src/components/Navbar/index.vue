@@ -16,7 +16,7 @@
       </el-breadcrumb>
     </el-col>
     <el-col :span="1">
-      <el-icon class="i-ep-full-screen" :size="20"></el-icon>
+      <el-icon class="i-ep-full-screen" :size="20" style="cursor: pointer"></el-icon>
     </el-col>
     <el-col :span="2">
       <!-- 头像 -->
