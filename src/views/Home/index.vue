@@ -1,8 +1,8 @@
 <template>
-  首页
+  <el-button>点我+1</el-button>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 
 </script>
 

@@ -1,14 +1,14 @@
-import {createApp} from 'vue'
-import store from '@/store'
-import router from "@/router";
+import {App as Application, createApp} from 'vue'
+import router from "@/permission";
 import App from '@/App.vue'
-import '@/style/index.scss'
+import store from '@/store'
+import '@/styles/index.scss'
 import 'virtual:windi.css'
-import 'uno.css'
 import 'reset-css'
+import 'uno.css'
+import 'element-plus/theme-chalk/src/index.scss'
 
-
-const app = createApp(App)
+const app: Application = createApp(App)
 app.use(router)
 app.use(store)
 app.mount('#app')

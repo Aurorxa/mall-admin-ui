@@ -5,6 +5,9 @@ const publicRoutes: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: 'login',
+        meta: {
+            title: '登录页面'
+        },
         component: () => import('@/views/Login/index.vue')
     },
     {
@@ -14,6 +17,9 @@ const publicRoutes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'home',
+                meta: {
+                    title: '首页'
+                },
                 component: () => import('@/views/Home/index.vue')
             },
             {
@@ -36,6 +42,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [...publicRoutes]
 })
+
 
 // 暴露路由
 export default router

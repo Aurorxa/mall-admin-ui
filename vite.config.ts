@@ -13,22 +13,22 @@ import Unocss from 'unocss/vite'
 import {presetIcons} from 'unocss'
 import WindiCSS from 'vite-plugin-windicss'
 
-
 export default defineConfig(({command, mode}) => {
     // 根据当前工作目录中的 `mode` 加载 .env 文件
     // 设置第三个参数为 '' 来加载所有环境变量，而不管是否有 `VITE_` 前缀。
     const env = loadEnv(mode, process.cwd(), '')
     return {
-        base: env.VITE_APP_BASE_URL,
+        base: env.VITE_APP_BUILD_DIRECTORY,
         plugins: [
-            vue(),
+            vue({reactivityTransform: true}),
             vueJsx(),
             legacy({
                 targets: ['defaults', 'not IE 11']
             }),
             AutoImport({
                 // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-                imports: ['vue', 'vue-router', 'vuex', 'vue-i18n'],
+                imports: ['vue', 'vue-router', 'pinia', 'vue-i18n', '@vueuse/core'],
+                dirs: [path.resolve(__dirname, 'src', 'composables')],
                 resolvers: [
                     // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
                     ElementPlusResolver(),
@@ -38,6 +38,7 @@ export default defineConfig(({command, mode}) => {
                     }),
 
                 ],
+                vueTemplate: true,
                 dts: path.resolve(path.resolve(__dirname, 'src'), 'auto-imports.d.ts'),
             }),
             Components({
@@ -85,7 +86,6 @@ export default defineConfig(({command, mode}) => {
             alias: [ // 配置别名
                 {find: '@', replacement: path.resolve(__dirname, 'src')}
             ],
-            extensions: [".js", ".json", ".ts", ".vue"] // 使用路径别名时想要省略的后缀名
         },
         build: {
             target: 'es2015'
@@ -97,7 +97,7 @@ export default defineConfig(({command, mode}) => {
             proxy: {
                 // 选项写法
                 "/api": {
-                    target: "http://localhost:9000", // 所要代理的目标地址
+                    target: "http://localhost:8088", // 所要代理的目标地址
                     rewrite: (path) => path.replace(/^\/api/, ""),
                     changeOrigin: true
                 }

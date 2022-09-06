@@ -1,12 +1,12 @@
 <template>
-  <el-row class="min-h-screen">
-    <el-col :lg="16" :md="12" class="!flex !items-center !justify-center flex-col bg-img ">
-      <div class="font-bold text-5xl text-light-50 mb-4 select-none">欢迎光临</div>
-      <div class="text-2xl text-light-blue-400 mb-2">《基于 Vite + Vue3.x + Element Plus + Windi css
-        开发的商城后台系统》
+  <el-row class="login-container">
+    <el-col :lg="16" :md="12" class="!flex items-center justify-center flex-col bg-img">
+      <div class="font-bold text-5xl text-light-50 mb-4 select-none">商城后台系统</div>
+      <div class="text-2xl text-light-blue-400 mb-2">
+        《基于 Vite + Vue3.x + Element Plus + Windi css + pinia 等技术》
       </div>
     </el-col>
-    <el-col :lg="8" :md="12" class="bg-light-50 !flex !items-center !justify-center !flex-col">
+    <el-col :lg="8" :md="12" class="bg-light-50 !flex items-center justify-center flex-col">
       <el-form
           ref="loginFormRef"
           :model="loginForm"
@@ -16,7 +16,7 @@
         <el-row style="text-align: center">
           <el-col>
             <el-form-item style="display: inline-block">
-              <img alt="" src="@/assets/logo.png" class="w-20">
+              <img alt="" class="w-20" src="@/assets/logo.png">
             </el-form-item>
           </el-col>
         </el-row>
@@ -33,9 +33,9 @@
         <el-form-item prop="password">
           <el-input
               v-model="loginForm.password"
-              prefix-icon="i-ep-lock"
               clearable
               placeholder="请输入密码"
+              prefix-icon="i-ep-lock"
               show-password
               style="width: 250px" />
         </el-form-item>
@@ -48,36 +48,35 @@
         </el-form-item>
         <!-- 登录 -->
         <el-form-item>
-          <el-button :loading="loading" type="primary" @click="onSubmit(loginFormRef)" class="w-full">登录</el-button>
+          <el-button class="w-full" :loading="loading" type="primary" @click="onSubmit()">登录</el-button>
         </el-form-item>
       </el-form>
     </el-col>
   </el-row>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {useRouter} from 'vue-router'
-import type {FormInstance} from "element-plus"
+import type {FormInstance, FormRules} from "element-plus"
+import {ElMessage} from 'element-plus'
+import {useAdminStore} from "@/store/ums/admin"
+import {LoginFormType} from "@/types/ums/admin"
+import {onBeforeUnmount} from "vue"
 
 const router = useRouter()
-const store = useStore()
+const adminStore = useAdminStore()
 
-// 数据源
-type loginFormType = {
-  username: string,
-  password: string,
-  agree: boolean
-}
+const loginFormRef = ref<FormInstance>()
 
-const loginForm: loginFormType = reactive<loginFormType>({
+const loginForm: LoginFormType = reactive<LoginFormType>({
   username: 'admin', // 用户名
   password: '123456', // 密码
-  agree: false // 是否同意协议
+  agree: true // 是否同意协议
 })
 
 // 自定义验证规则
 const validateAgree = (rule: any, value: any, callback: any) => {
-  if (value === '') {
+  if (!value) {
     callback(new Error('同意协议没有选中'))
   } else {
     callback()
@@ -85,37 +84,26 @@ const validateAgree = (rule: any, value: any, callback: any) => {
 }
 
 // 验证规则
-const loginRules = reactive({
+const loginRules = reactive<FormRules>({
   username: [
     {
-      required: true,
-      message: '用户名为必填项',
-      trigger: 'change'
+      required: true, message: '用户名为必填项', trigger: 'change'
     },
     {
-      min: 3,
-      max: 10,
-      message: '长度在 3 到 10 个字符',
-      trigger: 'change'
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
     }
   ],
   password: [
     {
-      required: true,
-      message: '密码为必填项',
-      trigger: 'change'
+      required: true, message: '密码为必填项', trigger: 'change'
     },
     {
-      min: 3,
-      max: 10,
-      message: '长度在 3 到 10 个字符',
-      trigger: 'change'
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
     }
   ],
   agree: [
     {
-      validator: validateAgree,
-      trigger: 'change'
+      validator: validateAgree, trigger: 'change'
     }
   ]
 })
@@ -123,37 +111,58 @@ const loginRules = reactive({
 // 处理登录
 const loading = ref<boolean>(false)
 
-const loginFormRef = ref<FormInstance>()
-
-const onSubmit = (formEl: FormInstance | undefined) => {
-  // 如果没有传递 ref ，就返回 false
-  if (!formEl) {
-    return false
-  }
+const onSubmit = () => {
   // 进行表单验证
-  formEl.validate(async (valid) => {
+  loginFormRef.value?.validate(async valid => {
     if (!valid) { // 如果表单验证失败，就返回 false
       return false
-    }
-    // 开启 loading 效果
-    loading.value = true
-    try {
-      // 触发登录动作
-      await store.dispatch('user/login', {...loginForm})
-      // 关闭 loading 效果
-      loading.value = false
-      // 进行登录后操作
-      await router.push('/')
-    } catch (e) {
-      // 关闭 loading 效果
-      loading.value = false
+    } else {
+      try {
+        loading.value = true
+        // 触发登录操作
+        await adminStore.login(loginForm)
+        // 提示登录成功
+        ElMessage({
+          message: '登录成功',
+          type: 'success',
+          center: true,
+          duration: 1000
+        })
+        loading.value = false
+        // 跳转到首页
+        await router.push('/')
+      } catch (e) {
+        loading.value = false
+        console.log(e)
+      }
     }
   })
 }
 
+// 键盘事件
+const onKeyUp = (e: KeyboardEvent) => {
+  if (e.key === 'Enter') {
+    onSubmit()
+  }
+}
+
+// 钩子函数，添加键盘监听
+onMounted(() => {
+  document.addEventListener('keyup', onKeyUp)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keyup', onKeyUp)
+})
+
 </script>
 
 <style lang="scss" scoped>
+
+.login-container {
+  @apply min-h-screen;
+}
+
 .bg-img {
   background: url("@/assets/login_bg.jpg") no-repeat;
 }

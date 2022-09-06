@@ -45,10 +45,15 @@
 </template>
 
 <script setup lang="ts">
-const store = useStore()
-const icon = computed(() => store.getters.sidebarOpened ? 'i-ep-expand' : 'i-ep-fold')
-// 处理个人设置、修改密码、退出登录等逻辑
+import {useAdminStore} from "@/store/ums/admin"
+import {useRouter} from 'vue-router'
+import {ElMessageBox} from "element-plus";
 
+const router = useRouter()
+
+const adminStore = useAdminStore()
+// 处理个人设置、修改密码、退出登录等逻辑
+const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
   // 个人设置
   if (command === 'settings') {
@@ -60,7 +65,18 @@ const handleCommand = (command: string) => {
   }
   // 退出登录
   if (command === 'logout') {
-    store.dispatch('user/logout')
+    ElMessageBox.confirm('确认退出登录吗？', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+      autofocus: false
+    }).then(async () => {
+      // 触发退出登录操作
+      await adminStore.logout()
+      await router.push('/login')
+    }).catch(() => {
+
+    })
   }
 }
 
