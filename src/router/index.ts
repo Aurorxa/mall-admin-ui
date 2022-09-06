@@ -1,14 +1,13 @@
-import {
-    createRouter,
-    createWebHashHistory,
-    RouteRecordRaw
-} from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 
 // 路由表
 const publicRoutes: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: 'login',
+        meta: {
+            title: '登录页面'
+        },
         component: () => import('@/views/Login/index.vue')
     },
     {
@@ -18,6 +17,9 @@ const publicRoutes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'home',
+                meta: {
+                    title: '首页'
+                },
                 component: () => import('@/views/Home/index.vue')
             },
             {
