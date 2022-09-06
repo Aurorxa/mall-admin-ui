@@ -22,7 +22,8 @@
           content="全屏"
           placement="bottom"
       >
-        <el-icon class="i-ep-full-screen" :size="20" style="cursor: pointer"></el-icon>
+        <el-icon :class="[!isFullscreen ?'i-ep-full-screen':'i-ep-aim']" :size="20"
+                 style="cursor: pointer" @click="toggle"></el-icon>
       </el-tooltip>
     </el-col>
     <el-col :span="2">
@@ -56,12 +57,15 @@
 
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
+import {useFullscreen} from '@vueuse/core'
 import {useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus";
 
 const router = useRouter()
-
+const {isFullscreen, toggle} = useFullscreen()
 const adminStore = useAdminStore()
+
+
 // 处理个人设置、修改密码、退出登录等逻辑
 const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
@@ -89,6 +93,7 @@ const handleCommand = (command: string) => {
     })
   }
 }
+
 
 </script>
 

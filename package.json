@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^9.2.0",
     "accessible-nprogress": "^2.1.2",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
