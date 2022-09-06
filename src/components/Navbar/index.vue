@@ -3,7 +3,7 @@
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="icon"></el-icon>
     </el-col>
-    <el-col :span="21">
+    <el-col :span="20">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path:'/Home'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
@@ -14,6 +14,9 @@
           <div class="no-redirect">活动详情</div>
         </el-breadcrumb-item>
       </el-breadcrumb>
+    </el-col>
+    <el-col :span="1">
+      <el-icon class="i-ep-full-screen" :size="20"></el-icon>
     </el-col>
     <el-col :span="2">
       <!-- 头像 -->
