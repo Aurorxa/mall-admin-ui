@@ -69,6 +69,7 @@ const handleCommand = (command: string) => {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
       type: 'warning',
+      autofocus: false
     }).then(async () => {
       // 触发退出登录操作
       await adminStore.logout()
