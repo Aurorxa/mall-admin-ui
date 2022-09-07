@@ -5,21 +5,22 @@ import {login} from "@/api/ums/admin";
 export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<AdminStoreType>, actionType>('admin', {
         state: () => {
             return {
-                saToken: '',
-                userInfo: {}
+                saTokenInfo: {},
+                resourceCode: []
             }
         },
         actions: {
             async login(value: LoginFormType): Promise<void> {
                 const result: LoginReturnType = await login(value);
-                this.saToken = result.saToken
+                console.log(result.saTokenInfo)
+                this.saTokenInfo = result.saTokenInfo
+                this.resourceCode = result.resourceCode
             },
             async logout(): Promise<void> {
                 // TODO 调用后端的退出登录方法
-                // TODO 权限相关的配置
                 // 清除用户的缓存数据
-                this.saToken = ''
-                this.userInfo = {}
+                this.saTokenInfo = {}
+                this.resourceCode = []
             }
         },
         getters: {},
@@ -28,7 +29,7 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
             strategies: [
                 {
                     storage: localStorage,
-                    paths: ['saToken', 'userInfo']
+                    paths: ['saTokenInfo', 'resourceCode']
                 }
             ],
         },

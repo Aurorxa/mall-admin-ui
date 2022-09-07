@@ -123,16 +123,16 @@ const showDrawer = ref<boolean>(false)
 const changePasswordFormRef = ref<FormInstance>()
 
 const changePasswordForm: ChangePasswordFormType = reactive<ChangePasswordFormType>({
-  oldPassword: '',
-  newPassword: '',
-  confirmPassword: ''
+  oldPassword: '123456',
+  newPassword: '123456',
+  confirmPassword: '123456'
 })
 
 const validateConfirmPassword = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('确认密码为必填项'))
   } else if (value !== changePasswordForm.newPassword) {
-    callback(new Error("新密码和确认密码需要一样"))
+    callback(new Error("新密码和确认密码需要一样~"))
   } else {
     callback()
   }

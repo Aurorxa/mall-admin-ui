@@ -25,13 +25,28 @@ export interface actionType {
     logout(): Promise<void>
 }
 
+export type SaTokenInfoType = {
+    tokenName?: string,
+    tokenValue?: string,
+    isLogin?: boolean,
+    loginId?: string,
+    loginType?: string,
+    tokenTimeout?: number,
+    sessionTimeout?: number,
+    tokenSessionTimeout?: number,
+    tokenActivityTimeout?: number,
+    loginDevice?: string,
+    tag?: object,
+}
+
 // store 中 storeType 的类型
 export type AdminStoreType = {
-    saToken: string,
-    userInfo: object
+    saTokenInfo: SaTokenInfoType,
+    resourceCode: string[]
 }
 
 // 登录返回的类型
 export type LoginReturnType = {
-    saToken: string
+    saTokenInfo: SaTokenInfoType,
+    resourceCode: string[]
 }
