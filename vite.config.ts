@@ -54,6 +54,8 @@ export default defineConfig(({command, mode}) => {
             }),
             Icons({
                 autoInstall: true,
+                compiler: "vue3", // 编译方式
+                jsx: 'react' // jsx 支持
             }),
             Inspect(),
             // 添加以下配置
