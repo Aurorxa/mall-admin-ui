@@ -30,6 +30,8 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    FormDrawer: typeof import('./components/FormDrawer/index.vue')['default']
+    FromDrawer: typeof import('./components/FromDrawer/index.vue')['default']
     MenuItem: typeof import('./components/Sidebar/MenuItem/index.vue')['default']
     Navbar: typeof import('./components/Navbar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
