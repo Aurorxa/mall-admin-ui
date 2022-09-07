@@ -94,7 +94,6 @@ import {useFullscreen} from '@vueuse/core'
 import {useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
-// 修改密码的逻辑
 import UseChangePassword from '@/hooks/changePassword'
 
 const router = useRouter()
