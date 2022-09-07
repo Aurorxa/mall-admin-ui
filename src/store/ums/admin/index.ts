@@ -12,7 +12,6 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
         actions: {
             async login(value: LoginFormType): Promise<void> {
                 const result: LoginReturnType = await login(value);
-                console.log(result.saTokenInfo)
                 this.saTokenInfo = result.saTokenInfo
                 this.resourceCode = result.resourceCode
             },
