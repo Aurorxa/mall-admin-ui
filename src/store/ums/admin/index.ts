@@ -16,7 +16,8 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
             },
             async logout(): Promise<void> {
                 // TODO 调用后端的退出登录方法
-                // TODO 清除用户的缓存数据以及权限相关的配置
+                // TODO 权限相关的配置
+                // 清除用户的缓存数据
                 this.saToken = ''
                 this.userInfo = {}
             }
