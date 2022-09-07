@@ -8,7 +8,11 @@ import 'reset-css'
 import 'uno.css'
 import 'element-plus/theme-chalk/src/index.scss'
 
+import FormDrawer from '@/components/FormDrawer/index.vue'
+
 const app: Application = createApp(App)
+// 注册全局组件
+app.component('FormDrawer', FormDrawer)
 app.use(router)
 app.use(store)
 app.mount('#app')

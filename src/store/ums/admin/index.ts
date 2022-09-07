@@ -1,16 +1,16 @@
 import {_GettersTree, defineStore} from 'pinia'
-import {actionType, AdminStoreType, LoginFormType, LoginReturnType} from "@/types/ums/admin";
-import {login, logout} from "@/api/ums/admin";
+import {actionType, AdminStoreType, ChangePasswordFormType, LoginFormType, LoginReturnType} from "@/types/ums/admin";
+import {changePassword, login, logout} from "@/api/ums/admin";
 
 export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<AdminStoreType>, actionType>('admin', {
-        state: () => {
-            return {
-                saTokenInfo: {},
-                resourceCode: []
-            }
-        },
-        actions: {
-            async login(value: LoginFormType): Promise<void> {
+    state: () => {
+        return {
+            saTokenInfo: {},
+            resourceCode: []
+        }
+    },
+    actions: {
+        async login(value: LoginFormType): Promise<void> {
                 // 登录接口
                 const result: LoginReturnType = await login(value);
                 // 设置值到 store 中

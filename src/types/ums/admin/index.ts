@@ -15,7 +15,7 @@ export type ChangePasswordFormType = {
     // 新密码
     newPassword: string,
     // 确认密码
-    confirmPassword: string
+    confirmPassword?: string
 }
 
 // store 中 action 的类型
