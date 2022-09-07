@@ -5,7 +5,17 @@ export type LoginFormType = {
     // 密码
     password: string,
     // 是否同意协议
-    agree: boolean
+    agree?: boolean
+}
+
+// 修改密码表单类型
+export type ChangePasswordFormType = {
+    // 原密码
+    oldPassword: string,
+    // 新密码
+    newPassword: string,
+    // 确认密码
+    confirmPassword: string
 }
 
 // store 中 action 的类型

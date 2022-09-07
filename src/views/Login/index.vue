@@ -132,8 +132,9 @@ const onSubmit = () => {
         // 跳转到首页
         await router.push('/')
       } catch (e) {
-        loading.value = false
         console.log(e)
+      } finally {
+        loading.value = false
       }
     }
   })
