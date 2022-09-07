@@ -12,7 +12,7 @@
         <slot></slot>
       </div>
       <div class="footer">
-        <el-button type="primary" @click="submit">{{ confirmText }}</el-button>
+        <el-button type="primary" :loading="loading" @click="submit">{{ confirmText }}</el-button>
         <el-button type="default" @click="close">{{ cancelText }}</el-button>
       </div>
     </div>
@@ -23,6 +23,17 @@
 <script setup lang="ts">
 // 控制 抽屉 的打开和关闭
 const showDrawer = ref<boolean>(false)
+
+const loading = ref<boolean>(false)
+
+const showLoading = () => {
+  loading.value = true
+}
+
+const closeLoading = () => {
+  loading.value = false
+}
+
 
 // 打开抽屉
 const open = () => {
@@ -46,7 +57,9 @@ const emit = defineEmits<{
 // 向父组件暴露方法
 defineExpose({
   open,
-  close
+  close,
+  showLoading,
+  closeLoading
 })
 
 interface Props {

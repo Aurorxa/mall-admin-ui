@@ -153,8 +153,6 @@ const changePasswordRules: FormRules = reactive<FormRules>({
 })
 
 // 处理修改密码
-const loading = ref<boolean>(false)
-
 const onSubmit = () => {
   // 进行表单验证
   changePasswordFormRef.value?.validate(async valid => {
@@ -162,6 +160,7 @@ const onSubmit = () => {
       return false
     } else {
       try {
+        formDrawerRef.value.showLoading()
         await changePassword(changePasswordForm)
         // 提示登录成功
         ElMessage({
@@ -173,6 +172,8 @@ const onSubmit = () => {
         formDrawerRef.value.close();
       } catch (e) {
         console.log(e)
+      } finally {
+        formDrawerRef.value.closeLoading()
       }
     }
   })
