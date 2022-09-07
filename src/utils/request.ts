@@ -15,9 +15,9 @@ const instance: AxiosInstance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
     // 从 store 中获取 token
-    const {saTokenInfo: {tokenValue}} = useAdminStore()
+    const {saTokenInfo: {tokenValue, tokenName}} = useAdminStore()
     if (tokenValue) {
-        config.headers = {"sa-token": `Bearer ${tokenValue}`, ...config.headers}
+        config.headers = {[tokenName as string]: `Bearer ${tokenValue}`, ...config.headers}
     }
     // qs 是 axios 自带的序列化参数方式
     if (config.headers && config.headers["Content-Type"] &&
