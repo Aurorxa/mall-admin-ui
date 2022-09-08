@@ -48,7 +48,9 @@
         </el-form-item>
         <!-- 登录 -->
         <el-form-item>
-          <el-button class="w-full" :loading="loading" type="primary" @click="onSubmit()">登录</el-button>
+          <el-button class="w-full" :loading="loading" type="primary" @click="onSubmit()">
+            {{ $t('message.login.loginBtn') }}
+          </el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -64,9 +66,12 @@ import {LoginFormType} from "@/types/ums/admin"
 import {onBeforeUnmount} from "vue"
 
 const APP_TITLE = import.meta.env.VITE_APP_TITLE
-
 const router = useRouter()
 const adminStore = useAdminStore()
+import {useI18n} from 'vue-i18n'
+
+const {locale, t} = useI18n()
+
 
 const loginFormRef = ref<FormInstance>()
 
