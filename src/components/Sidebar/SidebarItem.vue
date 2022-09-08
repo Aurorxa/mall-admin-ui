@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 const props = defineProps(['menu'])
-console.log(props.menu)
 </script>
 
 <style>
