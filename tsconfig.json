@@ -15,7 +15,8 @@
       "DOM"
     ],
     "types": [
-      "pinia-plugin-persist"
+      "pinia-plugin-persist",
+      "unplugin-icons/types/vue"
     ],
     "skipLibCheck": true,
     // 解决打包报 'vue-tsc --noEmit && vite build '的错误，忽略所有声明文件（*.d.ts）的类型检查

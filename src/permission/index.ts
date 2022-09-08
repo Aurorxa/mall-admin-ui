@@ -10,8 +10,8 @@ const whiteList = ['/login']
 // 路由前置守卫
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
-    const {saToken} = useAdminStore()
-    if (saToken) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
+    const {saTokenInfo: {tokenValue}} = useAdminStore()
+    if (tokenValue) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
         if (to.path == '/login') {
             next({name: 'home'}) // 强制进入首页
         } else {
@@ -30,7 +30,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 // 全局后置守卫
 router.afterEach((to: RouteLocationNormalized) => {
     NProgress.done()
-    window.document.title = to.meta.title as string || import.meta.env.VITE_APP_TITLE
+    document.title = to.meta.title as string || import.meta.env.VITE_APP_TITLE
 })
 
 export default router
