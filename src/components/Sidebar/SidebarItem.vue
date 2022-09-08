@@ -6,7 +6,7 @@
       <span>{{ menu.title }}</span>
     </template>
     <!-- 循环渲染 -->
-    <SidebarItem v-for="item in menu.children" :menu="item"></SidebarItem>
+    <SidebarItem v-for="item in menu.children" :menu="item" :key="item.id"></SidebarItem>
   </el-sub-menu>
   <!-- 具体菜单项 -->
   <el-menu-item :index="menu.path" v-else>
