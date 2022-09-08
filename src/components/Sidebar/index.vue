@@ -6,6 +6,7 @@
       class="el-menu-vertical-demo"
       :default-active="activeMenu"
       router
+      :collapse-transition="false"
       text-color="#fff">
     <SidebarItem v-for="item in menuList" :menu="item" :key="item.id" />
   </el-menu>
