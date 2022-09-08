@@ -72,6 +72,8 @@ const adminStore = useAdminStore()
 
 const {locale, t} = useI18n()
 
+console.log('locale', locale)
+
 
 const loginFormRef = ref<FormInstance>()
 

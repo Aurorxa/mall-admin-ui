@@ -1,6 +1,5 @@
 <template>
   <el-button @click="add">点我+1</el-button>
-  <p>{{ $t("message.test") }}</p>
 </template>
 
 <script lang="ts" setup>

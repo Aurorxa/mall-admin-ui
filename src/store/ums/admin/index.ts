@@ -28,6 +28,7 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
         async clear(): Promise<void> {
             this.saTokenInfo = {}
             this.resourceCode = []
+            this.menuList = []
         }
     },
         getters: {},
