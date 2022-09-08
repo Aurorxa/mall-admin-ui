@@ -38,7 +38,7 @@ const handleCommand = (command: string) => {
     // 设置 store 中保存的 language
     languageStore.setLanguage(command)
     // 切换 i18n 的 locale
-    locale.value = command
+    locale.value = language.value
     ElMessage.success('切换成功')
   }
 }
