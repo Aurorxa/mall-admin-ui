@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 import {useLanguageStore} from '@/store/lang'
-import {ElMessage} from "element-plus";
+import {ElMessage} from "element-plus"
+import {useI18n} from 'vue-i18n'
 
-const i18n = useI18n()
+const {locale, t} = useI18n()
 const languageStore = useLanguageStore();
-
 const {language} = storeToRefs(languageStore)
 
 const handleCommand = (command: string) => {
@@ -38,10 +38,9 @@ const handleCommand = (command: string) => {
     // 设置 store 中保存的 language
     languageStore.setLanguage(command)
     // 切换 i18n 的 locale
-    i18n.locale.value = command
+    locale.value = command
     ElMessage.success('切换成功')
   }
-
 }
 
 </script>
