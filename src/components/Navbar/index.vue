@@ -15,10 +15,8 @@
         </el-breadcrumb-item>
       </el-breadcrumb>
     </el-col>
-    <el-col :span="1">
+    <el-col :span="2" style="display:flex;justify-content: space-evenly">
       <Fullscreen />
-    </el-col>
-    <el-col :span="1">
       <LangSelect />
     </el-col>
     <el-col :span="2">
