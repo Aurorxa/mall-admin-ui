@@ -14,11 +14,11 @@ const messages = {
         }
     }
 }
-const locale = 'en'
+const locale = 'zh'
 
 const i18n = createI18n({
     legacy: false, // 使用 Composition API
-    globalInjection: true, // 全局使用 t  函数
+    globalInjection: true, // 全局使用 t 函数
     locale,
     messages
 })
