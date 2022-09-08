@@ -96,9 +96,9 @@ import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 
-const router = useRouter()
 const {isFullscreen, toggle} = useFullscreen()
 const adminStore = useAdminStore()
+const router = useRouter()
 
 const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
 
@@ -123,7 +123,9 @@ const handleCommand = (command: string) => {
     }).then(async () => {
       // 触发退出登录操作
       await adminStore.logout()
+      // 跳转到登录页面
       await router.push('/login')
+
     }).catch(() => {
 
     })

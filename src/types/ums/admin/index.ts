@@ -23,6 +23,8 @@ export interface actionType {
     login(value: LoginFormType): Promise<void>
 
     logout(): Promise<void>
+
+    clear(): Promise<void>
 }
 
 export type SaTokenInfoType = {
