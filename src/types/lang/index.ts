@@ -5,5 +5,5 @@ export type LanguageStoreType = {
 
 // store 中 action 的类型
 export interface actionType {
-
+    setLanguage(lang: string): void
 }

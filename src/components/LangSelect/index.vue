@@ -10,10 +10,10 @@
                style="cursor: pointer"></el-icon>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="zh">
+          <el-dropdown-item command="zh" :disabled="language ==='zh'">
             中文
           </el-dropdown-item>
-          <el-dropdown-item command="en">
+          <el-dropdown-item command="en" :disabled="language ==='en'">
             English
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -24,13 +24,20 @@
 </template>
 
 <script setup lang="ts">
+import {useLanguageStore} from '@/store/lang'
+
+const languageStore = useLanguageStore();
+
+const {language} = storeToRefs(languageStore)
 
 const handleCommand = (command: string) => {
   // 中文
   if (command === 'zh') {
+    languageStore.setLanguage('zh')
   }
   // 英文
   if (command === 'en') {
+    languageStore.setLanguage('en')
   }
 }
 
