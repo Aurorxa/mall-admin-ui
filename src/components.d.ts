@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ChangePassword: typeof import('./components/ChangePassword/index.vue')['default']
-    Dialog: typeof import('./components/Dialog.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -34,10 +32,8 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormDrawer: typeof import('./components/FormDrawer/index.vue')['default']
-    FromDrawer: typeof import('./components/FromDrawer/index.vue')['default']
     Fullscreen: typeof import('./components/Fullscreen/index.vue')['default']
     LangSelect: typeof import('./components/LangSelect/index.vue')['default']
-    MenuItem: typeof import('./components/Sidebar/MenuItem/index.vue')['default']
     Navbar: typeof import('./components/Navbar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
