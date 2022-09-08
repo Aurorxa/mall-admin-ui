@@ -1,6 +1,6 @@
 <template>
   <!-- 有子菜单 -->
-  <el-sub-menu index="1" v-if="menu.children && menu.children.length > 0">
+  <el-sub-menu :index="menu.id" v-if="menu.children && menu.children.length > 0">
     <template #title>
       <el-icon :class="menu.icon"></el-icon>
       <span>{{ menu.title }}</span>
@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 const props = defineProps(['menu'])
+console.log(props.menu)
 </script>
 
 <style>
