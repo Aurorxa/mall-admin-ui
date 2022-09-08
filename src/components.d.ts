@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElResult: typeof import('element-plus/es')['ElResult']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
@@ -40,5 +41,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./components/Sidebar/index.vue')['default']
     SidebarHeader: typeof import('./components/SidebarHeader/index.vue')['default']
+    SidebarItem: typeof import('./components/Sidebar/SidebarItem.vue')['default']
   }
 }

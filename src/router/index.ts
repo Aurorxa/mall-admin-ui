@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 
-// 路由表
+// 公开的路由表
 const publicRoutes: Array<RouteRecordRaw> = [
     {
         path: '/login',
@@ -37,10 +37,13 @@ const publicRoutes: Array<RouteRecordRaw> = [
     },
 ]
 
+// 私有的路由表
+const privateRoutes: Array<RouteRecordRaw> = []
+
 // 创建路由
 const router = createRouter({
     history: createWebHashHistory(),
-    routes: [...publicRoutes]
+    routes: [...publicRoutes, ...privateRoutes]
 })
 
 
