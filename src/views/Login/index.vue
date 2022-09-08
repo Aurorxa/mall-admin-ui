@@ -1,7 +1,7 @@
 <template>
   <el-row class="login-container">
     <el-col :lg="16" :md="12" class="!flex items-center justify-center flex-col bg-img">
-      <div class="font-bold text-5xl text-light-50 mb-4 select-none">商城后台管理系统</div>
+      <div class="font-bold text-5xl text-light-50 mb-4 select-none">{{ APP_TITLE }}</div>
       <div class="text-2xl text-light-blue-400 mb-2">
         《基于 Vite + Vue3.x + Element Plus + Windi css + pinia 等技术》
       </div>
@@ -62,6 +62,8 @@ import {ElMessage} from 'element-plus'
 import {useAdminStore} from "@/store/ums/admin"
 import {LoginFormType} from "@/types/ums/admin"
 import {onBeforeUnmount} from "vue"
+
+const APP_TITLE = import.meta.env.VITE_APP_TITLE
 
 const router = useRouter()
 const adminStore = useAdminStore()

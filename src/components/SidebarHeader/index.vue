@@ -1,12 +1,12 @@
 <template>
   <div class="sidebar-header-container">
     <img alt="" src="@/assets/logo.png">
-    <h1>后台管理系统</h1>
+    <h1>{{ APP_TITLE }}</h1>
   </div>
 </template>
 
 <script lang="ts" setup>
-
+const APP_TITLE = import.meta.env.VITE_APP_TITLE
 </script>
 
 <style scoped lang="scss">
