@@ -6,10 +6,8 @@
       placement="bottom"
   >
     <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
-        <span class="el-dropdown-link" style="display: flex;justify-content: center;align-items: center">
-          <el-avatar :size="50" shape="circle"
-                     src="https://avatars.githubusercontent.com/u/25677587?s=400&u=49a02118ee2c72d9200af201976fcd2c95766455&v=4" />
-        </span>
+      <el-icon class="i-ant-design-google-circle-filled" :size="20"
+               style="cursor: pointer"></el-icon>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="zh">
