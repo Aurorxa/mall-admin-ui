@@ -91,7 +91,7 @@
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
 import {useFullscreen} from '@vueuse/core'
-import {useRouter} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
@@ -99,6 +99,8 @@ import UseChangePassword from '@/hooks/changePassword'
 const {isFullscreen, toggle} = useFullscreen()
 const adminStore = useAdminStore()
 const router = useRouter()
+const route = useRoute()
+console.log('route.matched@@@', route.matched);
 
 const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
 
