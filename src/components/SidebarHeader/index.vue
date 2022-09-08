@@ -1,12 +1,14 @@
 <template>
   <div class="sidebar-header-container">
     <img alt="" src="@/assets/logo.png">
-    <h1>{{ APP_TITLE }}</h1>
+    <h1>{{ $t('message.app.title') }}</h1>
   </div>
 </template>
 
 <script lang="ts" setup>
-const APP_TITLE = import.meta.env.VITE_APP_TITLE
+import {useI18n} from 'vue-i18n'
+
+const {locale, t} = useI18n()
 </script>
 
 <style scoped lang="scss">

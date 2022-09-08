@@ -64,11 +64,11 @@ import {ElMessage} from 'element-plus'
 import {useAdminStore} from "@/store/ums/admin"
 import {LoginFormType} from "@/types/ums/admin"
 import {onBeforeUnmount} from "vue"
+import {useI18n} from 'vue-i18n'
 
 const APP_TITLE = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
 const adminStore = useAdminStore()
-import {useI18n} from 'vue-i18n'
 
 const {locale, t} = useI18n()
 
