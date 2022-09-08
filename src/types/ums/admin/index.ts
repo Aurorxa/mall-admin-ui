@@ -44,7 +44,8 @@ export type SaTokenInfoType = {
 // store 中 storeType 的类型
 export type AdminStoreType = {
     saTokenInfo: SaTokenInfoType,
-    resourceCode: string[]
+    resourceCode: string[],
+    menuList: object[]
 }
 
 // 登录返回的类型

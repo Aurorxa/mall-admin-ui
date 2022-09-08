@@ -6,7 +6,8 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
     state: () => {
         return {
             saTokenInfo: {},
-            resourceCode: []
+            resourceCode: [],
+            menuList: []
         }
     },
     actions: {
