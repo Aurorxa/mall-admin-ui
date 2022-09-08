@@ -8,7 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
+import {AntDesignVueResolver, ElementPlusResolver, VantResolver} from 'unplugin-vue-components/resolvers'
 import Unocss from 'unocss/vite'
 import {presetIcons} from 'unocss'
 import WindiCSS from 'vite-plugin-windicss'
@@ -28,10 +28,12 @@ export default defineConfig(({command, mode}) => {
             AutoImport({
                 // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
                 imports: ['vue', 'vue-router', 'pinia', 'vue-i18n', '@vueuse/core'],
-                dirs: [path.resolve(__dirname, 'src', 'composables')],
+                dirs: [path.resolve(__dirname, 'src')],
                 resolvers: [
                     // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
                     ElementPlusResolver(),
+                    AntDesignVueResolver(),
+                    VantResolver(),
                     // 自动导入图标组件
                     IconsResolver({
                         prefix: 'Icon',
@@ -45,9 +47,11 @@ export default defineConfig(({command, mode}) => {
                 resolvers: [
                     // 自动导入 Element Plus 组件
                     ElementPlusResolver(),
+                    AntDesignVueResolver(),
+                    VantResolver(),
                     // 自动注册图标组件
                     IconsResolver({
-                        enabledCollections: ['ep'],
+                        enabledCollections: ['ep', 'ant'],
                     }),
                 ],
                 dts: path.resolve(path.resolve(__dirname, 'src'), 'components.d.ts'),
@@ -57,6 +61,7 @@ export default defineConfig(({command, mode}) => {
                 compiler: "vue3", // 编译方式
                 jsx: 'react' // jsx 支持
             }),
+
             Inspect(),
             // 添加以下配置
             Unocss({
@@ -86,8 +91,15 @@ export default defineConfig(({command, mode}) => {
         ],
         resolve: {
             alias: [ // 配置别名
-                {find: '@', replacement: path.resolve(__dirname, 'src')}
+                {find: '@', replacement: path.resolve(__dirname, 'src')},
             ],
+        },
+        css: {
+            preprocessorOptions: {
+                less: {
+                    javascriptEnabled: true,
+                },
+            },
         },
         build: {
             target: 'es2015'

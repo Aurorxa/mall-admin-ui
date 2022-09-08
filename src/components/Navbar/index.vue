@@ -3,7 +3,7 @@
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="icon"></el-icon>
     </el-col>
-    <el-col :span="20">
+    <el-col :span="19">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path:'/'}">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
@@ -16,15 +16,10 @@
       </el-breadcrumb>
     </el-col>
     <el-col :span="1">
-      <el-tooltip
-          class="box-item"
-          effect="dark"
-          content="全屏"
-          placement="bottom"
-      >
-        <el-icon :class="[!isFullscreen ?'i-ep-full-screen':'i-ep-aim']" :size="20"
-                 style="cursor: pointer" @click="toggle"></el-icon>
-      </el-tooltip>
+      <Fullscreen />
+    </el-col>
+    <el-col :span="1">
+      <LangSelect />
     </el-col>
     <el-col :span="2">
       <!-- 头像 -->
@@ -90,13 +85,13 @@
 
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
-import {useFullscreen} from '@vueuse/core'
 import {useRoute, useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
+import LangSelect from '@/components/LangSelect/index.vue'
+import Fullscreen from '@/components/Fullscreen/index.vue'
 
-const {isFullscreen, toggle} = useFullscreen()
 const adminStore = useAdminStore()
 const router = useRouter()
 const route = useRoute()
