@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import SidebarItem from '@/components/Sidebar/SidebarItem.vue'
 import SidebarHeader from '@/components/SidebarHeader/index.vue'
-import {useRouter} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 const router = useRouter()
 // 测试数据
