@@ -70,10 +70,7 @@ const APP_TITLE = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
 const adminStore = useAdminStore()
 
-const {locale, t} = useI18n()
-
-console.log('locale', locale)
-
+const {t} = useI18n()
 
 const loginFormRef = ref<FormInstance>()
 

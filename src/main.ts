@@ -1,7 +1,7 @@
 import {App as Application, createApp} from 'vue'
 import router from "@/permission";
 import App from '@/App.vue'
-import store from '@/store'
+import pinia from '@/store'
 import '@/styles/index.scss'
 import 'virtual:windi.css'
 import 'reset-css'
@@ -13,7 +13,7 @@ import i18n from "@/i18n";
 const app: Application = createApp(App)
 // 注册全局组件
 app.component('FormDrawer', FormDrawer)
+app.use(pinia)
 app.use(i18n)
-app.use(store)
 app.use(router)
 app.mount('#app')

@@ -30,6 +30,7 @@ import {useI18n} from 'vue-i18n'
 
 const {locale, t} = useI18n()
 const languageStore = useLanguageStore();
+
 const {language} = storeToRefs(languageStore)
 
 const handleCommand = (command: string) => {

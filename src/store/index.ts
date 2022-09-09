@@ -1,7 +1,7 @@
 import {createPinia} from 'pinia'
 import persist from 'pinia-plugin-persist'
 
-const store = createPinia()
-store.use(persist)
+const pinia = createPinia()
+pinia.use(persist)
 
-export default store
+export default pinia
