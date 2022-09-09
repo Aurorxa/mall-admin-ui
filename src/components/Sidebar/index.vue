@@ -43,27 +43,13 @@ const menuList = reactive([
         id: '3',
         title: '用户管理',
         icon: 'i-ep-user',
-        path: '',
-        children: [
-          {
-            id: '4',
-            title: '用户管理1',
-            icon: 'i-ep-user',
-            path: '/admin1',
-          },
-          {
-            id: '5',
-            title: '用户管理2',
-            icon: 'i-ep-user',
-            path: '/admin2',
-          }
-        ]
+        path: '/system/user',
       },
       {
         id: '6',
         title: '角色管理',
         icon: 'i-ep-user',
-        path: '/role'
+        path: '/system/role'
       },
       {
         id: '7',

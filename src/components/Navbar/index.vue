@@ -82,7 +82,9 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'
 import {useSidebarStore} from "@/store/sidebar"
 import BreadCrumb from '@/components/BreadCrumb/index.vue'
+import {useRouter} from "vue-router"
 
+const router = useRouter()
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
 
