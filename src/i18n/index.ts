@@ -1,6 +1,6 @@
 import {createI18n} from 'vue-i18n'
-import ZH from "@/i18n/lang/zh";
-import EN from "@/i18n/lang/en";
+import ZH from "@/i18n/lang/zh"
+import EN from "@/i18n/lang/en"
 
 const messages = {
     en: {
