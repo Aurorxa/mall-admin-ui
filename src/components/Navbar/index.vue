@@ -5,16 +5,7 @@
                @click="toggleCollapse"></el-icon>
     </el-col>
     <el-col :span="19">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path:'/'}">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <a href="/">活动管理</a>
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <div class="no-redirect">活动详情</div>
-        </el-breadcrumb-item>
-      </el-breadcrumb>
+      <BreadCrumb></BreadCrumb>
     </el-col>
     <el-col :span="2" style="display:flex;justify-content: space-evenly">
       <Fullscreen />
@@ -84,19 +75,16 @@
 
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
-import {useRoute, useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
-import Fullscreen from '@/components/Fullscreen/index.vue'
+import Fullscreen from '@/components/FullScreen/index.vue'
 import {useSidebarStore} from "@/store/sidebar"
+import BreadCrumb from '@/components/BreadCrumb/index.vue'
 
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
-const router = useRouter()
-const route = useRoute()
-console.log('route.matched@@@', route.matched);
 
 // 处理侧边栏展开和收缩
 const {sidebarOpened} = storeToRefs(sidebarStore)

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BreadCrumb: typeof import('./components/BreadCrumb/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -32,6 +33,7 @@ declare module '@vue/runtime-core' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormDrawer: typeof import('./components/FormDrawer/index.vue')['default']
     Fullscreen: typeof import('./components/Fullscreen/index.vue')['default']
+    FullScreen: typeof import('./components/FullScreen/index.vue')['default']
     LangSelect: typeof import('./components/LangSelect/index.vue')['default']
     Navbar: typeof import('./components/Navbar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
