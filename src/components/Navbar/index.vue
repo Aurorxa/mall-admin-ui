@@ -1,7 +1,8 @@
 <template>
   <el-row align="middle" style="height: 100%">
     <el-col :span="1">
-      <el-icon :size="22" style="cursor: pointer" :class="icon"></el-icon>
+      <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
+               @click="toggleCollapse"></el-icon>
     </el-col>
     <el-col :span="19">
       <el-breadcrumb separator="/">
@@ -89,16 +90,24 @@ import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/Fullscreen/index.vue'
+import {useSidebarStore} from "@/store/sidebar"
 
 const adminStore = useAdminStore()
+const sidebarStore = useSidebarStore()
 const router = useRouter()
 const route = useRoute()
 console.log('route.matched@@@', route.matched);
 
-const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
+// 处理侧边栏展开和收缩
+const {sidebarOpened} = storeToRefs(sidebarStore)
 
+const toggleCollapse = () => {
+  sidebarStore.toggleSidebarOpened()
+}
+
+// 修改密码 hooks
+const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
 // 处理个人设置、修改密码、退出登录等逻辑
-const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
   // 个人设置
   if (command === 'settings') {

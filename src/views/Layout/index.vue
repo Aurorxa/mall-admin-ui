@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-container">
     <!-- 左侧侧边栏 -->
-    <el-aside width="200px" class="aside">
+    <el-aside width="auto" class="aside">
       <SideBar />
     </el-aside>
     <el-container>
@@ -24,6 +24,7 @@ import Navbar from '@/components/Navbar/index.vue'</script>
 <style scoped lang="scss">
 .layout-container {
   height: 100%;
+  transition: all 1s;
 
   .aside {
     overflow: hidden;

@@ -19,7 +19,7 @@ export type ChangePasswordFormType = {
 }
 
 // store 中 action 的类型
-export interface actionType {
+export interface ActionType {
     login(value: LoginFormType): Promise<void>
 
     logout(): Promise<void>
@@ -42,7 +42,7 @@ export type SaTokenInfoType = {
 }
 
 // store 中 storeType 的类型
-export type AdminStoreType = {
+export type StoreType = {
     saTokenInfo: SaTokenInfoType,
     resourceCode: string[],
     menuList: object[]

@@ -6,6 +6,7 @@
       class="el-menu-vertical-demo"
       :default-active="activeMenu"
       router
+      :collapse="sidebarOpened"
       :unique-opened="true"
       :collapse-transition="false"
       text-color="#fff">
@@ -16,10 +17,13 @@
 <script setup lang="ts">
 import SidebarItem from '@/components/Sidebar/SidebarItem.vue'
 import SidebarHeader from '@/components/SidebarHeader/index.vue'
-import {useRoute, useRouter} from 'vue-router'
+import {useRoute} from 'vue-router'
 import {computed} from 'vue'
+import {useSidebarStore} from "@/store/sidebar"
 
-const router = useRouter()
+const sidebarStore = useSidebarStore()
+const {sidebarOpened} = storeToRefs(sidebarStore)
+
 // 测试数据
 const menuList = reactive([
   {
