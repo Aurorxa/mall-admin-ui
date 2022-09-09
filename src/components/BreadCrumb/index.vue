@@ -1,11 +1,13 @@
 <template>
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item v-for="(item,index) in BreadCrumbDataArr" :key="index">
-      <!-- 不可点击项 -->
-      <span class="no-redirect" v-if="index == BreadCrumbDataArr.length -1">{{ item.title }}</span>
-      <!-- 可点击项 -->
-      <span class="redirect" v-else @click="onLinkClick(item)">{{ item.title }}</span>
-    </el-breadcrumb-item>
+    <transition-group name="breadcrumb">
+      <el-breadcrumb-item v-for="(item,index) in BreadCrumbDataArr" :key="index">
+        <!-- 不可点击项 -->
+        <span class="no-redirect" v-if="index == BreadCrumbDataArr.length -1">{{ item.title }}</span>
+        <!-- 可点击项 -->
+        <span class="redirect" v-else @click="onLinkClick(item)">{{ item.title }}</span>
+      </el-breadcrumb-item>
+    </transition-group>
   </el-breadcrumb>
 </template>
 
@@ -54,5 +56,20 @@ const onLinkClick = (item: BreadCrumbDataType) => {
 .no-redirect {
   color: #97a8be;
   cursor: text;
+}
+
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all 0.5s;
+}
+
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
 }
 </style>
