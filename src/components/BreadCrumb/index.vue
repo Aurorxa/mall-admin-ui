@@ -3,7 +3,7 @@
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in BreadCrumbDataArr" :key="index">
         <!-- 不可点击项 -->
-        <span class="no-redirect" v-if="index == BreadCrumbDataArr.length -1">{{ item.title }}</span>
+        <span class="no-redirect" v-if="index === BreadCrumbDataArr.length -1">{{ item.title }}</span>
         <!-- 可点击项 -->
         <span class="redirect" v-else @click="onLinkClick(item)">{{ item.title }}</span>
       </el-breadcrumb-item>
