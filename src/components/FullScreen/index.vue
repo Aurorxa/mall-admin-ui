@@ -11,9 +11,26 @@
 </template>
 
 <script setup lang="ts">
-import {useFullscreen} from "@vueuse/core";
+import screenfull from 'screenfull'
+// 是否全屏
+const isFullscreen = ref<boolean>(false)
+// 触发事件
+const toggle = () => {
+  screenfull.toggle()
+}
+// 监听 screenfull 的变化
+const change = () => {
+  isFullscreen.value = screenfull.isFullscreen
+}
+// 绑定监听
+onMounted(() => {
+  screenfull.on('change', change);
+})
+// 取消监听
+onBeforeMount(() => {
+  screenfull.off('change', change)
+})
 
-const {isFullscreen, toggle} = useFullscreen()
 </script>
 
 <style>

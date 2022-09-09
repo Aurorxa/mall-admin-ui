@@ -357,5 +357,7 @@ const handleCommand = (command: string) => {
 </script>
 ```
 
+## 1.2 基于 vue-i18n 实现国际化
+
 
 
