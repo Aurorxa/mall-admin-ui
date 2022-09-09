@@ -9,13 +9,12 @@
     </el-col>
     <el-col :span="2" style="display:flex;justify-content: space-evenly">
       <Fullscreen />
-      <LangSelect />
     </el-col>
-    <el-col :span="2">
+    <el-col :span="2" style="display:flex;justify-content: space-between;align-items: center">
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <span class="el-dropdown-link" style="display: flex;justify-content: center;align-items: center">
-          <el-avatar :size="50" shape="circle"
+          <el-avatar :size="25" shape="circle"
                      src="https://avatars.githubusercontent.com/u/25677587?s=400&u=49a02118ee2c72d9200af201976fcd2c95766455&v=4" />
           <span style="margin-left: 10px">许大仙</span>
         </span>
@@ -36,6 +35,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <LangSelect />
     </el-col>
   </el-row>
   <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">

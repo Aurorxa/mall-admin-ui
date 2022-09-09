@@ -6,7 +6,7 @@
       placement="bottom"
   >
     <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
-      <el-icon class="i-ant-design-google-circle-filled" :size="20"
+      <el-icon class="i-ant-design-global-outlined" :size="20"
                style="cursor: pointer"></el-icon>
       <template #dropdown>
         <el-dropdown-menu>
