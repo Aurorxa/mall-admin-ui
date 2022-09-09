@@ -7,10 +7,8 @@
     <el-col :span="19">
       <BreadCrumb></BreadCrumb>
     </el-col>
-    <el-col :span="2" style="display:flex;justify-content: space-evenly">
+    <el-col :span="4" style="display:flex;justify-content: space-evenly;align-items: center">
       <Fullscreen />
-    </el-col>
-    <el-col :span="2" style="display:flex;justify-content: space-between;align-items: center">
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <span class="el-dropdown-link" style="display: flex;justify-content: center;align-items: center">
