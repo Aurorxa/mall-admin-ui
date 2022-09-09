@@ -34,6 +34,7 @@ import Navbar from '@/components/Navbar/index.vue'</script>
 
   .header {
     border-bottom: 1px solid #ccc;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, .2);
   }
 
   .main {
