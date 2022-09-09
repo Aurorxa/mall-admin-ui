@@ -35,10 +35,10 @@ const {language} = storeToRefs(languageStore)
 const handleCommand = (command: string) => {
   // 中文或英文
   if (command === 'zh' || command === 'en') {
-    // 切换 i18n 的 locale
-    locale.value = language.value
     // 设置 store 中保存的 language
     languageStore.setLanguage(command)
+    // 切换 i18n 的 locale
+    locale.value = language.value
     // 提示
     ElMessage.success('切换成功')
   }
