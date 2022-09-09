@@ -50,5 +50,24 @@
 </html>
 ```
 
+## 1.2 vue-i18n
+
+* Vue 3.x 的 vue-i18n 的适配版本是 9.x 。
+
+
+* 下载：
+
+```shell
+yarn add vue-i18n@9
+```
+
+* 使用步骤：
+  * ① 创建 messages 数据源。
+  * ② 创建 locale 语言变量。
+  * ③ 初始化 i18n 实例。
+  * ④ 注册 i18n 实例。
+
+
+
 
 
