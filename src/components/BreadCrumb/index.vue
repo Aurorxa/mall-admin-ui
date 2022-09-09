@@ -1,6 +1,5 @@
 <template>
   <el-breadcrumb separator="/">
-    <!--<el-breadcrumb-item :to="{ path:'/'}">首页</el-breadcrumb-item>-->
     <el-breadcrumb-item v-for="(item,index) in BreadCrumbDataArr" :key="index">
       <!-- 不可点击项 -->
       <span class="no-redirect" v-if="index == BreadCrumbDataArr.length -1">{{ item.title }}</span>
