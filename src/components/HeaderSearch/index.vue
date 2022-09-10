@@ -24,7 +24,7 @@
 
 <script lang="ts" setup>
 // 控制 Search 展示
-import {ElSelect} from "element-plus";
+import {ElSelect} from "element-plus"
 
 const isShow = ref<boolean>(false)
 
