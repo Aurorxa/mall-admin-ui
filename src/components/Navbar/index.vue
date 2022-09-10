@@ -4,11 +4,13 @@
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
     </el-col>
-    <el-col :span="19">
+    <el-col :span="16">
       <BreadCrumb></BreadCrumb>
     </el-col>
-    <el-col :span="4" style="display:flex;justify-content: space-evenly;align-items: center">
+    <el-col :span="7" style="display:flex;justify-content: space-evenly;align-items: center">
+      <HeaderSearch/>
       <Fullscreen />
+      <Badge/>
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <span class="el-dropdown-link"
@@ -79,6 +81,8 @@ import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'
+import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Badge from '@/components/Badge/index.vue'
 import {useSidebarStore} from "@/store/sidebar"
 import BreadCrumb from '@/components/BreadCrumb/index.vue'
 import {useRouter} from "vue-router"

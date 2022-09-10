@@ -7,9 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Badge: typeof import('./components/Badge/index.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBadge: typeof import('element-plus/es')['ElBadge']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -28,12 +30,15 @@ declare module '@vue/runtime-core' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElOption: typeof import('element-plus/es')['ElOption']
     ElResult: typeof import('element-plus/es')['ElResult']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormDrawer: typeof import('./components/FormDrawer/index.vue')['default']
     FullScreen: typeof import('./components/FullScreen/index.vue')['default']
+    HeaderSearch: typeof import('./components/HeaderSearch/index.vue')['default']
     LangSelect: typeof import('./components/LangSelect/index.vue')['default']
     Navbar: typeof import('./components/Navbar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
