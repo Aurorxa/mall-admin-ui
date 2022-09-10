@@ -63,7 +63,7 @@ const onSelectChange = () => {
 .header-search {
   font-size: 0 !important;
 
-  .search-icon {
+  ::v-deep(.search-icon) {
     cursor: pointer;
     font-size: 18px;
     vertical-align: middle;
