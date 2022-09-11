@@ -24,7 +24,7 @@
 
 <script lang="ts" setup>
 // 控制 Search 展示
-import {ElSelect} from "element-plus"
+import type {ElSelect} from "element-plus"
 // 模糊搜索
 import Fuse from 'fuse.js'
 
@@ -34,13 +34,16 @@ const isShow = ref<boolean>(false)
 // 搜索的内容
 const search = ref<string>('')
 // el-select 实例
-const headerSearchSelectRef = ref<typeof ElSelect>()
+const headerSearchSelectRef = ref<InstanceType<typeof ElSelect>>()
 const onShowClick = () => {
   isShow.value = !isShow.value
   if (headerSearchSelectRef.value) {
     headerSearchSelectRef.value.focus()
   }
 }
+
+
+
 // 搜索数据源
 type MenuDataType = {
   id: string,
@@ -187,6 +190,24 @@ const onSelectChange = (path: string) => {
     router.push(path)
   }
 }
+
+// 关闭 search 的处理事件
+const onClose = () => {
+  if (headerSearchSelectRef.value) {
+    headerSearchSelectRef.value.blur()
+  }
+  isShow.value = false;
+  searchOptions.value = []
+}
+
+// 监听 search 打开，处理 close 事件
+watch(isShow,val=>{
+  if(val){
+    document.body.addEventListener('click',onClose)
+  }else{
+    document.body.removeEventListener('click',onClose)
+  }
+})
 
 </script>
 
