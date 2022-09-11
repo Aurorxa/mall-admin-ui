@@ -203,6 +203,9 @@ const onClose = () => {
 // 监听 search 打开，处理 close 事件
 watch(isShow,val=>{
   if(val){
+    if (headerSearchSelectRef.value) {
+      headerSearchSelectRef.value.focus()
+    }
     document.body.addEventListener('click',onClose)
   }else{
     document.body.removeEventListener('click',onClose)
