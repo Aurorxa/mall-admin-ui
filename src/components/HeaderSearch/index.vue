@@ -12,10 +12,10 @@
         @change="onSelectChange"
         :remote="true">
       <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="option in searchOptions"
+          :key="option.item.path"
+          :label="option.item.title"
+          :value="option.item.path"
       >
       </el-option>
     </el-select>
@@ -28,6 +28,7 @@ import {ElSelect} from "element-plus"
 // 模糊搜索
 import Fuse from 'fuse.js'
 
+const router = useRouter()
 const isShow = ref<boolean>(false)
 
 // 搜索的内容
@@ -40,7 +41,7 @@ const onShowClick = () => {
     headerSearchSelectRef.value.focus()
   }
 }
-// 检索数据源
+// 搜索数据源
 type MenuDataType = {
   id: string,
   title: string,
@@ -128,7 +129,7 @@ type FuseDataType = {
   title: string | string[],
   path: string
 }
-
+// 处理菜单数据，用于检索
 const handleMenuList = (menuList: MenuDataType[]) => {
   // 创建 result 数据
   let result: FuseDataType[] = []
@@ -156,7 +157,7 @@ const handleMenuList = (menuList: MenuDataType[]) => {
 }
 
 // 搜索库相关
-const fuse = new Fuse(handleMenuList(menuList), {
+const fuse = new Fuse<FuseDataType>(handleMenuList(menuList), {
   shouldSort: true, // 是否按照优先级进行排序
   minMatchCharLength: 1, // 匹配长度超过某个值的被认为是匹配的
   keys: [ // 将被搜索的键列表，支持嵌套路劲、加权搜索、在字符串和对象数组中搜索
@@ -170,19 +171,21 @@ const fuse = new Fuse(handleMenuList(menuList), {
   ]
 })
 
-// 搜索的方法
+// 搜索的相关逻辑
+const searchOptions = ref<Fuse.FuseResult<FuseDataType>[]>([])
 const querySearch = (query: string) => {
   if (query !== '') {
-    const result = fuse.search(query)
-    console.log('@@@@result', result)
-  }else{
-     // 没有搜索数据
+    searchOptions.value = fuse.search(query)
+  } else {
+    searchOptions.value = []
   }
 }
 
 // 选中回调
-const onSelectChange = () => {
-  console.log('@')
+const onSelectChange = (path: string) => {
+  if (path) {
+    router.push(path)
+  }
 }
 
 </script>
