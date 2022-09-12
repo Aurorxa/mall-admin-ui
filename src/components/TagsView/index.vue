@@ -2,11 +2,12 @@
   <el-row>
     <el-col :span="24">
       <el-tag
-          v-for="tag in tagsViewList"
-          :key="tag.fullPath"
+          v-for="(tag,index) in tagsViewList"
+          :key="index"
           size="large"
-          class="mx-1"
           closable
+          :effect="'dark'"
+          :round="false"
           :disable-transitions="false"
           @close="onCloseClick(tag)"
       >
@@ -18,23 +19,21 @@
 
 <script lang="ts" setup>
 import {useTagsViewStore} from '@/store/tagsview'
-import {RouteLocationNormalizedLoaded, useRoute} from "vue-router"
+import {TagViewType} from "@/types/tagsview";
 
-const route = useRoute()
 const tagsViewStore = useTagsViewStore()
 
-const tagsViewList = ref(tagsViewStore.tagsViewList);
+const {tagsViewList} = storeToRefs(tagsViewStore);
 
 /**
  * 是否被选中
  * @param tag
  */
-const isActive = (tag: RouteLocationNormalizedLoaded) => tag.path === route.path
 
 /**
  * 关闭 tag 的点击事件
  */
-const onCloseClick = (tag: RouteLocationNormalizedLoaded) => {
+const onCloseClick = (tag: TagViewType) => {
   tagsViewList.value.splice(tagsViewList.value.map(tags => tags.path).indexOf(tag.path), 1)
 }
 </script>

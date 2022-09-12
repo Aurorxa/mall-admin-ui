@@ -86,10 +86,12 @@ import Badge from '@/components/Badge/index.vue'
 import {useSidebarStore} from "@/store/sidebar"
 import BreadCrumb from '@/components/BreadCrumb/index.vue'
 import {useRouter} from "vue-router"
+import {useTagsViewStore} from '@/store/tagsview'
 
 const router = useRouter()
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
+const tagsViewStore = useTagsViewStore()
 
 // 处理侧边栏展开和收缩
 const {sidebarOpened} = storeToRefs(sidebarStore)
@@ -120,7 +122,9 @@ const handleCommand = (command: string) => {
     }).then(async () => {
       // 触发退出登录操作
       await adminStore.logout()
-      // 跳转到登录页面
+      // 触发清空 tagsView 动作
+      await tagsViewStore.clear()
+          // 跳转到登录页面
       await router.push('/login')
 
     }).catch(() => {
