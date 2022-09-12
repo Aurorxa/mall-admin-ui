@@ -9,9 +9,13 @@
       <el-header class="header">
         <Navbar />
       </el-header>
+      <!-- tagView -->
+      <el-header class="tags-view">
+        <TagsView />
+      </el-header>
       <!-- 内容区 -->
       <el-main class="main">
-        <router-view />
+        <AppMain/>
       </el-main>
     </el-container>
   </el-container>
@@ -19,7 +23,11 @@
 
 <script setup lang="ts">
 import SideBar from '@/components/Sidebar/index.vue'
-import Navbar from '@/components/Navbar/index.vue'</script>
+import Navbar from '@/components/Navbar/index.vue'
+import TagsView from '@/components/TagsView/index.vue'
+import AppMain from '@/components/AppMain/index.vue'
+
+</script>
 
 <style scoped lang="scss">
 .layout-container {
@@ -31,10 +39,14 @@ import Navbar from '@/components/Navbar/index.vue'</script>
     height: 100%;
   }
 
-
   .header {
+  }
+
+  .tags-view{
+    height: 30px;
+    padding: 0;
     border-bottom: 1px solid #ccc;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .2);
   }
 
   .main {

@@ -97,7 +97,7 @@ export default {
 }
 ```
 
-* 在 i18n/index.ts 中创建 message 数据源，创建 locale 语言变量，初始化 i18n 实例：
+* 在 i18n/tags.ts 中创建 message 数据源，创建 locale 语言变量，初始化 i18n 实例：
 
 ```tsx
 import {createI18n} from 'vue-i18n'

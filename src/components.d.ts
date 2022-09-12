@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AppMain: typeof import('./components/AppMain/index.vue')['default']
     Badge: typeof import('./components/Badge/index.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -35,6 +36,7 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormDrawer: typeof import('./components/FormDrawer/index.vue')['default']
     FullScreen: typeof import('./components/FullScreen/index.vue')['default']
@@ -46,5 +48,6 @@ declare module '@vue/runtime-core' {
     Sidebar: typeof import('./components/Sidebar/index.vue')['default']
     SidebarHeader: typeof import('./components/SidebarHeader/index.vue')['default']
     SidebarItem: typeof import('./components/Sidebar/SidebarItem.vue')['default']
+    TagsView: typeof import('./components/TagsView/index.vue')['default']
   }
 }
