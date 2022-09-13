@@ -8,8 +8,8 @@
         :round="false"
         color="#545c64"
         :disable-transitions="false"
-        @click="onClick(tag)"
-        @close="onCloseClick(tag)"
+        @click="onHandleClick(tag)"
+        @close="onHandleClose(tag)"
     >
       <span class="content">{{ tag.meta.title }}</span>
     </el-tag>
@@ -30,7 +30,7 @@ const {tagsViewList} = storeToRefs(tagsViewStore)
 /**
  * 点击跳转事件
  */
-const onClick = (tag: TagViewType) => {
+const onHandleClick = (tag: TagViewType) => {
   const fullPath = tag.fullPath
   if (fullPath) {
     router.push(fullPath)
@@ -40,7 +40,7 @@ const onClick = (tag: TagViewType) => {
 /**
  * 关闭 tag 的点击事件
  */
-const onCloseClick = (tag: TagViewType) => {
+const onHandleClose = (tag: TagViewType) => {
   tagsViewList.value.splice(tagsViewList.value.map(tags => tags.path).indexOf(tag.path), 1)
 }
 </script>
