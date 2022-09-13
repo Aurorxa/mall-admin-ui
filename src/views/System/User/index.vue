@@ -48,6 +48,7 @@
             stripe border size="large"
             :header-cell-style="{background:'#f8f8f9',color:'#515a6d'}"
             :highlight-current-row="true">
+    <el-table-column type="index" label="#" />
     <el-table-column label="日期">
       <template #default="scope">
         <div style="display: flex; align-items: center">
