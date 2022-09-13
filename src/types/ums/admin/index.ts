@@ -18,6 +18,25 @@ export type ChangePasswordFormType = {
     confirmPassword?: string
 }
 
+// 分页查询表单类型
+export type QueryFormType = {
+    // 用户名
+    username?: string,
+    // 邮箱
+    email?: string,
+    // 手机号码
+    phone?: string,
+    // 状态
+    status?: number,
+    // 页码
+    pageNo: number,
+    // 每页显示条数
+    pageSize: number
+}
+
+// 分页列表查询返回类型
+export type PageListReturnType = {}
+
 // store 中 action 的类型
 export interface ActionType {
     login(value: LoginFormType): Promise<void>

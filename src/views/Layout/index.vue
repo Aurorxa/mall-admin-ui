@@ -51,6 +51,7 @@ import AppMain from '@/components/AppMain/index.vue'
   }
 
   .main {
+
   }
 }
 </style>
