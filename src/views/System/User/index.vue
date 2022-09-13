@@ -45,15 +45,15 @@
     <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
   </el-row>
   <!-- 表格 -->
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column label="Date" width="180">
+  <el-table :data="tableData" style="width: 100%" :table-layout="auto">
+    <el-table-column label="Date">
       <template #default="scope">
         <div style="display: flex; align-items: center">
           <span style="margin-left: 10px">{{ scope.row.date }}</span>
         </div>
       </template>
     </el-table-column>
-    <el-table-column label="Name" width="180">
+    <el-table-column label="Name">
       <template #default="scope">
         <el-popover effect="light" trigger="hover" placement="top" width="auto">
           <template #default>
