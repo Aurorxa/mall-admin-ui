@@ -8,8 +8,11 @@
       <BreadCrumb></BreadCrumb>
     </el-col>
     <el-col :span="7" style="display:flex;justify-content: space-evenly;align-items: center">
+      <!-- Search -->
       <HeaderSearch/>
+      <!-- 全屏 -->
       <Fullscreen />
+      <!-- 消息提示 -->
       <Badge/>
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
@@ -36,6 +39,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- 语言切换 -->
       <LangSelect />
     </el-col>
   </el-row>
