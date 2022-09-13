@@ -80,9 +80,32 @@
     </el-table-column>
   </el-table>
   <!-- 分页组件 -->
+  <el-pagination
+      :currentPage="currentPage"
+      :pageSize="pageSize"
+      small
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="500"
+      :page-sizes="[5, 10, 15, 20]"
+      class="mt-4"
+      @sizeChange="handleSizeChange"
+      @currentChange="handleCurrentChange"
+  />
 </template>
 
 <script setup lang="ts">
+// 页码
+const currentPage = ref<number>(1)
+// 每页显示条数
+const pageSize = ref<number>(10)
+
+const handleSizeChange = (val: number) => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+}
 
 interface User {
   date: string
