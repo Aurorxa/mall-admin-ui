@@ -39,21 +39,20 @@
   </el-row>
   <el-row>
     <el-button plain type="primary" size="default" icon="i-ep-plus">新增</el-button>
-    <el-button plain type="success" size="default" icon="i-ep-edit">修改</el-button>
-    <el-button plain type="danger" size="default" icon="i-ep-delete">删除</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
     <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
   </el-row>
   <!-- 表格 -->
-  <el-table :data="tableData" style="width: 100%" :table-layout="auto">
-    <el-table-column label="Date">
+  <el-table :data="tableData" style="width: 100%" :table-layout="auto" stripe border size="large"
+            :highlight-current-row="true">
+    <el-table-column label="日期">
       <template #default="scope">
         <div style="display: flex; align-items: center">
           <span style="margin-left: 10px">{{ scope.row.date }}</span>
         </div>
       </template>
     </el-table-column>
-    <el-table-column label="Name">
+    <el-table-column label="姓名">
       <template #default="scope">
         <el-popover effect="light" trigger="hover" placement="top" width="auto">
           <template #default>
@@ -66,22 +65,27 @@
         </el-popover>
       </template>
     </el-table-column>
-    <el-table-column label="Operations">
+    <el-table-column label="操作">
       <template #default="scope">
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
-          编辑
+        <el-button
+            link
+            icon="i-ep-edit"
+            @click="handleEdit(scope.$index, scope.row)">
+          修改
         </el-button>
         <el-button
-            size="small"
             type="danger"
+            icon="i-ep-delete"
+            link
             @click="handleDelete(scope.$index, scope.row)">
           删除
         </el-button>
         <el-button
-            size="small"
-            type="danger"
+            type="success"
+            link
+            icon="i-ep-position"
             @click="handleDelete(scope.$index, scope.row)">
-          删除
+          分配角色
         </el-button>
       </template>
     </el-table-column>
