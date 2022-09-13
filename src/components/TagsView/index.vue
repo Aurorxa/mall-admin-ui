@@ -78,13 +78,10 @@ const handleCommand = (commandObj: CommandType) => {
   }
   // 关闭所有
   if (command === 'closeAll') {
-    tagsViewStore.clear()
+    tagsViewStore.clearAllTag()
   }
 }
 
-const closeRight = () => {
-  console.log('@@')
-}
 
 </script>
 
