@@ -9,11 +9,17 @@ export const useTagsViewStore = defineStore<string, StoreType, _GettersTree<Stor
         },
         actions: {
             addTagsViewList(tag: TagViewType): void {
-                console.log('tagsViewList', this.tagsViewList)
                 const isFind = this.tagsViewList.find(item => item.path === tag.path)
                 // 数组去重
                 if (!isFind) {
                     this.tagsViewList.push(tag)
+                }
+                // 找到首页，将首页放到数组中的首位置
+                const home = this.tagsViewList.find(item => item.fullPath === '/');
+                const firstIndex = this.tagsViewList.findIndex(item => item.fullPath === '/')
+                if (home && firstIndex) {
+                    this.tagsViewList.splice(firstIndex, 1)
+                    this.tagsViewList.unshift(home)
                 }
             },
             clear(): void {

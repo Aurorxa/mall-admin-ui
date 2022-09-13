@@ -6,12 +6,12 @@
           :key="index"
           size="large"
           closable
-          :effect="'dark'"
           :round="false"
+          color="#545c64"
           :disable-transitions="false"
           @close="onCloseClick(tag)"
       >
-        {{ tag.meta.title }}
+        <span class="content">{{ tag.meta.title }}</span>
       </el-tag>
     </el-col>
   </el-row>
@@ -39,13 +39,19 @@ const onCloseClick = (tag: TagViewType) => {
 </script>
 
 <style scoped lang="scss">
-.tags-view-container {
-  .tags-view-item {
 
+.el-tag {
+
+  .content {
+    color: #fff !important;
   }
 
-  .active {
-
+  .el-tag__close {
+    color: #fff;
   }
 }
+
+
+
+
 </style>
