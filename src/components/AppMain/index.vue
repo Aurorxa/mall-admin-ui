@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+    <router-view />
 </template>
 
 <script lang="ts" setup>
@@ -15,7 +15,7 @@ watch(route, (to: RouteLocationNormalizedLoaded) => {
   // 并不是所有的路由都需要保存，比如：登录页面的路由、404 的路由
   if (isTags(to.path)) {
     const {fullPath, meta, name, path, params, query} = to;
-    if(to){
+    if (to) {
       tagsViewStore.addTagsViewList({
         fullPath,
         meta,
@@ -30,6 +30,5 @@ watch(route, (to: RouteLocationNormalizedLoaded) => {
 }, {immediate: true})
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>
