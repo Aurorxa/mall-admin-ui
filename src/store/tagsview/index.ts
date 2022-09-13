@@ -5,7 +5,8 @@ import router from "@/router";
 export const useTagsViewStore = defineStore<string, StoreType, _GettersTree<StoreType>, ActionType>('tagsView', {
         state: () => {
             return {
-                tagsViewList: []
+                tagsViewList: [],
+                currentTagIndex: -1
             }
         },
         actions: {
@@ -38,6 +39,10 @@ export const useTagsViewStore = defineStore<string, StoreType, _GettersTree<Stor
                 this.tagsViewList.splice(index + 1)
                 // 处理路由
                 await router.push(tag.fullPath)
+            },
+            setCurrentTagIndex(tag: TagViewType) {
+                const index = this.tagsViewList.findIndex(item => item.fullPath === tag.fullPath)
+                this.currentTagIndex = index
             },
             async clearAllTag() {
                 this.tagsViewList = []

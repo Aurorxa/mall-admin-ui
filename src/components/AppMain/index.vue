@@ -9,6 +9,8 @@ import {useTagsViewStore} from '@/store/tagsview'
 
 const tagsViewStore = useTagsViewStore()
 
+const {addTagsViewList, setCurrentTagIndex} = tagsViewStore
+
 const route: RouteLocationNormalizedLoaded = useRoute()
 
 watch(route, (to: RouteLocationNormalizedLoaded) => {
@@ -16,7 +18,7 @@ watch(route, (to: RouteLocationNormalizedLoaded) => {
   if (isTags(to.path)) {
     const {fullPath, meta, name, path, params, query} = to;
     if (to) {
-      tagsViewStore.addTagsViewList({
+      addTagsViewList({
         fullPath,
         meta,
         name,
@@ -25,6 +27,7 @@ watch(route, (to: RouteLocationNormalizedLoaded) => {
         query,
         title: meta.title as string
       })
+      setCurrentTagIndex(to)
     }
   }
 }, {immediate: true})

@@ -12,7 +12,8 @@ export type TagViewType = {
 
 // store 中 storeType 的类型
 export type StoreType = {
-    tagsViewList: TagViewType[]
+    tagsViewList: TagViewType[],
+    currentTagIndex: number
 }
 
 // store 中 action 的类型
@@ -23,6 +24,7 @@ export interface ActionType {
 
     removeRightTag(tag: TagViewType): void
 
+    setCurrentTagIndex(tag: TagViewType): void
 
     clearAllTag(): void
 

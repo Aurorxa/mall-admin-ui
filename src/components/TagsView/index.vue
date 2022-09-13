@@ -6,14 +6,15 @@
         size="large"
         closable
         :round="false"
-        color="#545c64"
+        color="#fff"
+        :class="{active:currentTagIndex === index}"
         :disable-transitions="false"
         @click="onHandleClick(tag)"
         @close="onHandleClose(tag)"
     >
       <el-dropdown @command="handleCommand" trigger="contextmenu" placement="bottom-end">
         <span class="el-dropdown-link">
-            <span class="content">{{ tag.meta.title }}</span>
+            <span class="content" :class="{active:currentTagIndex === index}">{{ tag.meta.title }}</span>
          </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -36,13 +37,15 @@
 <script lang="ts" setup>
 import {useTagsViewStore} from '@/store/tagsview'
 import {TagViewType} from "@/types/tagsview"
-import {useRouter} from "vue-router"
+import {RouteLocationMatched, RouteLocationNormalizedLoaded, useRoute, useRouter} from "vue-router"
 
 const router = useRouter()
 
+const route: RouteLocationNormalizedLoaded = useRoute()
+
 const tagsViewStore = useTagsViewStore()
 
-const {tagsViewList} = storeToRefs(tagsViewStore)
+const {tagsViewList, currentTagIndex} = storeToRefs(tagsViewStore)
 
 /**
  * 点击跳转事件
@@ -50,6 +53,7 @@ const {tagsViewList} = storeToRefs(tagsViewStore)
 const onHandleClick = (tag: TagViewType) => {
   const fullPath = tag.fullPath
   if (fullPath) {
+    tagsViewStore.setCurrentTagIndex(tag)
     router.push(fullPath)
   }
 }
@@ -60,6 +64,11 @@ const onHandleClick = (tag: TagViewType) => {
 const onHandleClose = (tag: TagViewType) => {
   tagsViewStore.removeTag(tag)
 }
+
+
+// 监视 route 中的 matched 的变化
+watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
+}, {immediate: true})
 
 // 处理刷新等逻辑
 type CommandType = {
@@ -89,11 +98,11 @@ const handleCommand = (commandObj: CommandType) => {
 
 .el-tag {
   cursor: pointer;
+}
 
-  .content {
-    color: #fff !important;
-  }
-
+.active {
+  background-color: #434a50 !important;
+  color: #ffd04b;
 }
 
 
