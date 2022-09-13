@@ -41,7 +41,7 @@ const onHandleClick = (tag: TagViewType) => {
  * 关闭 tag 的点击事件
  */
 const onHandleClose = (tag: TagViewType) => {
-  tagsViewList.value.splice(tagsViewList.value.map(tags => tags.path).indexOf(tag.path), 1)
+  tagsViewStore.removeTag(tag)
 }
 </script>
 
