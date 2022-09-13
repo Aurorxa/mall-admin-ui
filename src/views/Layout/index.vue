@@ -40,6 +40,7 @@ import AppMain from '@/components/AppMain/index.vue'
   }
 
   .header {
+    border-bottom: 1px solid #eee;
   }
 
   .tags-view{

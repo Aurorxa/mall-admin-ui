@@ -18,6 +18,5 @@ export type StoreType = {
 // store 中 action 的类型
 export interface ActionType {
     addTagsViewList(tag: TagViewType): void,
-
     clear(): void;
 }

@@ -1,19 +1,17 @@
 <template>
   <el-row>
-    <el-col :span="24">
-      <el-tag
-          v-for="(tag,index) in tagsViewList"
-          :key="index"
-          size="large"
-          closable
-          :round="false"
-          color="#545c64"
-          :disable-transitions="false"
-          @close="onCloseClick(tag)"
-      >
-        <span class="content">{{ tag.meta.title }}</span>
-      </el-tag>
-    </el-col>
+    <el-tag
+        v-for="(tag,index) in tagsViewList"
+        :key="index"
+        size="large"
+        closable
+        :round="false"
+        color="#545c64"
+        :disable-transitions="false"
+        @close="onCloseClick(tag)"
+    >
+      <span class="content">{{ tag.meta.title }}</span>
+    </el-tag>
   </el-row>
 </template>
 
@@ -50,8 +48,6 @@ const onCloseClick = (tag: TagViewType) => {
     color: #fff;
   }
 }
-
-
 
 
 </style>
