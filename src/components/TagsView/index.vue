@@ -17,14 +17,14 @@
          </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="refresh">
+            <el-dropdown-item :command="{command: 'refresh'}">
               刷新
             </el-dropdown-item>
-            <el-dropdown-item command="closeRight">
+            <el-dropdown-item :command="{command: 'closeRight',tag: tag}">
               关闭右侧
             </el-dropdown-item>
-            <el-dropdown-item command="closeOther">
-              关闭其他
+            <el-dropdown-item :command="{command: 'closeAll'}">
+              关闭所有
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -62,19 +62,28 @@ const onHandleClose = (tag: TagViewType) => {
 }
 
 // 处理刷新等逻辑
-const handleCommand = (command: string) => {
+type CommandType = {
+  command: string,
+  tag: TagViewType
+}
+const handleCommand = (commandObj: CommandType) => {
+  const {command, tag} = commandObj;
   // 刷新
   if (command === 'refresh') {
-
-  }
-  // 关闭右侧
-  if (command === 'closeRight') {
-
+    router.go(0)
   }
   // 关闭其他
-  if (command === 'closeOther') {
-
+  if (command === 'closeRight') {
+    tagsViewStore.removeRightTag(tag)
   }
+  // 关闭所有
+  if (command === 'closeAll') {
+    tagsViewStore.clear()
+  }
+}
+
+const closeRight = () => {
+  console.log('@@')
 }
 
 </script>

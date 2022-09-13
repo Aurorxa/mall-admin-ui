@@ -25,6 +25,10 @@ export const useTagsViewStore = defineStore<string, StoreType, _GettersTree<Stor
             removeTag(tag: TagViewType): void {
                 this.tagsViewList.splice(this.tagsViewList.map(tags => tags.path).indexOf(tag.path), 1)
             },
+            removeRightTag(tag: TagViewType) {
+                const index = this.tagsViewList.findIndex(item => item.fullPath === tag.fullPath)
+                this.tagsViewList.splice(index + 1)
+            },
             clear(): void {
                 this.tagsViewList = []
             }

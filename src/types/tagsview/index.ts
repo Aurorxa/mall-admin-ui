@@ -21,5 +21,7 @@ export interface ActionType {
 
     removeTag(tag: TagViewType): void
 
+    removeRightTag(tag: TagViewType): void
+
     clear(): void
 }
