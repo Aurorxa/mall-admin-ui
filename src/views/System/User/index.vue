@@ -37,6 +37,13 @@
       </el-button>
     </el-col>
   </el-row>
+  <el-row>
+    <el-button plain type="primary" size="default" icon="i-ep-plus">新增</el-button>
+    <el-button plain type="success" size="default" icon="i-ep-edit">修改</el-button>
+    <el-button plain type="danger" size="default" icon="i-ep-delete">删除</el-button>
+    <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
+    <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
+  </el-row>
   <!-- 表格 -->
   <el-table :data="tableData" style="width: 100%">
     <el-table-column label="Date" width="180">
