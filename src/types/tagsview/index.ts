@@ -2,7 +2,7 @@ import {LocationQuery, RouteMeta, RouteParams, RouteRecordName} from "vue-router
 
 export type TagViewType = {
     fullPath: string,
-    meta?: RouteMeta,
+    meta: RouteMeta,
     name: RouteRecordName | null | undefined,
     params: RouteParams,
     path: string,
