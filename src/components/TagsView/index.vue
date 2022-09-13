@@ -1,36 +1,35 @@
 <template>
   <el-row>
-    <el-dropdown @command="handleCommand" trigger="contextmenu" placement="bottom">
-        <span class="el-dropdown-link"
-              style="display: flex;justify-content: center;align-items: center;cursor: pointer">
-           <el-tag
-               v-for="(tag,index) in tagsViewList"
-               :key="index"
-               size="large"
-               closable
-               :round="false"
-               color="#545c64"
-               :disable-transitions="false"
-               @click="onHandleClick(tag)"
-               @close="onHandleClose(tag)"
-           >
+    <el-tag
+        v-for="(tag,index) in tagsViewList"
+        :key="index"
+        size="large"
+        closable
+        :round="false"
+        color="#545c64"
+        :disable-transitions="false"
+        @click="onHandleClick(tag)"
+        @close="onHandleClose(tag)"
+    >
+      <el-dropdown @command="handleCommand" trigger="contextmenu" placement="bottom-end">
+        <span class="el-dropdown-link">
             <span class="content">{{ tag.meta.title }}</span>
-           </el-tag>
-        </span>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item command="refresh">
-            刷新
-          </el-dropdown-item>
-          <el-dropdown-item command="closeRight">
-            关闭右侧
-          </el-dropdown-item>
-          <el-dropdown-item command="closeOther">
-            关闭其他
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+         </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="refresh">
+              刷新
+            </el-dropdown-item>
+            <el-dropdown-item command="closeRight">
+              关闭右侧
+            </el-dropdown-item>
+            <el-dropdown-item command="closeOther">
+              关闭其他
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </el-tag>
   </el-row>
 </template>
 
