@@ -170,7 +170,7 @@ import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
 import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
-import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
+import {vm, DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
 
@@ -305,11 +305,23 @@ const handleAdd = () => {
       {
         label: '确定 ',
         type: 'primary',
-        onClick: ({vm}: DialogConfig) => {
-          vm.hide()
-        },
+        onClick: ({vm,ctx, component}: DialogConfig) => {
+          // vm.hide()
+          console.log('ctx',ctx)
+          console.log('component',component.content)
+        }
+      },
+      {
+        label: '取消 ',
+        type: 'primary',
+        onClick: ({vm,ctx, component}: DialogConfig) => {
+          // vm.hide()
+          console.log('ctx',ctx)
+          console.log('component',component.content)
+        }
       },
     ],
+
   })
 }
 
