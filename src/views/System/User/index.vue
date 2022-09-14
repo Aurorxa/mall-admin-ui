@@ -26,7 +26,7 @@
   <el-row>
     <el-button plain type="primary" icon="i-ep-plus">新增</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
-    <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
+    <el-button color="#feb926" plain icon="i-ep-download" @click="handleExport">导出</el-button>
   </el-row>
   <!-- 表格 -->
   <el-table :data="tableData"
@@ -126,7 +126,8 @@
               @click="handleDelete(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
-        <el-popconfirm title="确定删除吗？" @confirm="handleDelete(scope.$index, scope.row)">
+        <el-popconfirm :title="`确定删除${scope.row.username}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+                       width="160">
           <template #reference>
             <el-button
                 type="danger"
@@ -151,12 +152,16 @@
       @sizeChange="handleSizeChange"
       @currentChange="handleCurrentChange"
   />
+
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
 import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
+import dialogService from '@caroundsky/el-plus-dialog-service'
+import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
+import UserView from '@/components/System/User/View/index.vue'
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
@@ -220,7 +225,21 @@ const handleEdit = (index: number, row: PageListReturnType) => {
 
 // 详情
 const handleView = (index: number, row: PageListReturnType) => {
-  console.log(index, row)
+  dialogService({
+    title: '用户详情',
+    height: '50vh',
+    width: '50vw',
+    content: <UserView />,
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
 }
 
 // 删除
@@ -228,6 +247,25 @@ const handleDelete = async (index: number, row: PageListReturnType) => {
   await adminDelete(row.id)
   // 分页查询
   await paginationQuery()
+}
+
+// 导出
+const handleExport = () => {
+  dialogService({
+    title: '导出',
+    height: '50vh',
+    width: '50vw',
+    content: '你好啊',
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
 }
 
 </script>

@@ -23,7 +23,7 @@ export default function () {
         }
     }
 
-// 验证规则
+    // 验证规则
     const changePasswordRules: FormRules = reactive<FormRules>({
         oldPassword: [
             {
@@ -54,7 +54,7 @@ export default function () {
         ],
     })
 
-// 处理修改密码
+    // 处理修改密码
     const onSubmit = () => {
         // 进行表单验证
         changePasswordFormRef.value?.validate(async valid => {

@@ -15,3 +15,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $dialogService: typeof import('@caroundsky/el-plus-dialog-service')['default']
+  }
+}

@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@caroundsky/el-plus-dialog-service": "^0.0.3",
     "@vueuse/core": "^9.2.0",
     "accessible-nprogress": "^2.1.2",
     "axios": "^0.27.2",
