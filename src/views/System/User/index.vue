@@ -129,10 +129,9 @@
 </template>
 
 <script setup lang="ts">
-
-import {PageListReturnType, QueryFormType} from "@/types/ums/admin";
-import {pageList} from "@/api/ums/admin";
-import {PaginationReturn} from "@/utils/global";
+import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
+import {pageList} from "@/api/ums/admin"
+import {PaginationReturn} from "@/utils/global"
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
