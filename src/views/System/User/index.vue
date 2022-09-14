@@ -17,11 +17,11 @@
       </el-select>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary">
+      <el-button type="primary" @click="handleSearch">
         <el-icon class="i-ep-search"></el-icon>
         搜索
       </el-button>
-      <el-button type="primary">
+      <el-button type="primary" @click="handleReset">
         <el-icon class="i-ep-refresh"></el-icon>
         重置
       </el-button>
@@ -159,6 +159,24 @@ const paginationQuery = async () => {
 onMounted(async () => {
   await paginationQuery()
 })
+
+// 查询
+const handleSearch = async () => {
+  await paginationQuery()
+}
+
+// 重置
+const handleReset = async () => {
+  // 查询条件重置
+  searchOptions.username = ''
+  searchOptions.email = ''
+  searchOptions.phone = ''
+  searchOptions.status = 1
+  searchOptions.pageNo = 1
+  searchOptions.pageSize = 10
+  // 分页查询
+  await paginationQuery()
+}
 
 const handleSizeChange = (val: number) => {
   searchOptions.pageSize = val
