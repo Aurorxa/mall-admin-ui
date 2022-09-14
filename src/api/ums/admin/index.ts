@@ -28,7 +28,12 @@ export const changePassword = (data: ChangePasswordFormType) => {
 }
 
 /* 分页获取管理员数据 */
-export const pageList: (data: QueryFormType) => Promise<PaginationReturn<PageListReturnType>> = data => {
+export const adminPageList: (data: QueryFormType) => Promise<PaginationReturn<PageListReturnType>> = data => {
     return request.post(`/ums/admin/pageList/${data.pageNo}/${data.pageSize}`, {...data})
+}
+
+// 删除管理员数据
+export const adminDelete = (id: string) => {
+    return request.delete(`ums/admin/delete/${id}`)
 }
 

@@ -103,18 +103,15 @@
               @click="handleEdit(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
-        <el-tooltip
-            class="box-item"
-            effect="dark"
-            content="删除"
-            placement="top">
-          <el-button
-              type="danger"
-              icon="i-ep-delete"
-              link
-              @click="handleDelete(scope.$index, scope.row)">
-          </el-button>
-        </el-tooltip>
+        <el-popconfirm title="确定删除吗？" @confirm="handleDelete(scope.$index, scope.row)">
+          <template #reference>
+            <el-button
+                type="danger"
+                icon="i-ep-delete"
+                link>
+            </el-button>
+          </template>
+        </el-popconfirm>
         <el-tooltip
             class="box-item"
             effect="dark"
@@ -147,7 +144,7 @@
 
 <script setup lang="ts">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {pageList} from "@/api/ums/admin"
+import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
 
 // 搜索条件
@@ -167,7 +164,7 @@ const tableData = ref<PageListReturnType[]>([])
 
 // 分页查询
 const paginationQuery = async () => {
-  const result: PaginationReturn<PageListReturnType> = await pageList(searchOptions)
+  const result: PaginationReturn<PageListReturnType> = await adminPageList(searchOptions)
   total.value = result.total
   tableData.value = result.records
 }
@@ -208,8 +205,10 @@ const handleCurrentChange = async (val: number) => {
 const handleEdit = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
-const handleDelete = (index: number, row: PageListReturnType) => {
-  console.log(index, row)
+const handleDelete = async (index: number, row: PageListReturnType) => {
+  await adminDelete(row.id)
+  // 分页查询
+  await paginationQuery()
 }
 
 </script>
