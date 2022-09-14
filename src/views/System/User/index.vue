@@ -138,6 +138,7 @@
       :currentPage="searchOptions.pageNo"
       :pageSize="searchOptions.pageSize"
       background
+      small
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
       :page-sizes="[5, 10, 15, 20]"
