@@ -100,7 +100,7 @@
           <el-button
               link
               icon="i-ep-info-filled"
-              @click="handleEdit(scope.$index, scope.row)">
+              @click="handleView(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
         <el-tooltip
@@ -213,7 +213,13 @@ const handleCurrentChange = async (val: number) => {
   await paginationQuery()
 }
 
+// 编辑
 const handleEdit = (index: number, row: PageListReturnType) => {
+  console.log(index, row)
+}
+
+// 详情
+const handleView = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
 
