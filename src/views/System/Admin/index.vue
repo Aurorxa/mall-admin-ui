@@ -171,7 +171,7 @@ import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
-import UserView from '@/components/System/User/View/index.vue'
+import UserView from '@/components/System/Admin/View/index.vue'
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({

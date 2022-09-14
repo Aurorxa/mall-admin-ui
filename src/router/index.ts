@@ -62,7 +62,7 @@ const privateRoutes: Array<RouteRecordRaw> = [
             {
                 path: '/system/user',
                 name: 'user',
-                component: () => import( '@/views/System/User/index.vue'),
+                component: () => import( '@/views/System/Admin/index.vue'),
                 meta: {
                     title: '用户管理',
                     icon: ''
