@@ -216,6 +216,8 @@ const handleCurrentChange = async (val: number) => {
 const handleEdit = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
+
+// 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
   await adminDelete(row.id)
   // 分页查询
