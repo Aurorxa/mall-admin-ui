@@ -33,7 +33,9 @@
   <!-- 表格 -->
   <el-table :data="tableData"
             style="width: 100%"
-            stripe border size="large"
+            stripe
+            border
+            size="large"
             :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
     <el-table-column type="index" label="#" />
     <el-table-column label="用户名">
