@@ -169,16 +169,10 @@ const handleCurrentChange = (val: number) => {
   searchOptions.pageNo = val
 }
 
-interface User {
-  date: string
-  name: string
-  address: string
-}
-
-const handleEdit = (index: number, row: User) => {
+const handleEdit = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
-const handleDelete = (index: number, row: User) => {
+const handleDelete = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
 
