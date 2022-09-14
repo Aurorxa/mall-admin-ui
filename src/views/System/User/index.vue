@@ -4,9 +4,6 @@
     <el-form-item label="用户名">
       <el-input v-model="searchOptions.username" />
     </el-form-item>
-    <el-form-item label="邮箱">
-      <el-input v-model="searchOptions.email" />
-    </el-form-item>
     <el-form-item label="手机号码">
       <el-input v-model="searchOptions.phone" />
     </el-form-item>
