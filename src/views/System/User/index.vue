@@ -229,7 +229,7 @@ const handleView = (index: number, row: PageListReturnType) => {
     title: '用户详情',
     height: '50vh',
     width: '50vw',
-    content: <UserView />,
+    content: <UserView id={row.id} />,
     buttons: [
       {
         label: '确定 ',

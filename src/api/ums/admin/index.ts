@@ -4,7 +4,8 @@ import {
     LoginFormType,
     LoginReturnType,
     PageListReturnType,
-    QueryFormType
+    QueryFormType,
+    ViewReturnType
 } from "@/types/ums/admin"
 import {PaginationReturn} from "@/utils/global";
 
@@ -35,5 +36,10 @@ export const adminPageList: (data: QueryFormType) => Promise<PaginationReturn<Pa
 // 删除管理员数据
 export const adminDelete = (id: string) => {
     return request.delete(`ums/admin/delete/${id}`)
+}
+
+// 管理员详情
+export const adminView: (id: string) => Promise<ViewReturnType> = id => {
+    return request.get(`ums/admin/view/${id}`)
 }
 

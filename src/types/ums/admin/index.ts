@@ -48,6 +48,20 @@ export type PageListReturnType = {
     sort: number
 }
 
+// 详情接口返回类型
+export type ViewReturnType = {
+    id: string,
+    username: string,
+    realName: string,
+    nickName: string,
+    gender: string,
+    phone: string,
+    email: string,
+    status: number,
+    avatar: string,
+    sort: number
+}
+
 // store 中 action 的类型
 export interface ActionType {
     login(value: LoginFormType): Promise<void>
