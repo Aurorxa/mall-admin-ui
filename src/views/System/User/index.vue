@@ -72,14 +72,24 @@
     </el-table-column>
     <el-table-column label="状态">
       <template #default="scope">
-        <el-switch
-            v-model="scope.row.status"
-            class="ml-2"
-            active-text="启用"
-            inactive-text="禁用"
-            :active-value="1"
-            :inactive-value="0"
-            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        <el-switch v-if="scope.row.username === 'admin'"
+                   disabled
+                   v-model="scope.row.status"
+                   class="ml-2"
+                   active-text="启用"
+                   inactive-text="禁用"
+                   :active-value="1"
+                   :inactive-value="0"
+                   style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        </el-switch>
+        <el-switch v-else
+                   v-model="scope.row.status"
+                   class="ml-2"
+                   active-text="启用"
+                   inactive-text="禁用"
+                   :active-value="1"
+                   :inactive-value="0"
+                   style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
         </el-switch>
       </template>
     </el-table-column>
@@ -227,7 +237,7 @@ const handleEdit = (index: number, row: PageListReturnType) => {
 const handleView = (index: number, row: PageListReturnType) => {
   dialogService({
     title: '用户详情',
-    height: '50vh',
+    height: '60vh',
     width: '50vw',
     content: <UserView id={row.id} />,
     buttons: [

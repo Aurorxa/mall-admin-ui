@@ -33,6 +33,9 @@
       <el-avatar :size="25" shape="circle"
                  :src="data.avatar" />
     </el-form-item>
+    <el-form-item label="排序">
+      <el-input v-model="data.sort" />
+    </el-form-item>
   </el-form>
 </template>
 
