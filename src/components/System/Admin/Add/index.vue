@@ -44,12 +44,6 @@
     <el-form-item label="排序字段" prop="sort">
       <el-input v-model="addForm.sort" clearable placeholder="请输入排序字段" />
     </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-      >Create
-      </el-button>
-      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
-    </el-form-item>
   </el-form>
 </template>
 
@@ -77,7 +71,7 @@ const rules = reactive<FormRules>({
   ]
 })
 
-const submitForm = async (formEl: FormInstance | undefined) => {
+const submitForm = () :void => {
   console.log('Admin---------@@@@@@@@@@@@')
   // if (!formEl) return
   // await formEl.validate((valid, fields) => {
@@ -88,6 +82,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   //   }
   // })
 }
+
+
+defineExpose({
+  submitForm
+})
 
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return

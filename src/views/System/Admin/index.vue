@@ -308,7 +308,8 @@ const handleAdd = () => {
         onClick: ({vm,ctx, component}: DialogConfig) => {
           // vm.hide()
           console.log('ctx',ctx)
-          console.log('component',component)
+          component.submitForm()
+          // console.log('component',component.submitForm())
         }
       },
       {
