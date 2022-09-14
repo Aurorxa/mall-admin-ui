@@ -24,7 +24,7 @@
   </el-form>
   <!-- 新增、导入、导出 -->
   <el-row>
-    <el-button plain type="primary" icon="i-ep-plus">新增</el-button>
+    <el-button plain type="primary" icon="i-ep-plus" @click="handleAdd">新增</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
     <el-button color="#feb926" plain icon="i-ep-download" @click="handleExport">导出</el-button>
   </el-row>
@@ -171,7 +171,9 @@ import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
-import UserView from '@/components/System/Admin/View/index.vue'
+import AdminView from '@/components/System/Admin/View/index.vue'
+import AdminAdd from '@/components/System/Admin/Add/index.vue'
+
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
@@ -234,7 +236,7 @@ const handleEdit = (index: number, row: PageListReturnType) => {
     title: '用户编辑',
     height: '60vh',
     width: '50vw',
-    content: <UserView id={row.id} />,
+    content: <AdminView id={row.id} />,
     buttons: [
       {
         label: '确定 ',
@@ -253,7 +255,7 @@ const handleView = (index: number, row: PageListReturnType) => {
     title: '用户详情',
     height: '60vh',
     width: '50vw',
-    content: <UserView id={row.id} />,
+    content: <AdminView id={row.id} />,
     buttons: [
       {
         label: '确定 ',
@@ -280,6 +282,25 @@ const handleExport = () => {
     height: '50vh',
     width: '50vw',
     content: '你好啊',
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
+}
+
+// 新增
+const handleAdd = () => {
+  dialogService({
+    title: '新增',
+    height: '50vh',
+    width: '50vw',
+    content: <AdminAdd />,
     buttons: [
       {
         label: '确定 ',

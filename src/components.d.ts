@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Add: typeof import('./components/System/Admin/Add/index.vue')['default']
     AppMain: typeof import('./components/AppMain/index.vue')['default']
     Badge: typeof import('./components/Badge/index.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb/index.vue')['default']
