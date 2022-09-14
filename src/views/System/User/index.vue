@@ -1,42 +1,33 @@
 <template>
   <!-- 搜索 -->
-  <el-row :gutter="10">
-    <el-col :span="4">
-      <el-form-item label="用户名">
-        <el-input />
-      </el-form-item>
-    </el-col>
-    <el-col :span="4">
-      <el-form-item label="邮箱">
-        <el-input />
-      </el-form-item>
-    </el-col>
-    <el-col :span="4">
-      <el-form-item label="手机号码">
-        <el-input />
-      </el-form-item>
-    </el-col>
-    <el-col :span="4">
-      <el-form-item label="状态">
-        <el-select>
-          <el-option label="禁止" value="0" />
-          <el-option label="启用" value="1" />
-        </el-select>
-      </el-form-item>
-    </el-col>
-    <el-col :span="1">
+  <el-form :inline="true" :model="searchOptions">
+    <el-form-item label="用户名">
+      <el-input v-model="searchOptions.username" />
+    </el-form-item>
+    <el-form-item label="邮箱">
+      <el-input v-model="searchOptions.email" />
+    </el-form-item>
+    <el-form-item label="手机号码">
+      <el-input v-model="searchOptions.phone" />
+    </el-form-item>
+    <el-form-item label="状态">
+      <el-select v-model="searchOptions.status">
+        <el-option label="禁止" :value="0" />
+        <el-option label="启用" :value="1" />
+      </el-select>
+    </el-form-item>
+    <el-form-item>
       <el-button type="primary">
         <el-icon class="i-ep-search"></el-icon>
         搜索
       </el-button>
-    </el-col>
-    <el-col :span="1" style="margin-left: 15px">
       <el-button type="primary">
         <el-icon class="i-ep-refresh"></el-icon>
         重置
       </el-button>
-    </el-col>
-  </el-row>
+    </el-form-item>
+  </el-form>
+  <!-- 新增、导入、导出 -->
   <el-row>
     <el-button plain type="primary" size="default" icon="i-ep-plus">新增</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
@@ -109,6 +100,21 @@
 </template>
 
 <script setup lang="ts">
+
+type SearchOptionsType = {
+  username: string,
+  email: string,
+  phone: string,
+  status: number
+}
+
+const searchOptions = reactive<SearchOptionsType>({
+  username: '',
+  email: '',
+  phone: '',
+  status: 1
+})
+
 // 页码
 const currentPage = ref<number>(1)
 // 每页显示条数
@@ -167,12 +173,4 @@ const tableData: User[] = [
   margin-bottom: 0;
 }
 
-.el-col {
-  border-radius: 4px;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
 </style>
