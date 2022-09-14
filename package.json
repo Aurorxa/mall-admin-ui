@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --force",
     "build": "vue-tsc --noEmit && vite build",
+    "test": "vue-tsc --noEmit && vite build --mode test",
     "github": "vue-tsc --noEmit && vite build --mode github",
     "preview": "vite preview"
   },
@@ -14,10 +15,13 @@
     "accessible-nprogress": "^2.1.2",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
+    "fuse.js": "^6.6.2",
     "pinia": "^2.0.21",
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.11.0",
     "reset-css": "^5.0.1",
+    "screenfull": "^6.0.2",
+    "store2": "^2.14.2",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.2",
     "vue-router": "4"

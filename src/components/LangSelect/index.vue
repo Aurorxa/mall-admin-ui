@@ -6,7 +6,7 @@
       placement="bottom"
   >
     <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
-      <el-icon class="i-ant-design-google-circle-filled" :size="20"
+      <el-icon class="i-ant-design-global-outlined" :size="20"
                style="cursor: pointer"></el-icon>
       <template #dropdown>
         <el-dropdown-menu>
@@ -30,6 +30,7 @@ import {useI18n} from 'vue-i18n'
 
 const {locale, t} = useI18n()
 const languageStore = useLanguageStore();
+
 const {language} = storeToRefs(languageStore)
 
 const handleCommand = (command: string) => {
@@ -39,6 +40,7 @@ const handleCommand = (command: string) => {
     languageStore.setLanguage(command)
     // 切换 i18n 的 locale
     locale.value = language.value
+    // 提示
     ElMessage.success('切换成功')
   }
 }

@@ -6,6 +6,7 @@
       class="el-menu-vertical-demo"
       :default-active="activeMenu"
       router
+      :collapse="sidebarOpened"
       :unique-opened="true"
       :collapse-transition="false"
       text-color="#fff">
@@ -16,10 +17,13 @@
 <script setup lang="ts">
 import SidebarItem from '@/components/Sidebar/SidebarItem.vue'
 import SidebarHeader from '@/components/SidebarHeader/index.vue'
-import {useRoute, useRouter} from 'vue-router'
+import {useRoute} from 'vue-router'
 import {computed} from 'vue'
+import {useSidebarStore} from "@/store/sidebar"
 
-const router = useRouter()
+const sidebarStore = useSidebarStore()
+const {sidebarOpened} = storeToRefs(sidebarStore)
+
 // 测试数据
 const menuList = reactive([
   {
@@ -39,27 +43,13 @@ const menuList = reactive([
         id: '3',
         title: '用户管理',
         icon: 'i-ep-user',
-        path: '',
-        children: [
-          {
-            id: '4',
-            title: '用户管理1',
-            icon: 'i-ep-user',
-            path: '/admin1',
-          },
-          {
-            id: '5',
-            title: '用户管理2',
-            icon: 'i-ep-user',
-            path: '/admin2',
-          }
-        ]
+        path: '/system/user',
       },
       {
         id: '6',
         title: '角色管理',
         icon: 'i-ep-user',
-        path: '/role'
+        path: '/system/role'
       },
       {
         id: '7',
@@ -118,6 +108,7 @@ const activeMenu = computed(() => {
   }
   return path
 })
+
 </script>
 
 <style lang="scss">

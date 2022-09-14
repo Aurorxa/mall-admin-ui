@@ -14,3 +14,17 @@ export enum ResponseDataCodeEnum {
     // 失败的状态码
     ERROR_CODE = 500
 }
+
+// 分页接口返回的数据类型
+export interface PaginationReturn<T = any> {
+    countId: number | null,
+    current: number | null, // 当前页码
+    maxLimit: number | null,
+    optimizeCountSql: boolean | null,
+    pages: number | null,
+    searchCount: boolean | null,
+    orders: object [] | null,
+    size: number | null, // 每页显示条数
+    total: number, // 总条数
+    records: T[]  // 记录数
+}

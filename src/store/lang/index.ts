@@ -4,7 +4,7 @@ import {actionType, LanguageStoreType} from "@/types/lang";
 export const useLanguageStore = defineStore<string, LanguageStoreType, _GettersTree<LanguageStoreType>, actionType>('language', {
         state: () => {
             return {
-                language: '' || 'zh'
+                language: ''
             }
         },
         actions: {

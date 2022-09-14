@@ -1,14 +1,19 @@
 <template>
-  <div class="sidebar-header-container">
+  <div class="sidebar-header-container" :style="{width: sidebarOpened ? '64px':'200px'}">
     <img alt="" src="@/assets/logo.png">
-    <h1>{{ $t('message.app.title') }}</h1>
+    <h1 v-show="!sidebarOpened">{{ $t('message.app.title') }}</h1>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {useI18n} from 'vue-i18n'
+import {useSidebarStore} from "@/store/sidebar"
 
 const {locale, t} = useI18n()
+
+const sidebarStore = useSidebarStore()
+const {sidebarOpened} = storeToRefs(sidebarStore)
+
 </script>
 
 <style scoped lang="scss">
@@ -20,7 +25,7 @@ const {locale, t} = useI18n()
   align-items: center;
 
   img {
-    width: 30px;
+    width: 20px;
   }
 
   h1 {

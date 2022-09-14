@@ -1,8 +1,8 @@
 import {_GettersTree, defineStore} from 'pinia'
-import {actionType, AdminStoreType, LoginFormType, LoginReturnType} from "@/types/ums/admin";
+import {ActionType, LoginFormType, LoginReturnType, StoreType} from "@/types/ums/admin";
 import {login, logout} from "@/api/ums/admin";
 
-export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<AdminStoreType>, actionType>('admin', {
+export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreType>, ActionType>('admin', {
     state: () => {
         return {
             saTokenInfo: {},
@@ -31,15 +31,15 @@ export const useAdminStore = defineStore<string, AdminStoreType, _GettersTree<Ad
             this.menuList = []
         }
     },
-        getters: {},
-        persist: {
-            enabled: true,
-            strategies: [
-                {
-                    storage: localStorage,
-                    paths: ['saTokenInfo', 'resourceCode']
-                }
-            ],
-        },
+    getters: {},
+    persist: {
+        enabled: true,
+        strategies: [
+            {
+                storage: localStorage,
+                paths: ['saTokenInfo', 'resourceCode']
+            }
+        ],
+    },
     }
 )

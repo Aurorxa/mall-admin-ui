@@ -1,29 +1,24 @@
 <template>
   <el-row align="middle" style="height: 100%">
     <el-col :span="1">
-      <el-icon :size="22" style="cursor: pointer" :class="icon"></el-icon>
+      <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
+               @click="toggleCollapse"></el-icon>
     </el-col>
-    <el-col :span="19">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path:'/'}">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <a href="/">活动管理</a>
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <div class="no-redirect">活动详情</div>
-        </el-breadcrumb-item>
-      </el-breadcrumb>
+    <el-col :span="16">
+      <BreadCrumb></BreadCrumb>
     </el-col>
-    <el-col :span="2" style="display:flex;justify-content: space-evenly">
+    <el-col :span="7" style="display:flex;justify-content: space-evenly;align-items: center">
+      <!-- Search -->
+      <HeaderSearch/>
+      <!-- 全屏 -->
       <Fullscreen />
-      <LangSelect />
-    </el-col>
-    <el-col :span="2">
+      <!-- 消息提示 -->
+      <Badge/>
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
-        <span class="el-dropdown-link" style="display: flex;justify-content: center;align-items: center">
-          <el-avatar :size="50" shape="circle"
+        <span class="el-dropdown-link"
+              style="display: flex;justify-content: center;align-items: center;cursor: pointer">
+          <el-avatar :size="25" shape="circle"
                      src="https://avatars.githubusercontent.com/u/25677587?s=400&u=49a02118ee2c72d9200af201976fcd2c95766455&v=4" />
           <span style="margin-left: 10px">许大仙</span>
         </span>
@@ -44,6 +39,8 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- 语言切换 -->
+      <LangSelect />
     </el-col>
   </el-row>
   <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">
@@ -83,22 +80,33 @@
 
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
-import {useRoute, useRouter} from 'vue-router'
 import {ElMessageBox} from "element-plus"
 import {changePassword} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
-import Fullscreen from '@/components/Fullscreen/index.vue'
+import Fullscreen from '@/components/FullScreen/index.vue'
+import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Badge from '@/components/Badge/index.vue'
+import {useSidebarStore} from "@/store/sidebar"
+import BreadCrumb from '@/components/BreadCrumb/index.vue'
+import {useRouter} from "vue-router"
+import {useTagsViewStore} from '@/store/tagsview'
 
-const adminStore = useAdminStore()
 const router = useRouter()
-const route = useRoute()
-console.log('route.matched@@@', route.matched);
+const adminStore = useAdminStore()
+const sidebarStore = useSidebarStore()
+const tagsViewStore = useTagsViewStore()
 
+// 处理侧边栏展开和收缩
+const {sidebarOpened} = storeToRefs(sidebarStore)
+
+const toggleCollapse = () => {
+  sidebarStore.toggleSidebarOpened()
+}
+
+// 修改密码 hooks
 const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
-
 // 处理个人设置、修改密码、退出登录等逻辑
-const icon = false ? 'i-ep-expand' : 'i-ep-fold'
 const handleCommand = (command: string) => {
   // 个人设置
   if (command === 'settings') {
@@ -118,7 +126,9 @@ const handleCommand = (command: string) => {
     }).then(async () => {
       // 触发退出登录操作
       await adminStore.logout()
-      // 跳转到登录页面
+      // 触发清空 tagsView 动作
+      await tagsViewStore.clear()
+          // 跳转到登录页面
       await router.push('/login')
 
     }).catch(() => {
