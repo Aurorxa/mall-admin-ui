@@ -73,6 +73,19 @@
         </div>
       </template>
     </el-table-column>
+    <el-table-column label="状态">
+      <template #default="scope">
+        <el-switch
+            v-model="scope.row.status"
+            class="ml-2"
+            active-text="启用"
+            inactive-text="禁用"
+            :active-value="1"
+            :inactive-value="0"
+            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        </el-switch>
+      </template>
+    </el-table-column>
     <el-table-column label="操作" fixed="right" width="120">
       <template #default="scope">
         <el-tooltip
