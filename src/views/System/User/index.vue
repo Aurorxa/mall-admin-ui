@@ -14,19 +14,17 @@
       </el-select>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="handleSearch">
-        <el-icon class="i-ep-search"></el-icon>
+      <el-button type="primary" @click="handleSearch" icon="i-ep-search">
         搜索
       </el-button>
-      <el-button type="primary" @click="handleReset">
-        <el-icon class="i-ep-refresh"></el-icon>
+      <el-button type="primary" @click="handleReset" icon="i-ep-refresh">
         重置
       </el-button>
     </el-form-item>
   </el-form>
   <!-- 新增、导入、导出 -->
   <el-row>
-    <el-button plain type="primary" size="default" icon="i-ep-plus">新增</el-button>
+    <el-button plain type="primary" icon="i-ep-plus">新增</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
     <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
   </el-row>
