@@ -6,6 +6,7 @@ import {
     PageListReturnType,
     QueryFormType
 } from "@/types/ums/admin"
+import {PaginationReturn} from "@/utils/global";
 
 /* 登录 */
 export const login: (data: LoginFormType) => Promise<LoginReturnType> = data => {
@@ -27,7 +28,7 @@ export const changePassword = (data: ChangePasswordFormType) => {
 }
 
 /* 分页获取管理员数据 */
-export const pageList: (data: QueryFormType) => Promise<PageListReturnType> = data => {
-    return request.post(`/ums/admin/pageList/`)
+export const pageList: (data: QueryFormType) => Promise<PaginationReturn<PageListReturnType>> = data => {
+    return request.post(`/ums/admin/pageList/${data.pageNo}/${data.pageSize}`, {...data})
 }
 

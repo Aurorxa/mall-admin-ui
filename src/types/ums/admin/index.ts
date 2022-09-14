@@ -35,7 +35,18 @@ export type QueryFormType = {
 }
 
 // 分页列表查询返回类型
-export type PageListReturnType = {}
+export type PageListReturnType = {
+    id: string,
+    username: string,
+    realName: string,
+    nickName: string,
+    gender: string,
+    phone: string,
+    email: string,
+    status: number,
+    avatar: string,
+    sort: number
+}
 
 // store 中 action 的类型
 export interface ActionType {
