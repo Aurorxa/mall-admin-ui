@@ -129,7 +129,7 @@ const menuList: MenuDataType[] = [
 ]
 
 type FuseDataType = {
-  title: string | string[],
+  title: string,
   path: string
 }
 // 处理菜单数据，用于检索
