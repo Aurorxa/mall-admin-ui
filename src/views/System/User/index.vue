@@ -176,7 +176,6 @@ const handleDelete = (index: number, row: PageListReturnType) => {
   console.log(index, row)
 }
 
-
 </script>
 
 <style lang="scss" scoped>
