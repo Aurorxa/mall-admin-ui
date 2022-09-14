@@ -135,7 +135,6 @@ import {PaginationReturn} from "@/utils/global"
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
   username: '',
-  email: '',
   phone: '',
   status: 1,
   pageNo: 1, // 页码
