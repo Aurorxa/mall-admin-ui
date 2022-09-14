@@ -230,7 +230,21 @@ const handleCurrentChange = async (val: number) => {
 
 // 编辑
 const handleEdit = (index: number, row: PageListReturnType) => {
-  console.log(index, row)
+  dialogService({
+    title: '用户编辑',
+    height: '60vh',
+    width: '50vw',
+    content: <UserView id={row.id} />,
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
 }
 
 // 详情
