@@ -90,8 +90,19 @@
         </div>
       </template>
     </el-table-column>
-    <el-table-column label="操作" fixed="right" width="120">
+    <el-table-column label="操作" fixed="right" width="150">
       <template #default="scope">
+        <el-tooltip
+            class="box-item"
+            effect="dark"
+            content="详情"
+            placement="top">
+          <el-button
+              link
+              icon="i-ep-info-filled"
+              @click="handleEdit(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
         <el-tooltip
             class="box-item"
             effect="dark"
@@ -103,15 +114,6 @@
               @click="handleEdit(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
-        <el-popconfirm title="确定删除吗？" @confirm="handleDelete(scope.$index, scope.row)">
-          <template #reference>
-            <el-button
-                type="danger"
-                icon="i-ep-delete"
-                link>
-            </el-button>
-          </template>
-        </el-popconfirm>
         <el-tooltip
             class="box-item"
             effect="dark"
@@ -124,6 +126,15 @@
               @click="handleDelete(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
+        <el-popconfirm title="确定删除吗？" @confirm="handleDelete(scope.$index, scope.row)">
+          <template #reference>
+            <el-button
+                type="danger"
+                icon="i-ep-delete"
+                link>
+            </el-button>
+          </template>
+        </el-popconfirm>
       </template>
     </el-table-column>
   </el-table>
