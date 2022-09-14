@@ -86,6 +86,13 @@
         </el-switch>
       </template>
     </el-table-column>
+    <el-table-column label="排序">
+      <template #default="scope">
+        <div style="display: flex; align-items: center">
+          <span style="margin-left: 10px">{{ scope.row.sort }}</span>
+        </div>
+      </template>
+    </el-table-column>
     <el-table-column label="操作" fixed="right" width="120">
       <template #default="scope">
         <el-tooltip
@@ -189,11 +196,15 @@ const handleReset = async () => {
   await paginationQuery()
 }
 
-const handleSizeChange = (val: number) => {
+const handleSizeChange = async (val: number) => {
   searchOptions.pageSize = val
+  // 分页查询
+  await paginationQuery()
 }
-const handleCurrentChange = (val: number) => {
+const handleCurrentChange = async (val: number) => {
   searchOptions.pageNo = val
+  // 分页查询
+  await paginationQuery()
 }
 
 const handleEdit = (index: number, row: PageListReturnType) => {
