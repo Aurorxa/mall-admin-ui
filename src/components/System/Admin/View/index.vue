@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import {adminView} from "@/api/ums/admin"
 import {ViewReturnType} from "@/types/ums/admin"
+import {ResponseData} from "@/utils/global";
 
 let data = ref<ViewReturnType>({
   username: '',
@@ -62,7 +63,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 watchEffect(async () => {
-  data.value = await adminView(props.id)
+  const result: ResponseData<ViewReturnType> = await adminView(props.id)
+  data.value = result.data
 })
 
 </script>

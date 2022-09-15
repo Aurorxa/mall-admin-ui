@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 import {
+    AddFormType,
     ChangePasswordFormType,
     LoginFormType,
     LoginReturnType,
@@ -7,7 +8,7 @@ import {
     QueryFormType,
     ViewReturnType
 } from "@/types/ums/admin"
-import {PaginationReturn} from "@/utils/global";
+import {PaginationReturn, ResponseData} from "@/utils/global";
 
 /* 登录 */
 export const login: (data: LoginFormType) => Promise<LoginReturnType> = data => {
@@ -29,7 +30,7 @@ export const changePassword = (data: ChangePasswordFormType) => {
 }
 
 /* 分页获取管理员数据 */
-export const adminPageList: (data: QueryFormType) => Promise<PaginationReturn<PageListReturnType>> = data => {
+export const adminPageList: (data: QueryFormType) => Promise<ResponseData<PaginationReturn<PageListReturnType>>> = data => {
     return request.post(`/ums/admin/pageList/${data.pageNo}/${data.pageSize}`, {...data})
 }
 
@@ -39,7 +40,12 @@ export const adminDelete = (id: string) => {
 }
 
 // 管理员详情
-export const adminView: (id: string) => Promise<ViewReturnType> = id => {
+export const adminView: (id: string) => Promise<ResponseData<ViewReturnType>> = id => {
     return request.get(`ums/admin/view/${id}`)
 }
 
+
+// 管理员新增
+export const adminAdd: (data: AddFormType) => Promise<void> = data => {
+    return request.post(`ums/admin/add`, {...data})
+}

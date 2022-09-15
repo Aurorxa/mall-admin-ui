@@ -1,8 +1,8 @@
 <template>
   <el-form
-      ref="ruleFormRef"
+      ref="addFormRef"
       :model="addForm"
-      :rules="rules"
+      :rules="addFormRules"
       status-icon
       label-width="100px" class="m-5"
   >
@@ -32,13 +32,13 @@
     </el-form-item>
     <el-form-item label="状态" prop="status">
       <el-switch
-                 v-model="addForm.status"
-                 class="ml-2"
-                 active-text="启用"
-                 inactive-text="禁用"
-                 :active-value="1"
-                 :inactive-value="0"
-                 style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+          v-model="addForm.status"
+          class="ml-2"
+          active-text="启用"
+          inactive-text="禁用"
+          :active-value="1"
+          :inactive-value="0"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
       </el-switch>
     </el-form-item>
     <el-form-item label="排序字段" prop="sort">
@@ -49,8 +49,10 @@
 
 <script lang="ts" setup>
 import type {FormInstance, FormRules} from 'element-plus'
+import {ElMessage} from "element-plus";
+import {adminView} from "@/api/ums/admin";
 
-const ruleFormRef = ref<FormInstance>()
+const addFormRef = ref<FormInstance>()
 const addForm = reactive({
   username: '',
   password: '',
@@ -64,34 +66,112 @@ const addForm = reactive({
   sort: 0
 })
 
-const rules = reactive<FormRules>({
+// 自定义验证规则
+const validateAgree = (rule: any, value: any, callback: any) => {
+  if (!value) {
+    callback(new Error('同意协议没有选中'))
+  } else {
+    callback()
+  }
+}
+
+// 验证规则
+const addFormRules = reactive<FormRules>({
   username: [
-    {required: true, message: '请输入用户名', trigger: 'change'},
-    {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'},
+    {
+      required: true, message: '用户名为必填项', trigger: 'change'
+    },
+    {
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
+    }
+  ],
+  password: [
+    {
+      required: true, message: '密码为必填项', trigger: 'change'
+    },
+    {
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
+    }
+  ],
+  realName: [
+    {
+      required: true, message: '真实姓名为必填项', trigger: 'change'
+    },
+    {
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
+    }
+  ],
+  nickName: [
+    {
+      required: true, message: '昵称为必填项', trigger: 'change'
+    },
+    {
+      min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'change'
+    }
+  ],
+  phone: [
+    {
+      required: true, message: '手机号码为必填项', trigger: 'change'
+    },
+    {
+      pattern: /^1[3|4|5|7|8][0-9]\d{8}$/, message: '手机号码格式不正确', trigger: 'change'
+    }
+  ],
+  email: [
+    {
+      required: true, message: '邮箱为必填项', trigger: 'change'
+    },
+    {
+      pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+      message: '邮箱格式不正确',
+      trigger: 'change'
+    }
+  ],
+  agree: [
+    {
+      validator: validateAgree, trigger: 'change'
+    }
   ]
 })
 
-const submitForm = () :void => {
-  console.log('Admin---------@@@@@@@@@@@@')
-  // if (!formEl) return
-  // await formEl.validate((valid, fields) => {
-  //   if (valid) {
-  //     console.log('submit!')
-  //   } else {
-  //     console.log('error submit!', fields)
-  //   }
-  // })
+const submitForm = (): void => {
+  // 进行表单验证
+  addFormRef.value?.validate(async (valid: boolean) => {
+    if (!valid) { // 如果表单验证失败，就返回 false
+      return false
+    } else {
+      try {
+        // // 提示登录成功
+        // ElMessage({
+        //   message: '登录成功',
+        //   type: 'success',
+        //   center: true,
+        //   duration: 1000
+        // })
+      } catch (e) {
+        console.log(e)
+      } finally {
+      }
+    }
+  })
 }
 
+const resetForm = () => {
+  // 进行表单验证
+  addFormRef.value?.validate(async (valid: boolean) => {
+    if (!valid) { // 如果表单验证失败，就返回 false
+      return false
+    } else {
+      addFormRef.value.resetFields()
+    }
+  })
+}
 
 defineExpose({
-  submitForm
+  submitForm,
+  resetForm
 })
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
-}
 
 </script>
 

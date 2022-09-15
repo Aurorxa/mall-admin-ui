@@ -33,7 +33,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 instance.interceptors.response.use(async (response: AxiosResponse) => {
     const returnData: ResponseData<any> = response.data
     if (returnData.code === ResponseDataCodeEnum.SUCCESS_CODE) { // 请求成功，并且业务成功，返回解析后的数据
-        return returnData.data
+        return returnData
     } else { // 请求成功，业务失败，给出对应的提示
         if (returnData.code === ResponseDataCodeEnum.UNAUTHORIZED_CODE) { // 如果 token 过期，token 过时，token 无效等原因，就退出登录
             ElMessage.error(returnData.msg) // 提示错误消息

@@ -167,7 +167,7 @@
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
 import {adminDelete, adminPageList} from "@/api/ums/admin"
-import {PaginationReturn} from "@/utils/global"
+import {PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
@@ -191,9 +191,9 @@ const tableData = ref<PageListReturnType[]>([])
 
 // 分页查询
 const paginationQuery = async () => {
-  const result: PaginationReturn<PageListReturnType> = await adminPageList(searchOptions)
-  total.value = result.total
-  tableData.value = result.records
+  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageList(searchOptions)
+  total.value = result.data?.total
+  tableData.value = result.data?.records
 }
 
 onMounted(async () => {
@@ -269,7 +269,8 @@ const handleView = (index: number, row: PageListReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
-  await adminDelete(row.id)
+  const result = await adminDelete(row.id)
+  console.log(result)
   // 分页查询
   await paginationQuery()
 }
