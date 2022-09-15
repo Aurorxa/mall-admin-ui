@@ -41,7 +41,7 @@
           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
       </el-switch>
     </el-form-item>
-    <el-form-item label="排序字段" prop="sort">
+    <el-form-item label="排序" prop="sort">
       <el-input v-model="addForm.sort" clearable placeholder="请输入排序字段" />
     </el-form-item>
   </el-form>
