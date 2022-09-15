@@ -1,4 +1,4 @@
-import { createApp} from 'vue'
+import {createApp} from 'vue'
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import router from "@/permission"
 import App from '@/App.vue'

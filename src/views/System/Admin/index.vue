@@ -160,9 +160,8 @@
       :page-sizes="[5, 10, 15, 20]"
       class="mt-4"
       @sizeChange="handleSizeChange"
-      @currentChange="handleCurrentChange"
-  />
-
+      @current-change="handleCurrentChange"
+  ></el-pagination>
 </template>
 
 <script setup lang="tsx">
@@ -170,7 +169,7 @@ import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
 import {adminDelete, adminPageList} from "@/api/ums/admin"
 import {PaginationReturn} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
-import {vm, DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
+import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
 
@@ -224,7 +223,7 @@ const handleSizeChange = async (val: number) => {
   // 分页查询
   await paginationQuery()
 }
-const handleCurrentChange = async (val: number) => {
+const handleCurrentChange: (val: number) => void = async (val) => {
   searchOptions.pageNo = val
   // 分页查询
   await paginationQuery()
@@ -305,9 +304,9 @@ const handleAdd = () => {
       {
         label: '确定 ',
         type: 'primary',
-        onClick: ({vm,ctx, component}: DialogConfig) => {
+        onClick: ({vm, ctx, component}: DialogConfig) => {
           // vm.hide()
-          console.log('ctx',ctx)
+          console.log('ctx', ctx)
           component.submitForm()
           // console.log('component',component.submitForm())
         }
@@ -315,10 +314,10 @@ const handleAdd = () => {
       {
         label: '取消 ',
         type: 'primary',
-        onClick: ({vm,ctx, component}: DialogConfig) => {
+        onClick: ({vm, ctx, component}: DialogConfig) => {
           // vm.hide()
-          console.log('ctx',ctx)
-          console.log('component',component)
+          console.log('ctx', ctx)
+          console.log('component', component)
         }
       },
     ],
