@@ -129,7 +129,7 @@ const menuList: MenuDataType[] = [
 ]
 
 type FuseDataType = {
-  title: string | string[],
+  title: string,
   path: string
 }
 // 处理菜单数据，用于检索
@@ -201,14 +201,14 @@ const onClose = () => {
 }
 
 // 监听 search 打开，处理 close 事件
-watch(isShow,val=>{
-  if(val){
+watch(isShow, (val: boolean) => {
+  if (val) {
     if (headerSearchSelectRef.value) {
       headerSearchSelectRef.value.focus()
     }
-    document.body.addEventListener('click',onClose)
-  }else{
-    document.body.removeEventListener('click',onClose)
+    document.body.addEventListener('click', onClose)
+  } else {
+    document.body.removeEventListener('click', onClose)
   }
 })
 

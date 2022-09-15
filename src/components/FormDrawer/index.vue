@@ -5,8 +5,7 @@
       direction="rtl"
       :size="size"
       :destroy-on-close="destroyOnClose"
-      :close-on-click-modal="false"
-  >
+      :close-on-click-modal="false">
     <div class="formDrawer">
       <div class="content">
         <slot></slot>
@@ -76,7 +75,6 @@ const props = withDefaults(defineProps<Props>(), {
   confirmText: '提交',
   cancelText: '取消'
 })
-
 
 </script>
 

@@ -34,8 +34,46 @@ export type QueryFormType = {
     pageSize: number
 }
 
+// 新增表单类型
+export type AddFormType = {
+    // 用户名
+    username?: string,
+    // 密码
+    password?: string,
+    // 真实姓名
+    realName?: string,
+    // 昵称
+    nickName?: string,
+    // 性别
+    gender?: number,
+    // 手机号码
+    phone?: string,
+    // 邮箱
+    email?: string,
+    // 状态
+    status?: number,
+    // 头像
+    avatar: string,
+    // 排序字段
+    sort: number
+}
+
 // 分页列表查询返回类型
 export type PageListReturnType = {
+    id: string,
+    username: string,
+    realName: string,
+    nickName: string,
+    gender: string,
+    phone: string,
+    email: string,
+    status: number,
+    avatar: string,
+    sort: number
+}
+
+// 详情接口返回类型
+export type ViewReturnType = {
     id: string,
     username: string,
     realName: string,

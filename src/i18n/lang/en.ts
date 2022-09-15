@@ -1,6 +1,6 @@
 export default {
     login: {
-        title: 'User Login',
+        title: 'Admin Login',
         loginBtn: 'Login'
     },
     app: {

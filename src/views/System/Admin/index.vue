@@ -14,28 +14,25 @@
       </el-select>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="handleSearch">
-        <el-icon class="i-ep-search"></el-icon>
+      <el-button type="primary" @click="handleSearch" icon="i-ep-search">
         搜索
       </el-button>
-      <el-button type="primary" @click="handleReset">
-        <el-icon class="i-ep-refresh"></el-icon>
+      <el-button type="primary" @click="handleReset" icon="i-ep-refresh">
         重置
       </el-button>
     </el-form-item>
   </el-form>
   <!-- 新增、导入、导出 -->
   <el-row>
-    <el-button plain type="primary" size="default" icon="i-ep-plus">新增</el-button>
+    <el-button plain type="primary" icon="i-ep-plus" @click="handleAdd">新增</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
-    <el-button color="#feb926" plain icon="i-ep-download">导出</el-button>
+    <el-button color="#feb926" plain icon="i-ep-download" @click="handleExport">导出</el-button>
   </el-row>
   <!-- 表格 -->
   <el-table :data="tableData"
             style="width: 100%"
             stripe
             border
-            size="large"
             :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
     <el-table-column type="index" label="#" />
     <el-table-column label="用户名">
@@ -75,14 +72,24 @@
     </el-table-column>
     <el-table-column label="状态">
       <template #default="scope">
-        <el-switch
-            v-model="scope.row.status"
-            class="ml-2"
-            active-text="启用"
-            inactive-text="禁用"
-            :active-value="1"
-            :inactive-value="0"
-            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        <el-switch v-if="scope.row.username === 'admin'"
+                   disabled
+                   v-model="scope.row.status"
+                   class="ml-2"
+                   active-text="启用"
+                   inactive-text="禁用"
+                   :active-value="1"
+                   :inactive-value="0"
+                   style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        </el-switch>
+        <el-switch v-else
+                   v-model="scope.row.status"
+                   class="ml-2"
+                   active-text="启用"
+                   inactive-text="禁用"
+                   :active-value="1"
+                   :inactive-value="0"
+                   style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
         </el-switch>
       </template>
     </el-table-column>
@@ -93,8 +100,19 @@
         </div>
       </template>
     </el-table-column>
-    <el-table-column label="操作" fixed="right" width="120">
+    <el-table-column label="操作" fixed="right" width="150">
       <template #default="scope">
+        <el-tooltip
+            class="box-item"
+            effect="dark"
+            content="详情"
+            placement="top">
+          <el-button
+              link
+              icon="i-ep-info-filled"
+              @click="handleView(scope.$index, scope.row)">
+          </el-button>
+        </el-tooltip>
         <el-tooltip
             class="box-item"
             effect="dark"
@@ -109,18 +127,6 @@
         <el-tooltip
             class="box-item"
             effect="dark"
-            content="删除"
-            placement="top">
-          <el-button
-              type="danger"
-              icon="i-ep-delete"
-              link
-              @click="handleDelete(scope.$index, scope.row)">
-          </el-button>
-        </el-tooltip>
-        <el-tooltip
-            class="box-item"
-            effect="dark"
             content="分配角色"
             placement="top">
           <el-button
@@ -130,6 +136,16 @@
               @click="handleDelete(scope.$index, scope.row)">
           </el-button>
         </el-tooltip>
+        <el-popconfirm :title="`确定删除${scope.row.username}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+                       width="160">
+          <template #reference>
+            <el-button
+                type="danger"
+                icon="i-ep-delete"
+                link>
+            </el-button>
+          </template>
+        </el-popconfirm>
       </template>
     </el-table-column>
   </el-table>
@@ -138,19 +154,26 @@
       :currentPage="searchOptions.pageNo"
       :pageSize="searchOptions.pageSize"
       background
+      small
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
       :page-sizes="[5, 10, 15, 20]"
       class="mt-4"
       @sizeChange="handleSizeChange"
-      @currentChange="handleCurrentChange"
-  />
+      @current-change="handleCurrentChange"
+  ></el-pagination>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {pageList} from "@/api/ums/admin"
-import {PaginationReturn} from "@/utils/global"
+import {adminDelete, adminPageList} from "@/api/ums/admin"
+import {PaginationReturn, ResponseData} from "@/utils/global"
+import dialogService from '@caroundsky/el-plus-dialog-service'
+import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
+import AdminView from '@/components/System/Admin/View/index.vue'
+import AdminAdd from '@/components/System/Admin/Add/index.vue'
+import AdminEdit from '@/components/System/Admin/Edit/index.vue'
+
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
@@ -169,9 +192,9 @@ const tableData = ref<PageListReturnType[]>([])
 
 // 分页查询
 const paginationQuery = async () => {
-  const result: PaginationReturn<PageListReturnType> = await pageList(searchOptions)
-  total.value = result.total
-  tableData.value = result.records
+  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageList(searchOptions)
+  total.value = result.data?.total
+  tableData.value = result.data?.records
 }
 
 onMounted(async () => {
@@ -201,17 +224,106 @@ const handleSizeChange = async (val: number) => {
   // 分页查询
   await paginationQuery()
 }
-const handleCurrentChange = async (val: number) => {
+const handleCurrentChange: (val: number) => void = async (val) => {
   searchOptions.pageNo = val
   // 分页查询
   await paginationQuery()
 }
 
+// 编辑
 const handleEdit = (index: number, row: PageListReturnType) => {
-  console.log(index, row)
+  dialogService({
+    title: '用户编辑',
+    height: '60vh',
+    width: '50vw',
+    content: <AdminEdit id={row.id} />,
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
 }
-const handleDelete = (index: number, row: PageListReturnType) => {
-  console.log(index, row)
+
+// 详情
+const handleView = (index: number, row: PageListReturnType) => {
+  dialogService({
+    title: '用户详情',
+    height: '60vh',
+    width: '50vw',
+    content: <AdminView id={row.id} />,
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
+}
+
+// 删除
+const handleDelete = async (index: number, row: PageListReturnType) => {
+  const result: ResponseData<null> = await adminDelete(row.id)
+  ElMessage.success(result.msg)
+  // 分页查询
+  await paginationQuery()
+}
+
+// 导出
+const handleExport = () => {
+  dialogService({
+    title: '导出',
+    height: '50vh',
+    width: '50vw',
+    content: '你好啊',
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: ({vm}: DialogConfig) => {
+          vm.hide()
+        },
+      },
+    ],
+  })
+}
+
+// 新增
+const handleAdd = () => {
+  dialogService({
+    title: '新增',
+    height: '50vh',
+    width: '50vw',
+    content: <AdminAdd />,
+    buttons: [
+      {
+        label: '确定 ',
+        type: 'primary',
+        onClick: async ({vm, ctx, component}: DialogConfig) => {
+          const result = await component.submitForm()
+          if (result) {
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
+          }
+        }
+      },
+      {
+        label: '重置',
+        type: 'primary',
+        onClick: ({vm, ctx, component}: DialogConfig) => {
+          component.resetForm()
+        }
+      },
+    ]
+  })
 }
 
 </script>

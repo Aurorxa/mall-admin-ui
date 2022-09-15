@@ -2,7 +2,8 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
-  const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
+    const ElMessage: typeof import('element-plus/es')['ElMessage']
+    const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -277,8 +278,9 @@ declare global {
 import { UnwrapRef } from 'vue'
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+      readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+      readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
+      readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
