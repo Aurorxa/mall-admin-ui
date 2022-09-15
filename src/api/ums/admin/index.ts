@@ -36,15 +36,15 @@ export const adminPageList: (data: QueryFormType) => Promise<ResponseData<Pagina
 
 // 删除管理员数据
 export const adminDelete: (id: string) => Promise<ResponseData<null>> = (id: string) => {
-    return request.delete(`ums/admin/delete/${id}`)
+    return request.delete(`/ums/admin/delete/${id}`)
 }
 
 // 管理员详情
 export const adminView: (id: string) => Promise<ResponseData<ViewReturnType>> = id => {
-    return request.get(`ums/admin/view/${id}`)
+    return request.get(`/ums/admin/view/${id}`)
 }
 
 // 新增管理员
 export const adminAdd: (data: AddFormType) => Promise<ResponseData<null>> = data => {
-    return request.post(`ums/admin/add`, {...data})
+    return request.post(`/ums/admin/add`, {...data})
 }
