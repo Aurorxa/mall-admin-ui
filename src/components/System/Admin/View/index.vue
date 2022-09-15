@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import {adminView} from "@/api/ums/admin"
 import {ViewReturnType} from "@/types/ums/admin"
-import {ResponseData} from "@/utils/global";
+import {ResponseData} from "@/utils/global"
 
 let data = ref<ViewReturnType>({
   username: '',
