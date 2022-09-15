@@ -44,7 +44,7 @@ export const adminView: (id: string) => Promise<ResponseData<ViewReturnType>> = 
     return request.get(`ums/admin/view/${id}`)
 }
 
-// 管理员新增
+// 新增管理员
 export const adminAdd: (data: AddFormType) => Promise<ResponseData<null>> = data => {
     return request.post(`ums/admin/add`, {...data})
 }
