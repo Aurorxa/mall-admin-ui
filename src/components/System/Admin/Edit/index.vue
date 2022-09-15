@@ -34,7 +34,7 @@
                  :src="data.avatar" />
     </el-form-item>
     <el-form-item label="排序">
-      <el-input v-model="data.sort" />
+      <el-input-number v-model="data.sort" :min="0" placeholder="请输入排序字段" :value-on-clear="data.sort" />
     </el-form-item>
   </el-form>
 </template>

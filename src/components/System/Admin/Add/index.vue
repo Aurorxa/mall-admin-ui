@@ -42,7 +42,7 @@
       </el-switch>
     </el-form-item>
     <el-form-item label="排序" prop="sort">
-      <el-input-number v-model="addForm.sort" :min="0" placeholder="请输入排序字段" clearable />
+      <el-input-number v-model="addForm.sort" :min="0" placeholder="请输入排序字段" :value-on-clear="0" />
     </el-form-item>
   </el-form>
 </template>
