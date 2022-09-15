@@ -172,6 +172,7 @@ import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
+import AdminEdit from '@/components/System/Admin/Edit/index.vue'
 
 
 // 搜索条件
@@ -235,7 +236,7 @@ const handleEdit = (index: number, row: PageListReturnType) => {
     title: '用户编辑',
     height: '60vh',
     width: '50vw',
-    content: <AdminView id={row.id} />,
+    content: <AdminEdit id={row.id} />,
     buttons: [
       {
         label: '确定 ',
