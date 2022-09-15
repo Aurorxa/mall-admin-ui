@@ -49,11 +49,12 @@
 
 <script lang="ts" setup>
 import type {FormInstance, FormRules} from 'element-plus'
-import {ElMessage} from "element-plus";
-import {adminView} from "@/api/ums/admin";
+import {adminAdd} from "@/api/ums/admin";
+import {AddFormType} from "@/types/ums/admin"
+import {ResponseData} from "@/utils/global";
 
 const addFormRef = ref<FormInstance>()
-const addForm = reactive({
+const addForm = reactive<AddFormType>({
   username: '',
   password: '',
   realName: '',
@@ -134,23 +135,17 @@ const addFormRules = reactive<FormRules>({
   ]
 })
 
-const submitForm = (): void => {
+const submitForm = () => {
   // 进行表单验证
-  addFormRef.value?.validate(async (valid: boolean) => {
+  return addFormRef.value?.validate(async (valid: boolean) => {
     if (!valid) { // 如果表单验证失败，就返回 false
       return false
     } else {
       try {
-        // // 提示登录成功
-        // ElMessage({
-        //   message: '登录成功',
-        //   type: 'success',
-        //   center: true,
-        //   duration: 1000
-        // })
+        const result: ResponseData<null> = await adminAdd(addForm)
+        ElMessage.success(result.msg)
       } catch (e) {
         console.log(e)
-      } finally {
       }
     }
   })
@@ -158,13 +153,7 @@ const submitForm = (): void => {
 
 const resetForm = () => {
   // 进行表单验证
-  addFormRef.value?.validate(async (valid: boolean) => {
-    if (!valid) { // 如果表单验证失败，就返回 false
-      return false
-    } else {
-      addFormRef.value.resetFields()
-    }
-  })
+  return addFormRef.value?.resetFields()
 }
 
 defineExpose({

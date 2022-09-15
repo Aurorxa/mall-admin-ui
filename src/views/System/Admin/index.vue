@@ -269,8 +269,8 @@ const handleView = (index: number, row: PageListReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
-  const result = await adminDelete(row.id)
-  console.log(result)
+  const result: ResponseData<null> = await adminDelete(row.id)
+  ElMessage.success(result.msg)
   // 分页查询
   await paginationQuery()
 }
@@ -305,24 +305,23 @@ const handleAdd = () => {
       {
         label: '确定 ',
         type: 'primary',
-        onClick: ({vm, ctx, component}: DialogConfig) => {
-          // vm.hide()
-          console.log('ctx', ctx)
-          component.submitForm()
-          // console.log('component',component.submitForm())
+        onClick: async ({vm, ctx, component}: DialogConfig) => {
+          const result = await component.submitForm()
+          if (result) {
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
+          }
         }
       },
       {
-        label: '取消 ',
+        label: '重置',
         type: 'primary',
         onClick: ({vm, ctx, component}: DialogConfig) => {
-          // vm.hide()
-          console.log('ctx', ctx)
-          console.log('component', component)
+          component.resetForm()
         }
       },
-    ],
-
+    ]
   })
 }
 

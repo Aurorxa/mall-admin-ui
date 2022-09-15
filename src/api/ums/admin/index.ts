@@ -35,7 +35,7 @@ export const adminPageList: (data: QueryFormType) => Promise<ResponseData<Pagina
 }
 
 // 删除管理员数据
-export const adminDelete = (id: string) => {
+export const adminDelete: (id: string) => Promise<ResponseData<null>> = (id: string) => {
     return request.delete(`ums/admin/delete/${id}`)
 }
 
@@ -46,6 +46,6 @@ export const adminView: (id: string) => Promise<ResponseData<ViewReturnType>> = 
 
 
 // 管理员新增
-export const adminAdd: (data: AddFormType) => Promise<void> = data => {
+export const adminAdd: (data: AddFormType) => Promise<ResponseData<null>> = data => {
     return request.post(`ums/admin/add`, {...data})
 }
