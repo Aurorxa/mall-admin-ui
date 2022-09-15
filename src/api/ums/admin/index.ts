@@ -11,17 +11,13 @@ import {
 import {PaginationReturn, ResponseData} from "@/utils/global";
 
 /* 登录 */
-export const login: (data: LoginFormType) => Promise<LoginReturnType> = data => {
+export const login: (data: LoginFormType) => Promise<ResponseData<LoginReturnType>> = data => {
     return request.post('/ums/admin/doLogin', data)
 }
 
 /* 退出登录 */
 export const logout = () => {
     return request.post('/ums/admin/logout')
-}
-
-export const test = () => {
-    return request.get('/ums/admin/test')
 }
 
 /* 修改密码 */
