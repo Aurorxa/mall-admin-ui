@@ -33,6 +33,7 @@
             style="width: 100%"
             stripe
             border
+            table-layout="auto"
             :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
     <el-table-column type="index" label="#" />
     <el-table-column label="用户名">
