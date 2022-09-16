@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import {
     AddFormType,
     ChangePasswordFormType,
+    EditFormType,
     LoginFormType,
     LoginReturnType,
     PageListReturnType,
@@ -44,3 +45,9 @@ export const adminView: (id: string) => Promise<ResponseData<ViewReturnType>> = 
 export const adminAdd: (data: AddFormType) => Promise<ResponseData<null>> = data => {
     return request.post(`/ums/admin/add`, {...data})
 }
+
+// 编辑管理员
+export const adminEdit: (data: EditFormType, id: string) => Promise<ResponseData<null>> = (data, id) => {
+    return request.put(`/ums/admin/edit/${id}`, {...data})
+}
+

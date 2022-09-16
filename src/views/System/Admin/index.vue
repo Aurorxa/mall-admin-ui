@@ -179,7 +179,7 @@ import AdminEdit from '@/components/System/Admin/Edit/index.vue'
 const searchOptions = reactive<QueryFormType>({
   username: '',
   phone: '',
-  status: 1,
+  status: null,
   pageNo: 1, // 页码
   pageSize: 10 // 每页显示条数
 })
@@ -241,10 +241,15 @@ const handleEdit = (index: number, row: PageListReturnType) => {
       {
         label: '确定 ',
         type: 'primary',
-        onClick: ({vm}: DialogConfig) => {
-          vm.hide()
+        onClick: async ({vm, ctx, component}: DialogConfig) => {
+          const result = await component.submitForm()
+          if (result) {
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
+          }
         },
-      },
+      }
     ],
   })
 }

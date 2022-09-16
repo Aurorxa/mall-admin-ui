@@ -27,7 +27,7 @@ export type QueryFormType = {
     // 手机号码
     phone?: string,
     // 状态
-    status?: number,
+    status?: number | null,
     // 页码
     pageNo: number,
     // 每页显示条数
@@ -36,6 +36,30 @@ export type QueryFormType = {
 
 // 新增表单类型
 export type AddFormType = {
+    // 用户名
+    username?: string,
+    // 密码
+    password?: string,
+    // 真实姓名
+    realName?: string,
+    // 昵称
+    nickName?: string,
+    // 性别
+    gender?: number,
+    // 手机号码
+    phone?: string,
+    // 邮箱
+    email?: string,
+    // 状态
+    status?: number,
+    // 头像
+    avatar: string,
+    // 排序字段
+    sort: number
+}
+
+// 修改表单类型
+export type EditFormType = {
     // 用户名
     username?: string,
     // 密码
