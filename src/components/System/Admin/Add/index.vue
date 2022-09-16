@@ -65,7 +65,7 @@
 import type {FormInstance, FormRules, UploadProps} from 'element-plus'
 import {adminAdd} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
-import {ResponseData} from "@/utils/global"
+import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
@@ -83,14 +83,6 @@ const addForm = reactive<AddFormType>({
   sort: 0
 })
 
-// 自定义验证规则
-const validateAgree = (rule: any, value: any, callback: any) => {
-  if (!value) {
-    callback(new Error('同意协议没有选中'))
-  } else {
-    callback()
-  }
-}
 
 // 验证规则
 const addFormRules = reactive<FormRules>({
@@ -144,12 +136,40 @@ const addFormRules = reactive<FormRules>({
       trigger: 'change'
     }
   ],
-  agree: [
+  avatar: [
     {
-      validator: validateAgree, trigger: 'change'
-    }
-  ]
+      required: true, message: '头像为必填项', trigger: 'change'
+    },
+  ],
+
 })
+
+
+// 上传头像
+const imageUrl = ref<string>('')
+
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+    response: any,
+    uploadFile: { raw: Blob | MediaSource; }
+) => {
+  const {code, data, msg} = response
+  if (code === ResponseDataCodeEnum.SUCCESS_CODE) {
+    imageUrl.value = data.completeAvatarUrl
+  } else {
+    ElMessage.error(msg)
+  }
+}
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string; size: number; }) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('图片只能是 jpeg 格式')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('头像超过2MB!')
+    return false
+  }
+  return true
+}
 
 // 提交
 const submitForm = () => {
@@ -171,27 +191,6 @@ const submitForm = () => {
 // 重置
 const resetForm = () => {
   return addFormRef.value?.resetFields()
-}
-
-
-const imageUrl = ref('')
-
-const handleAvatarSuccess: UploadProps['onSuccess'] = (
-    response: any,
-    uploadFile: { raw: Blob | MediaSource; }
-) => {
-  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
-}
-
-const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string; size: number; }) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('Avatar picture must be JPG format!')
-    return false
-  } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error('Avatar picture size can not exceed 2MB!')
-    return false
-  }
-  return true
 }
 
 defineExpose({
