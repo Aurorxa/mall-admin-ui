@@ -299,7 +299,7 @@ const handleExport = () => {
 const handleAdd = () => {
   dialogService({
     title: '新增',
-    height: '50vh',
+    height: '60vh',
     width: '50vw',
     content: <AdminAdd />,
     buttons: [

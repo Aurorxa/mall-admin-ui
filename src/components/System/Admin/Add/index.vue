@@ -30,6 +30,19 @@
     <el-form-item label="邮箱" prop="email">
       <el-input v-model="addForm.email" clearable placeholder="请输入邮箱" />
     </el-form-item>
+    <el-form-item label="头像" prop="avatar">
+      <el-upload
+          class="avatar-uploader"
+          :action="baseUrl"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <div v-else class="avatar-uploader-icon">
+          <el-icon :class="['i-ep-plus']"></el-icon>
+        </div>
+      </el-upload>
+    </el-form-item>
     <el-form-item label="状态" prop="status">
       <el-switch
           v-model="addForm.status"
@@ -48,10 +61,13 @@
 </template>
 
 <script lang="ts" setup>
-import type {FormInstance, FormRules} from 'element-plus'
+// 上传
+import type {FormInstance, FormRules, UploadProps} from 'element-plus'
 import {adminAdd} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
-import {ResponseData} from "@/utils/global";
+import {ResponseData} from "@/utils/global"
+
+const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
 const addFormRef = ref<FormInstance>()
 const addForm = reactive<AddFormType>({
@@ -135,6 +151,7 @@ const addFormRules = reactive<FormRules>({
   ]
 })
 
+// 提交
 const submitForm = () => {
   // 进行表单验证
   return addFormRef.value?.validate(async (valid: boolean) => {
@@ -151,9 +168,30 @@ const submitForm = () => {
   })
 }
 
+// 重置
 const resetForm = () => {
-  // 进行表单验证
   return addFormRef.value?.resetFields()
+}
+
+
+const imageUrl = ref('')
+
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+    response: any,
+    uploadFile: { raw: Blob | MediaSource; }
+) => {
+  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
+}
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string; size: number; }) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('Avatar picture must be JPG format!')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('Avatar picture size can not exceed 2MB!')
+    return false
+  }
+  return true
 }
 
 defineExpose({
@@ -161,9 +199,38 @@ defineExpose({
   resetForm
 })
 
-
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+.avatar-uploader {
+  border: 1px dashed var(--el-border-color) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: var(--el-transition-duration-fast) !important;
+
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+
+  .avatar-uploader-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    text-align: center;
+  }
+
+  &:hover {
+    border-color: var(--el-color-primary) !important;
+  }
+}
 </style>
+
