@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import {adminEdit, adminView} from "@/api/ums/admin"
+import {adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditFormType, ViewReturnType} from "@/types/ums/admin"
 import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 import {FormInstance, FormRules, UploadProps} from "element-plus"
@@ -147,7 +147,7 @@ const props = withDefaults(defineProps<Props>(), {})
 const imageUrl = ref<string>('')
 
 watchEffect(async () => {
-  const result: ResponseData<ViewReturnType> = await adminView(props.id)
+  const result: ResponseData<ViewReturnType> = await adminViewApi(props.id)
   Object.assign(editForm, result.data)
   imageUrl.value = result.data?.avatar
 })
@@ -184,7 +184,7 @@ const submitForm = () => {
       return false
     } else {
       try {
-        const result: ResponseData<null> = await adminEdit(editForm, props.id)
+        const result: ResponseData<null> = await adminEditApi(editForm, props.id)
         ElMessage.success(result.msg)
       } catch (e) {
         console.log(e)

@@ -166,7 +166,7 @@
 
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {adminDelete, adminPageList} from "@/api/ums/admin"
+import {adminDeleteApi, adminPageListApi} from "@/api/ums/admin"
 import {PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
@@ -192,7 +192,7 @@ const tableData = ref<PageListReturnType[]>([])
 
 // 分页查询
 const paginationQuery = async () => {
-  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageList(searchOptions)
+  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageListApi(searchOptions)
   total.value = result.data?.total
   tableData.value = result.data?.records
 }
@@ -275,7 +275,7 @@ const handleView = (index: number, row: PageListReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
-  const result: ResponseData<null> = await adminDelete(row.id)
+  const result: ResponseData<null> = await adminDeleteApi(row.id)
   ElMessage.success(result.msg)
   // 分页查询
   await paginationQuery()

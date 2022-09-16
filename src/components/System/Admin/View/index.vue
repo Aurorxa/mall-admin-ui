@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import {adminView} from "@/api/ums/admin"
+import {adminViewApi} from "@/api/ums/admin"
 import {ViewReturnType} from "@/types/ums/admin"
 import {ResponseData} from "@/utils/global"
 
@@ -64,7 +64,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 watchEffect(async () => {
-  const result: ResponseData<ViewReturnType> = await adminView(props.id)
+  const result: ResponseData<ViewReturnType> = await adminViewApi(props.id)
   data.value = result.data
 })
 

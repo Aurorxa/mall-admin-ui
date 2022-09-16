@@ -81,7 +81,7 @@
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
 import {ElMessageBox} from "element-plus"
-import {changePassword} from "@/api/ums/admin";
+import {changePasswordApi} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'

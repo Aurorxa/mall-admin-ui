@@ -64,7 +64,7 @@
 <script lang="ts" setup>
 // 上传
 import type {FormInstance, FormRules, UploadProps} from 'element-plus'
-import {adminAdd} from "@/api/ums/admin";
+import {adminAddApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
 import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 
@@ -181,7 +181,7 @@ const submitForm = () => {
       return false
     } else {
       try {
-        const result: ResponseData<null> = await adminAdd(addForm)
+        const result: ResponseData<null> = await adminAddApi(addForm)
         ElMessage.success(result.msg)
       } catch (e) {
         console.log(e)
