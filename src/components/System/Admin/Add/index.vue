@@ -156,7 +156,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   const {code, data, msg} = response
   if (code === ResponseDataCodeEnum.SUCCESS_CODE) {
     imageUrl.value = data.completeAvatarUrl
-    addForm.value.avatar = data.completeAvatarUrl
+    addForm.avatar = data.completeAvatarUrl
   } else {
     ElMessage.error(msg)
   }

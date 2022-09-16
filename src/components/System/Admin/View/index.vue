@@ -30,7 +30,8 @@
       </el-switch>
     </el-form-item>
     <el-form-item label="头像">
-      <el-avatar :size="25" shape="circle"
+      <el-avatar :size="178"
+                 shape="circle"
                  :src="data.avatar" />
     </el-form-item>
     <el-form-item label="排序">
