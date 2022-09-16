@@ -166,7 +166,7 @@
 
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {adminDelete, adminPageList} from "@/api/ums/admin"
+import {adminDeleteApi, adminPageListApi} from "@/api/ums/admin"
 import {PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
@@ -179,7 +179,7 @@ import AdminEdit from '@/components/System/Admin/Edit/index.vue'
 const searchOptions = reactive<QueryFormType>({
   username: '',
   phone: '',
-  status: 1,
+  status: null,
   pageNo: 1, // 页码
   pageSize: 10 // 每页显示条数
 })
@@ -192,7 +192,7 @@ const tableData = ref<PageListReturnType[]>([])
 
 // 分页查询
 const paginationQuery = async () => {
-  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageList(searchOptions)
+  const result: ResponseData<PaginationReturn<PageListReturnType>> = await adminPageListApi(searchOptions)
   total.value = result.data?.total
   tableData.value = result.data?.records
 }
@@ -241,10 +241,15 @@ const handleEdit = (index: number, row: PageListReturnType) => {
       {
         label: '确定 ',
         type: 'primary',
-        onClick: ({vm}: DialogConfig) => {
-          vm.hide()
+        onClick: async ({vm, ctx, component}: DialogConfig) => {
+          const result = await component.submitForm()
+          if (result) {
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
+          }
         },
-      },
+      }
     ],
   })
 }
@@ -270,7 +275,7 @@ const handleView = (index: number, row: PageListReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
-  const result: ResponseData<null> = await adminDelete(row.id)
+  const result: ResponseData<null> = await adminDeleteApi(row.id)
   ElMessage.success(result.msg)
   // 分页查询
   await paginationQuery()
@@ -299,7 +304,7 @@ const handleExport = () => {
 const handleAdd = () => {
   dialogService({
     title: '新增',
-    height: '50vh',
+    height: '60vh',
     width: '50vw',
     content: <AdminAdd />,
     buttons: [

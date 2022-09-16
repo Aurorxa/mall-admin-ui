@@ -1,6 +1,6 @@
 import {ElMessage, FormInstance, FormRules} from "element-plus";
 import {ChangePasswordFormType} from "@/types/ums/admin";
-import {changePassword} from "@/api/ums/admin";
+import {changePasswordApi} from "@/api/ums/admin";
 
 export default function () {
     const formDrawerRef = ref();
@@ -63,7 +63,7 @@ export default function () {
             } else {
                 try {
                     formDrawerRef.value.showLoading()
-                    await changePassword(changePasswordForm)
+                    await changePasswordApi(changePasswordForm)
                     // 提示登录成功
                     ElMessage({
                         message: '修改密码成功',

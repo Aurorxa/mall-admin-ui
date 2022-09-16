@@ -30,6 +30,20 @@
     <el-form-item label="邮箱" prop="email">
       <el-input v-model="addForm.email" clearable placeholder="请输入邮箱" />
     </el-form-item>
+    <el-form-item label="头像" prop="avatar">
+      <el-upload
+          class="avatar-uploader"
+          :action="baseUrl"
+          name="file"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <div v-else class="avatar-uploader-icon">
+          <el-icon :class="['i-ep-plus']"></el-icon>
+        </div>
+      </el-upload>
+    </el-form-item>
     <el-form-item label="状态" prop="status">
       <el-switch
           v-model="addForm.status"
@@ -42,16 +56,19 @@
       </el-switch>
     </el-form-item>
     <el-form-item label="排序" prop="sort">
-      <el-input v-model="addForm.sort" clearable placeholder="请输入排序字段" />
+      <el-input-number v-model="addForm.sort" :min="0" placeholder="请输入排序字段" :value-on-clear="0" />
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import type {FormInstance, FormRules} from 'element-plus'
-import {adminAdd} from "@/api/ums/admin";
+// 上传
+import type {FormInstance, FormRules, UploadProps} from 'element-plus'
+import {adminAddApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
-import {ResponseData} from "@/utils/global";
+import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
+
+const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
 const addFormRef = ref<FormInstance>()
 const addForm = reactive<AddFormType>({
@@ -67,14 +84,6 @@ const addForm = reactive<AddFormType>({
   sort: 0
 })
 
-// 自定义验证规则
-const validateAgree = (rule: any, value: any, callback: any) => {
-  if (!value) {
-    callback(new Error('同意协议没有选中'))
-  } else {
-    callback()
-  }
-}
 
 // 验证规则
 const addFormRules = reactive<FormRules>({
@@ -128,13 +137,43 @@ const addFormRules = reactive<FormRules>({
       trigger: 'change'
     }
   ],
-  agree: [
+  avatar: [
     {
-      validator: validateAgree, trigger: 'change'
-    }
-  ]
+      required: true, message: '头像为必填项', trigger: 'change'
+    },
+  ],
+
 })
 
+
+// 上传头像
+const imageUrl = ref<string>('')
+
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+    response: any,
+    uploadFile: { raw: Blob | MediaSource; }
+) => {
+  const {code, data, msg} = response
+  if (code === ResponseDataCodeEnum.SUCCESS_CODE) {
+    imageUrl.value = data.completeAvatarUrl
+    addForm.avatar = data.completeAvatarUrl
+  } else {
+    ElMessage.error(msg)
+  }
+}
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string; size: number; }) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('图片只能是 jpeg 格式')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('头像超过2MB!')
+    return false
+  }
+  return true
+}
+
+// 提交
 const submitForm = () => {
   // 进行表单验证
   return addFormRef.value?.validate(async (valid: boolean) => {
@@ -142,7 +181,7 @@ const submitForm = () => {
       return false
     } else {
       try {
-        const result: ResponseData<null> = await adminAdd(addForm)
+        const result: ResponseData<null> = await adminAddApi(addForm)
         ElMessage.success(result.msg)
       } catch (e) {
         console.log(e)
@@ -151,8 +190,8 @@ const submitForm = () => {
   })
 }
 
+// 重置
 const resetForm = () => {
-  // 进行表单验证
   return addFormRef.value?.resetFields()
 }
 
@@ -161,9 +200,38 @@ defineExpose({
   resetForm
 })
 
-
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+.avatar-uploader {
+  border: 1px dashed var(--el-border-color) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: var(--el-transition-duration-fast) !important;
+
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+
+  .avatar-uploader-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    text-align: center;
+  }
+
+  &:hover {
+    border-color: var(--el-color-primary) !important;
+  }
+}
 </style>
+
