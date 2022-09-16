@@ -137,11 +137,15 @@ export type SaTokenInfoType = {
 export type StoreType = {
     saTokenInfo: SaTokenInfoType,
     resourceCode: string[],
-    menuList: object[]
+    menuList: object[],
+    username: string,
+    avatar: string
 }
 
 // 登录返回的类型
 export type LoginReturnType = {
     saTokenInfo: SaTokenInfoType,
+    username: string,
+    avatar: string,
     resourceCode: string[]
 }

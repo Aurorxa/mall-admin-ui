@@ -8,15 +8,20 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
             return {
                 saTokenInfo: {},
                 resourceCode: [],
-                menuList: []
+                menuList: [],
+                username: '',
+                avatar: ''
             }
         },
         actions: {
             async login(value: LoginFormType): Promise<void> {
                 // 登录接口
                 const result: ResponseData<LoginReturnType> = await loginApi(value);
+                console.log('result-->login', result)
                 // 设置值到 store 中
                 this.saTokenInfo = result.data?.saTokenInfo
+                this.username = result.data?.username
+                this.avatar = result.data?.avatar
                 this.resourceCode = result.data?.resourceCode
             },
             async logout(): Promise<void> {
@@ -30,6 +35,8 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                 this.saTokenInfo = {}
                 this.resourceCode = []
                 this.menuList = []
+                this.username = ''
+                this.avatar = ''
             }
         },
         getters: {},
@@ -38,7 +45,7 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
             strategies: [
                 {
                     storage: localStorage,
-                    paths: ['saTokenInfo', 'resourceCode']
+                    paths: ['saTokenInfo', 'resourceCode', 'username', 'avatar', 'menuList']
                 }
             ],
         },

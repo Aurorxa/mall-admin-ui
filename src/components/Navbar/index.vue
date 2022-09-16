@@ -19,8 +19,8 @@
         <span class="el-dropdown-link"
               style="display: flex;justify-content: center;align-items: center;cursor: pointer">
           <el-avatar :size="25" shape="circle"
-                     src="https://avatars.githubusercontent.com/u/25677587?s=400&u=49a02118ee2c72d9200af201976fcd2c95766455&v=4" />
-          <span style="margin-left: 10px">许大仙</span>
+                     :src="avatar" />
+          <span style="margin-left: 10px">{{ username }}</span>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -81,7 +81,6 @@
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
 import {ElMessageBox} from "element-plus"
-import {changePasswordApi} from "@/api/ums/admin";
 import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'
@@ -96,6 +95,8 @@ const router = useRouter()
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
 const tagsViewStore = useTagsViewStore()
+
+const {username, avatar} = storeToRefs(adminStore)
 
 // 处理侧边栏展开和收缩
 const {sidebarOpened} = storeToRefs(sidebarStore)
