@@ -159,7 +159,7 @@
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
 import {adminDeleteApi, adminPageListApi} from "@/api/ums/admin"
-import {PaginationReturn, ResponseData} from "@/utils/global"
+import {PAGE_NO, PAGE_SIZE, PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
@@ -172,8 +172,8 @@ const searchOptions = reactive<QueryFormType>({
   username: '',
   phone: '',
   status: null,
-  pageNo: 1, // 页码
-  pageSize: 10 // 每页显示条数
+  pageNo: PAGE_NO, // 页码
+  pageSize: PAGE_SIZE // 每页显示条数
 })
 
 // 总条数
@@ -204,9 +204,9 @@ const handleReset = async () => {
   searchOptions.username = ''
   searchOptions.email = ''
   searchOptions.phone = ''
-  searchOptions.status = 1
-  searchOptions.pageNo = 1
-  searchOptions.pageSize = 10
+  searchOptions.status = null
+  searchOptions.pageNo = PAGE_NO
+  searchOptions.pageSize = PAGE_SIZE
   // 分页查询
   await paginationQuery()
 }

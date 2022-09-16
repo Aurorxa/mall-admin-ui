@@ -28,3 +28,8 @@ export interface PaginationReturn<T = any> {
     total: number, // 总条数
     records: T[]  // 记录数
 }
+
+// 分页参数：起始页码
+export const PAGE_NO = 1
+// 分页参数：每页显示多少条
+export const PAGE_SIZE = 10
