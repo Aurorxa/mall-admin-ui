@@ -77,6 +77,15 @@ const privateRoutes: Array<RouteRecordRaw> = [
                     icon: ''
                 }
             },
+            {
+                path: '/system/menu',
+                name: 'menu',
+                component: () => import( '@/views/System/Menu/index.vue'),
+                meta: {
+                    title: '菜单管理',
+                    icon: ''
+                }
+            },
         ]
     },
 ]

@@ -18,7 +18,6 @@
 import SidebarItem from '@/components/Sidebar/SidebarItem.vue'
 import SidebarHeader from '@/components/SidebarHeader/index.vue'
 import {useRoute} from 'vue-router'
-import {computed} from 'vue'
 import {useSidebarStore} from "@/store/sidebar"
 
 const sidebarStore = useSidebarStore()
@@ -55,7 +54,7 @@ const menuList = reactive([
         id: '7',
         title: '菜单管理',
         icon: 'i-ep-user',
-        path: '/menu'
+        path: '/system/menu'
       },
     ]
   },
