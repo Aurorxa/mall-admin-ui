@@ -34,6 +34,7 @@
       <el-upload
           class="avatar-uploader"
           :action="baseUrl"
+          name="file"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -155,6 +156,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   const {code, data, msg} = response
   if (code === ResponseDataCodeEnum.SUCCESS_CODE) {
     imageUrl.value = data.completeAvatarUrl
+    addForm.value.avatar = data.completeAvatarUrl
   } else {
     ElMessage.error(msg)
   }
