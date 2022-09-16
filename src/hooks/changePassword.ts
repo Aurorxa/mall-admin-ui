@@ -57,7 +57,7 @@ export default function () {
     // 处理修改密码
     const onSubmit = () => {
         // 进行表单验证
-        changePasswordFormRef.value?.validate(async valid => {
+        changePasswordFormRef.value?.validate(async (valid: boolean) => {
             if (!valid) { // 如果表单验证失败，就返回 false
                 return false
             } else {
