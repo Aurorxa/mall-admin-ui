@@ -45,15 +45,15 @@
       </el-upload>
     </el-form-item>
     <el-form-item label="状态" prop="status">
-      <el-switch
-          v-model="addForm.status"
-          class="ml-2"
-          active-text="启用"
-          inactive-text="禁用"
-          :active-value="1"
-          :inactive-value="0"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
-      </el-switch>
+      <el-tooltip :content="addForm.status ? '启用' : '禁用'" placement="top">
+        <el-switch
+            v-model="addForm.status"
+            class="ml-2"
+            :active-value="1"
+            :inactive-value="0"
+            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        </el-switch>
+      </el-tooltip>
     </el-form-item>
     <el-form-item label="排序" prop="sort">
       <el-input-number v-model="addForm.sort" :min="0" placeholder="请输入排序字段" :value-on-clear="0" />

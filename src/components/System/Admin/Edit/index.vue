@@ -25,15 +25,15 @@
       <el-input v-model="editForm.email" />
     </el-form-item>
     <el-form-item label="状态" prop="status">
-      <el-switch
-          v-model="editForm.status"
-          class="ml-2"
-          active-text="启用"
-          inactive-text="禁用"
-          :active-value="1"
-          :inactive-value="0"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
-      </el-switch>
+      <el-tooltip :content="editForm.status ? '启用' : '禁用'" placement="top">
+        <el-switch
+            v-model="editForm.status"
+            class="ml-2"
+            :active-value="1"
+            :inactive-value="0"
+            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+        </el-switch>
+      </el-tooltip>
     </el-form-item>
     <el-form-item label="头像" prop="avatar">
       <el-upload
