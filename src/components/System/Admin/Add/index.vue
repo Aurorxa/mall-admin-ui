@@ -64,9 +64,9 @@
 <script lang="ts" setup>
 // 上传
 import type {FormInstance, FormRules, UploadProps} from 'element-plus'
-import {adminAddApi, adminEditApi} from "@/api/ums/admin";
+import {adminAddApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
-import {ResponseData, ResponseDataCodeEnum, ValidateFormError} from "@/utils/global"
+import {ResponseDataCodeEnum} from "@/utils/global"
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
