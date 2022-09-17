@@ -1,5 +1,5 @@
 <template>
-  <el-row >
+  <el-row>
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
@@ -9,11 +9,11 @@
     </el-col>
     <el-col :span="7" style="display:flex;justify-content: space-evenly;align-items: center">
       <!-- Search -->
-      <HeaderSearch/>
+      <HeaderSearch />
       <!-- 全屏 -->
       <Fullscreen />
       <!-- 消息提示 -->
-      <Badge/>
+      <Badge />
       <!-- 头像 -->
       <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <span class="el-dropdown-link"
@@ -46,9 +46,9 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import {useAdminStore} from "@/store/ums/admin"
-import {ElMessageBox} from "element-plus"
+import {ElMessage, ElMessageBox} from "element-plus"
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
@@ -57,6 +57,10 @@ import {useSidebarStore} from "@/store/sidebar"
 import BreadCrumb from '@/components/BreadCrumb/index.vue'
 import {useRouter} from "vue-router"
 import {useTagsViewStore} from '@/store/tagsview'
+import dialogService from '@caroundsky/el-plus-dialog-service'
+import {DialogConfig} from "@caroundsky/el-plus-dialog-service/src/props"
+import {ResponseData} from "@/utils/global"
+import ChangePassword from '@/components/ChangePassword/index.vue'
 
 const router = useRouter()
 const adminStore = useAdminStore()
@@ -81,7 +85,36 @@ const handleCommand = (command: string) => {
   }
   // 修改密码
   if (command === 'changePassword') {
-
+    dialogService({
+      title: '修改密码',
+      height: '30vh',
+      width: '40vw',
+      content: <ChangePassword />,
+      buttons: [
+        {
+          label: '确定 ',
+          type: 'primary',
+          onClick: async ({vm, ctx, component}: DialogConfig) => {
+            try {
+              const result: ResponseData<null> = await component.submitForm()
+              if (result) {
+                ElMessage.success(result.msg)
+                vm.hide()
+              }
+            } catch (e) {
+              console.error(e)
+            }
+          },
+        },
+        {
+          label: '重置',
+          type: 'primary',
+          onClick: ({vm, ctx, component}: DialogConfig) => {
+            component.resetForm()
+          }
+        },
+      ],
+    })
   }
   // 退出登录
   if (command === 'logout') {
@@ -95,7 +128,7 @@ const handleCommand = (command: string) => {
       await adminStore.logout()
       // 触发清空 tagsView 动作
       await tagsViewStore.clear()
-          // 跳转到登录页面
+      // 跳转到登录页面
       await router.push('/login')
 
     }).catch(() => {
