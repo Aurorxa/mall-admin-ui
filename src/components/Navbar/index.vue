@@ -105,7 +105,6 @@ const handleCommand = (command: string) => {
                 vm.hide()
               }
             } catch (e) {
-              logger.error('出错啦')
               console.error(e)
             }
           },
