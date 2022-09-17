@@ -29,6 +29,13 @@ export interface PaginationReturn<T = any> {
     records: T[]  // 记录数
 }
 
+// 表单验证失败
+export const ValidateFormError:ResponseData<null> = {
+    code: ResponseDataCodeEnum.ERROR_CODE,
+    msg: "表单验证失败"
+}
+
+
 // 分页参数：起始页码
 export const PAGE_NO = 1
 // 分页参数：每页显示多少条

@@ -61,11 +61,14 @@ import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from "@caroundsky/el-plus-dialog-service/src/props"
 import {ResponseData} from "@/utils/global"
 import ChangePassword from '@/components/ChangePassword/index.vue'
+import {ApplicationLogger,LoggerLevel,Logger} from 'simple-logging-system'
 
 const router = useRouter()
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
 const tagsViewStore = useTagsViewStore()
+
+const logger = new Logger("Navbar");
 
 const {username, avatar} = storeToRefs(adminStore)
 
@@ -102,6 +105,7 @@ const handleCommand = (command: string) => {
                 vm.hide()
               }
             } catch (e) {
+              logger.error('出错啦')
               console.error(e)
             }
           },

@@ -66,7 +66,7 @@
 import type {FormInstance, FormRules, UploadProps} from 'element-plus'
 import {adminAddApi, adminEditApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
-import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
+import {ResponseData, ResponseDataCodeEnum, ValidateFormError} from "@/utils/global"
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
@@ -183,7 +183,7 @@ const submitForm = async () => {
   })
   let validateResult: boolean = await validateForm
   if (!validateResult) {
-    throw new Error("表单验证失败");
+    return Promise.reject(ValidateFormError)
   } else {
     return await adminAddApi(addForm)
   }
