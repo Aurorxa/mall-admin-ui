@@ -1,5 +1,5 @@
 <template>
-  <el-row align="middle" style="height: 100%">
+  <el-row >
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
@@ -43,45 +43,12 @@
       <LangSelect />
     </el-col>
   </el-row>
-  <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">
-    <el-form
-        ref="changePasswordFormRef"
-        :model="changePasswordForm"
-        :rules="changePasswordRules"
-        label-width="120px"
-    >
-      <el-form-item prop="oldPassword" label="原密码">
-        <el-input
-            v-model="changePasswordForm.oldPassword"
-            clearable
-            placeholder="请输入原密码"
-            show-password
-        />
-      </el-form-item>
-      <el-form-item prop="newPassword" label="新密码">
-        <el-input
-            v-model="changePasswordForm.newPassword"
-            clearable
-            placeholder="请输入新密码"
-            show-password
-        />
-      </el-form-item>
-      <el-form-item prop="confirmPassword" label="确认密码">
-        <el-input
-            v-model="changePasswordForm.confirmPassword"
-            clearable
-            placeholder="请输入确认密码"
-            show-password
-        />
-      </el-form-item>
-    </el-form>
-  </FormDrawer>
+
 </template>
 
 <script setup lang="ts">
 import {useAdminStore} from "@/store/ums/admin"
 import {ElMessageBox} from "element-plus"
-import UseChangePassword from '@/hooks/changePassword'
 import LangSelect from '@/components/LangSelect/index.vue'
 import Fullscreen from '@/components/FullScreen/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
@@ -106,7 +73,6 @@ const toggleCollapse = () => {
 }
 
 // 修改密码 hooks
-const {formDrawerRef, changePasswordForm, changePasswordFormRef, changePasswordRules, onSubmit} = UseChangePassword()
 // 处理个人设置、修改密码、退出登录等逻辑
 const handleCommand = (command: string) => {
   // 个人设置
@@ -115,7 +81,7 @@ const handleCommand = (command: string) => {
   }
   // 修改密码
   if (command === 'changePassword') {
-    formDrawerRef.value.open();
+
   }
   // 退出登录
   if (command === 'logout') {

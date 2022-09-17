@@ -64,7 +64,7 @@
 <script lang="ts" setup>
 // 上传
 import type {FormInstance, FormRules, UploadProps} from 'element-plus'
-import {adminAddApi} from "@/api/ums/admin";
+import {adminAddApi, adminEditApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
 import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 
@@ -174,20 +174,19 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string
 }
 
 // 提交
-const submitForm = () => {
+const submitForm = async () => {
   // 进行表单验证
-  return addFormRef.value?.validate(async (valid: boolean) => {
-    if (!valid) { // 如果表单验证失败，就返回 false
-      return false
-    } else {
-      try {
-        const result: ResponseData<null> = await adminAddApi(addForm)
-        ElMessage.success(result.msg)
-      } catch (e) {
-        console.log(e)
-      }
-    }
+  const validateForm = new Promise<boolean>((resolve, reject) => {
+    addFormRef.value?.validate((valid: boolean) => {
+      resolve(valid)
+    })
   })
+  let validateResult: boolean = await validateForm
+  if (!validateResult) {
+    throw new Error("表单验证失败");
+  } else {
+    return await adminAddApi(addForm)
+  }
 }
 
 // 重置
