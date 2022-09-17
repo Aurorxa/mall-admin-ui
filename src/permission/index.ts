@@ -1,5 +1,5 @@
 import {NavigationGuardNext, RouteLocationNormalized} from "vue-router"
-import router from "@/router";
+import router from "@/router"
 import {useAdminStore} from '@/store/ums/admin'
 import NProgress from 'accessible-nprogress'
 import 'accessible-nprogress/dist/accessible-nprogress.min.css'
