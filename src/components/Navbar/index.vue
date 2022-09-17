@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row align="middle" style="height: 100%">
     <el-col :span="1">
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
@@ -61,14 +61,11 @@ import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from "@caroundsky/el-plus-dialog-service/src/props"
 import {ResponseData} from "@/utils/global"
 import ChangePassword from '@/components/ChangePassword/index.vue'
-import {ApplicationLogger,LoggerLevel,Logger} from 'simple-logging-system'
 
 const router = useRouter()
 const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
 const tagsViewStore = useTagsViewStore()
-
-const logger = new Logger("Navbar");
 
 const {username, avatar} = storeToRefs(adminStore)
 
