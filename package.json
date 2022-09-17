@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@caroundsky/el-plus-dialog-service": "^0.0.4",
-    "@upload-io/vue-uploader": "^1.5.7",
     "@vueuse/core": "^9.2.0",
     "accessible-nprogress": "^2.1.2",
+    "await-handler-ts": "^2.0.2",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
     "fuse.js": "^6.6.2",

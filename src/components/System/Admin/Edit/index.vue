@@ -59,7 +59,8 @@
 import {adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditFormType, ViewReturnType} from "@/types/ums/admin"
 import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
-import {FormInstance, FormRules, UploadProps} from "element-plus"
+import {ElMessage, FormInstance, FormRules, UploadProps} from "element-plus"
+import go from 'await-handler-ts'
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
@@ -177,20 +178,19 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string
 }
 
 // 提交
-const submitForm = () => {
+const submitForm = async () => {
   // 进行表单验证
-  return editFormRef.value?.validate(async (valid: boolean) => {
-    if (!valid) { // 如果表单验证失败，就返回 false
-      return false
-    } else {
-      try {
-        const result: ResponseData<null> = await adminEditApi(editForm, props.id)
-        ElMessage.success(result.msg)
-      } catch (e) {
-        console.log(e)
-      }
-    }
+  const validateForm = new Promise<boolean>((resolve, reject) => {
+    editFormRef.value?.validate((valid: boolean) => {
+      resolve(valid)
+    })
   })
+  let validateResult: boolean = await validateForm
+  if (!validateResult) {
+    throw new Error("表单验证失败");
+  } else {
+    return await adminEditApi(editForm, props.id);
+  }
 }
 
 // 重置

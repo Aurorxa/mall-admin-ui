@@ -158,13 +158,14 @@
 
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {adminDeleteApi, adminPageListApi} from "@/api/ums/admin"
+import {adminDeleteApi, adminEditApi, adminPageListApi} from "@/api/ums/admin"
 import {PAGE_NO, PAGE_SIZE, PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
 import AdminEdit from '@/components/System/Admin/Edit/index.vue'
+import go from 'await-handler-ts'
 
 
 // 搜索条件
@@ -234,11 +235,16 @@ const handleEdit = (index: number, row: PageListReturnType) => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          const result = await component.submitForm()
-          if (result) {
-            // 分页查询
-            await paginationQuery()
-            vm.hide()
+          try {
+            const result: ResponseData<null> = await component.submitForm()
+            if (result) {
+              ElMessage.success(result.msg)
+              // 分页查询
+              await paginationQuery()
+              vm.hide()
+            }
+          } catch (e) {
+            console.log(e)
           }
         },
       }

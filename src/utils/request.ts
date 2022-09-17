@@ -44,9 +44,8 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
         } else {
             ElMessage.error(returnData.msg) // 提示错误消息
         }
-        // 中断 Promise 链
-        return new Promise(() => {
-        })
+
+        return Promise.reject(returnData)
     }
 
 }, (error: AxiosError) => { // 请求失败
