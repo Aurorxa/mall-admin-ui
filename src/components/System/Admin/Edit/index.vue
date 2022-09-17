@@ -60,7 +60,6 @@ import {adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditFormType, ViewReturnType} from "@/types/ums/admin"
 import {ResponseData, ResponseDataCodeEnum, ValidateFormError} from "@/utils/global"
 import {ElMessage, FormInstance, FormRules, UploadProps} from "element-plus"
-import go from 'await-handler-ts'
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
