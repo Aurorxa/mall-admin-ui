@@ -32,7 +32,8 @@ export interface PaginationReturn<T = any> {
 // 表单验证失败
 export const ValidateFormError:ResponseData<null> = {
     code: ResponseDataCodeEnum.ERROR_CODE,
-    msg: "表单验证失败"
+    msg: "表单验证失败",
+    data: null
 }
 
 
