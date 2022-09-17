@@ -16,7 +16,10 @@
       <el-input v-model="editForm.nickName" />
     </el-form-item>
     <el-form-item label="性别" prop="gender">
-      <el-input v-model="editForm.gender" />
+      <el-radio-group v-model="editForm.gender">
+        <el-radio label="男">男</el-radio>
+        <el-radio label="女">女</el-radio>
+      </el-radio-group>
     </el-form-item>
     <el-form-item label="手机号码" prop="phone">
       <el-input v-model="editForm.phone" />

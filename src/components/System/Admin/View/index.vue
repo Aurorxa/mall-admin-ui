@@ -10,7 +10,10 @@
       <el-input v-model="data.nickName" disabled />
     </el-form-item>
     <el-form-item label="性别">
-      <el-input v-model="data.gender" disabled />
+      <el-radio-group v-model="data.gender" disabled>
+        <el-radio label="男">男</el-radio>
+        <el-radio label="女">女</el-radio>
+      </el-radio-group>
     </el-form-item>
     <el-form-item label="手机号码">
       <el-input v-model="data.phone" disabled />
