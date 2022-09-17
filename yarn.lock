@@ -945,16 +945,6 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-await-handler-ts@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/await-handler-ts/-/await-handler-ts-2.0.2.tgz#4960e873c590a8c2de567cf07dd89b346fb61a89"
-  integrity sha512-48RE1Zyl0Z6o4C4K/SopbyDycYloiGGsH3CtulKO4Ejv7tw4ruHbzPnxdmBkHLmUycy/VjszgdJCrAbNc0NajQ==
-
-await-handler@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/await-handler/-/await-handler-1.1.2.tgz#329c19e9382599898bc12c80c47efdcdaa1b4992"
-  integrity sha512-dihteGhwbJpT89kVbacWiyKeAZr+En0YGK6pAKQJLR0En9ZxSH2H4TTvfG4bBjzFq9gDAma4y9BrpDns6j5UiQ==
-
 axios@0.21.1:
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"

@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string,
   readonly VITE_APP_BUILD_DIRECTORY: string,
   readonly VITE_APP_BASE_URL: string,
+  readonly VITE_APP_LOGGER_LEVEL: string
 }
 
 interface ImportMeta {

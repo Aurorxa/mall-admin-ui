@@ -23,6 +23,8 @@ export default defineConfig(({command, mode}) => {
             vue({reactivityTransform: true}),
             vueJsx(),
             legacy({
+                polyfills: ['es.promise.finally', 'es/map', 'es/set'],
+                modernPolyfills: ['es.promise.finally'],
                 targets: ['defaults', 'not IE 11']
             }),
             AutoImport({

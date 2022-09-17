@@ -158,15 +158,14 @@
 
 <script setup lang="tsx">
 import {PageListReturnType, QueryFormType} from "@/types/ums/admin"
-import {adminDeleteApi, adminEditApi, adminPageListApi} from "@/api/ums/admin"
+import {adminDeleteApi, adminPageListApi} from "@/api/ums/admin"
 import {PAGE_NO, PAGE_SIZE, PaginationReturn, ResponseData} from "@/utils/global"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from '@caroundsky/el-plus-dialog-service/src/props'
 import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
 import AdminEdit from '@/components/System/Admin/Edit/index.vue'
-import go from 'await-handler-ts'
-
+import {ElMessage} from "element-plus"
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
@@ -244,7 +243,7 @@ const handleEdit = (index: number, row: PageListReturnType) => {
               vm.hide()
             }
           } catch (e) {
-            console.log(e)
+            console.error(e)
           }
         },
       }
