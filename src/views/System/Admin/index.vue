@@ -24,7 +24,7 @@
   </el-form>
   <!-- 新增、导入、导出 -->
   <el-row>
-    <el-button plain type="primary" icon="i-ep-plus" @click="handleAdd">新增</el-button>
+    <el-button @click="handleAdd" icon="i-ep-plus" type="primary">添加</el-button>
     <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
     <el-button color="#feb926" plain icon="i-ep-download" @click="handleExport">导出</el-button>
   </el-row>
@@ -301,7 +301,7 @@ const handleExport = () => {
 // 新增
 const handleAdd = () => {
   dialogService({
-    title: '新增',
+    title: '添加用户',
     height: '60vh',
     width: '50vw',
     content: <AdminAdd />,
