@@ -263,7 +263,11 @@ const handleView = (index: number, row: PageListReturnType) => {
         label: '确定 ',
         type: 'primary',
         onClick: ({vm}: DialogConfig) => {
-          vm.hide()
+          try {
+            vm.hide()
+          } catch (e) {
+            console.error(e)
+          }
         },
       },
     ],
@@ -272,10 +276,14 @@ const handleView = (index: number, row: PageListReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: PageListReturnType) => {
-  const result: ResponseData<null> = await adminDeleteApi(row.id)
-  ElMessage.success(result.msg)
-  // 分页查询
-  await paginationQuery()
+  try {
+    const result: ResponseData<null> = await adminDeleteApi(row.id)
+    ElMessage.success(result.msg)
+    // 分页查询
+    await paginationQuery()
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 // 导出
@@ -309,11 +317,16 @@ const handleAdd = () => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          const result = await component.submitForm()
-          if (result) {
-            // 分页查询
-            await paginationQuery()
-            vm.hide()
+          try {
+            const result: ResponseData<null> = await component.submitForm()
+            if (result) {
+              ElMessage.success(result.msg)
+              // 分页查询
+              await paginationQuery()
+              vm.hide()
+            }
+          } catch (e) {
+            console.error(e)
           }
         }
       },

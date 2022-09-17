@@ -17,7 +17,6 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
             async login(value: LoginFormType): Promise<void> {
                 // 登录接口
                 const result: ResponseData<LoginReturnType> = await loginApi(value);
-                console.log('result-->login', result)
                 // 设置值到 store 中
                 this.saTokenInfo = result.data?.saTokenInfo
                 this.username = result.data?.username
