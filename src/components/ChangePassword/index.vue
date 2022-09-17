@@ -37,7 +37,6 @@
 import {FormInstance, FormRules} from "element-plus"
 import {ChangePasswordFormType} from "@/types/ums/admin"
 import {changePasswordApi} from "@/api/ums/admin"
-import {ResponseData, ValidateFormError} from "@/utils/global";
 
 const changePasswordFormRef = ref<FormInstance>()
 const changePasswordForm = reactive<ChangePasswordFormType>({
@@ -97,9 +96,7 @@ const submitForm = async () => {
     })
   })
   let validateResult: boolean = await validateForm
-  if (!validateResult) {
-    throw new Error("表单验证失败");
-  } else {
+  if (validateResult) {
     return await changePasswordApi(changePasswordForm)
   }
 }

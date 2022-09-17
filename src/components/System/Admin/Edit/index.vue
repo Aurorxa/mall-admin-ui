@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import {adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditFormType, ViewReturnType} from "@/types/ums/admin"
-import {ResponseData, ResponseDataCodeEnum, ValidateFormError} from "@/utils/global"
+import {ResponseData, ResponseDataCodeEnum} from "@/utils/global"
 import {ElMessage, FormInstance, FormRules, UploadProps} from "element-plus"
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
@@ -185,9 +185,7 @@ const submitForm = async () => {
     })
   })
   let validateResult: boolean = await validateForm
-  if (!validateResult) {
-    throw new Error("表单验证失败");
-  } else {
+  if (validateResult) {
     return await adminEditApi(editForm, props.id);
   }
 }

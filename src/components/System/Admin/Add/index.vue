@@ -182,9 +182,7 @@ const submitForm = async () => {
     })
   })
   let validateResult: boolean = await validateForm
-  if (!validateResult) {
-    throw new Error("表单验证失败");
-  } else {
+  if (validateResult) {
     return await adminAddApi(addForm)
   }
 }
