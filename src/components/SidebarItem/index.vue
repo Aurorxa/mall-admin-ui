@@ -16,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import SidebarItem from '@/components/SidebarItem/index.vue'
 defineProps(['menu'])
 </script>
 

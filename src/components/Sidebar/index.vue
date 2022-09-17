@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import SidebarItem from '@/components/Sidebar/SidebarItem.vue'
+import SidebarItem from '@/components/SidebarItem/index.vue'
 import SidebarHeader from '@/components/SidebarHeader/index.vue'
 import {useRoute} from 'vue-router'
 import {useSidebarStore} from "@/store/sidebar"
