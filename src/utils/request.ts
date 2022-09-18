@@ -25,27 +25,27 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
         config.params = qs.stringify(config.params);
     }
     return config
-}, (error: any) => {
+}, (error: AxiosError) => {
     return Promise.reject(error)
 })
 
 // 添加响应拦截器
 instance.interceptors.response.use(async (response: AxiosResponse) => {
-    const returnData: ResponseData<any> = response.data
-    if (returnData.code === ResponseDataCodeEnum.SUCCESS_CODE) { // 请求成功，并且业务成功，返回解析后的数据
-        return returnData
+    const result: ResponseData = response.data
+    if (result.code === ResponseDataCodeEnum.SUCCESS_CODE) { // 请求成功，并且业务成功，返回解析后的数据
+        return result
     } else { // 请求成功，业务失败，给出对应的提示
-        if (returnData.code === ResponseDataCodeEnum.UNAUTHORIZED_CODE) { // 如果 token 过期，token 过时，token 无效等原因，就退出登录
-            ElMessage.error(returnData.msg) // 提示错误消息
+        if (result.code === ResponseDataCodeEnum.UNAUTHORIZED_CODE) { // 如果 token 过期，token 过时，token 无效等原因，就退出登录
+            ElMessage.error(result.msg) // 提示错误消息
             // 调用清空缓存操作
             const {clear} = useAdminStore()
             await clear();
             await router.push('/login')
         } else {
-            ElMessage.error(returnData.msg) // 提示错误消息
+            ElMessage.error(result.msg) // 提示错误消息
         }
 
-        return Promise.reject(returnData)
+        return Promise.reject(result)
     }
 
 }, (error: AxiosError) => { // 请求失败
