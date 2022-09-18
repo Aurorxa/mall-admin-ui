@@ -118,7 +118,7 @@ export interface ActionType {
 
     clear(): Promise<void>
 
-    setProfile(): Promise<void>
+    profile(): Promise<void>
 }
 
 // store 中 storeType 的类型

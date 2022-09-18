@@ -47,7 +47,7 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                 this.avatar = ''
             },
             // 设置用户信息
-            async setProfile(): Promise<void> {
+            async profile(): Promise<void> {
                 const result: ResponseData<ProfileType> = await profileApi();
                 this.username = result.data?.username
                 this.avatar = result.data?.avatar
