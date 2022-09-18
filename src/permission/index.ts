@@ -12,7 +12,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
     NProgress.start()
     const {saTokenInfo: {tokenValue}} = useAdminStore()
     if (tokenValue) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
-        if (to.path == '/login') {
+        if (to.path === '/login') {
             next({name: 'home'}) // 强制进入首页
         } else {
             // TODO 此处还可以向后端发送请求获取用户的信息，并存储到 store 中
