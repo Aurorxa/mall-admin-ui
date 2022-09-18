@@ -11,7 +11,6 @@ const whiteList = ['/login']
 router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
     const {tokenValue, username, avatar, profile} = useAdminStore()
-    console.log('tokenValue', tokenValue)
     if (tokenValue) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
         if (to.path === '/login') {
             next({name: 'home'}) // 强制进入首页

@@ -39,12 +39,8 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
             },
             // 清除用户缓存数据
             async clear(): Promise<void> {
-                this.saTokenInfo = {}
-                this.resourceCodeList = []
-                this.roleCodeList = []
-                this.menuList = []
-                this.username = ''
-                this.avatar = ''
+                this.$reset()
+                console.log('@@@',this.$state)
             },
             // 设置用户信息
             async profile(): Promise<void> {
