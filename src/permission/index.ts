@@ -17,7 +17,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
             next({name: 'home'}) // 强制进入首页
         } else {
             // 此处还可以向后端发送请求获取用户的信息，并存储到 store 中
-            // 需要注意的是：之前是否获取过用户的信息，如果之前已经获取过，就不需要再向后端发送请求获取用户的信息了（简而言之，判断 Store 中是否有用户信息）。
+            // 需要注意的是：需要判断之前是否获取过用户的信息，如果之前已经获取过，就不需要再向后端发送请求获取用户的信息了（简而言之，判断 Store 中是否有用户信息）。
             if (!username) {
                 await setProfile()
             }
