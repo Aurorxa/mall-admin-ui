@@ -235,9 +235,9 @@ const handleEdit = (index: number, row: PageListReturnType) => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          // 如果表单验证失败 error 就是 null ,result 是 undefined
-          // 如果表单验证成功，逻辑正确； error 就是 null ，result 是 json 对象
-          // 如果表单验证成功，逻辑失败，error 是错误的 json 对象，result 是 null
+          // 如果表单验证失败： error 就是 null ,result 是 undefined
+          // 如果表单验证成功，逻辑正确: error 就是 null ，result 是 json 对象
+          // 如果表单验证成功，逻辑失败：error 是错误的 json 对象，result 是 null
           let [error, result] = await go<any, ResponseData>(component.submitForm())
           if (!error && result) {
             ElMessage.success(result.msg)
@@ -313,9 +313,9 @@ const handleAdd = () => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          // 如果表单验证失败 error 就是 null ,result 是 undefined
-          // 如果表单验证成功，逻辑正确； error 就是 null ，result 是 json 对象
-          // 如果表单验证成功，逻辑失败，error 是错误的 json 对象，result 是 null
+          // 如果表单验证失败： error 就是 null ,result 是 undefined
+          // 如果表单验证成功，逻辑正确: error 就是 null ，result 是 json 对象
+          // 如果表单验证成功，逻辑失败：error 是错误的 json 对象，result 是 null
           let [error, result] = await go<any, ResponseData>(component.submitForm())
           if (!error && result) {
             ElMessage.success(result.msg)
