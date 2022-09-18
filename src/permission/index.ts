@@ -25,6 +25,8 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
             next('/login')
         }
     }
+    // 手动强制关闭，为了解决手动切换地址的时候，进度条不关闭的问题
+    NProgress.done()
 })
 
 // 全局后置守卫

@@ -64,6 +64,7 @@ import {ElMessage} from 'element-plus'
 import {useAdminStore} from "@/store/ums/admin"
 import {LoginFormType} from "@/types/ums/admin"
 import {useI18n} from 'vue-i18n'
+import go from 'await-handler-ts'
 
 const APP_TITLE = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
@@ -116,36 +117,32 @@ const loginRules = reactive<FormRules>({
 // 处理登录
 const loading = ref<boolean>(false)
 
-const onSubmit = () => {
+const onSubmit = async () => {
 
-  loginFormRef.value?.validate().then((result: any) => console.log('result', result)).catch((error: any) => console.log('error', error))
-
-  // 进行表单验证
-  loginFormRef.value?.validate(async (valid: boolean) => {
-    if (!valid) { // 如果表单验证失败，就返回 false
-      return false
-    } else {
-      try {
-        loading.value = true
-        // 触发登录操作
-        await adminStore.login(loginForm)
-        // 提示登录成功
-        ElMessage({
-          message: '登录成功',
-          type: 'success',
-          center: true,
-          duration: 1000
-        })
-        loading.value = false
-        // 跳转到首页
-        await router.push('/')
-      } catch (e) {
-        console.log(e)
-      } finally {
-        loading.value = false
-      }
+  let [error] = await go(loginFormRef.value?.validate())
+  // 如果校验成功，进行表单提交
+  if (!error) {
+    try {
+      loading.value = true
+      // 触发登录操作
+      await adminStore.login(loginForm)
+      // 提示登录成功
+      ElMessage({
+        message: '登录成功',
+        type: 'success',
+        center: true,
+        duration: 1000
+      })
+      loading.value = false
+      // 跳转到首页
+      await router.push('/')
+    } catch (e) {
+      console.log(e)
+    } finally {
+      loading.value = false
     }
-  })
+  }
+
 }
 
 // 键盘事件
