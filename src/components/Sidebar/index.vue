@@ -110,7 +110,7 @@ const activeMenu = computed(() => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .el-menu {
   height: 100%;
   border-right: 0;
