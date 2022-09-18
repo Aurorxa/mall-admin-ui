@@ -10,7 +10,7 @@ const whiteList = ['/login']
 // 路由前置守卫：实现认证拦截（认证：判断用户是否登录过，如果登录过，就放行；如果没有登录，则强制让其跳转到登录页面）
 router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
-    const {tokenValue, username, setProfile} = useAdminStore()
+    const {tokenValue, username, avatar, setProfile} = useAdminStore()
     console.log('tokenValue', tokenValue)
     if (tokenValue) { // 如果用户已经登录，则不允许进去登录页面，主要为了防止重复登录
         if (to.path === '/login') {
@@ -18,7 +18,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
         } else {
             // 此处还可以向后端发送请求获取用户的信息，并存储到 store 中
             // 需要注意的是：需要判断之前是否获取过用户的信息，如果之前已经获取过，就不需要再向后端发送请求获取用户的信息了（简而言之，判断 Store 中是否有用户信息）。
-            if (!username) {
+            if (!username || !avatar) {
                 await setProfile()
             }
             next()

@@ -16,7 +16,7 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                 tokenSessionTimeout: 0,
                 tokenActivityTimeout: 0,
                 loginDevice: '',
-                tag: {},
+                tag: '',
                 resourceCodeList: [],
                 roleCodeList: [],
                 menuList: [],

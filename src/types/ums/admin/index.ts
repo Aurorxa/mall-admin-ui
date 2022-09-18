@@ -133,7 +133,7 @@ export type StoreType = {
     tokenSessionTimeout?: number,
     tokenActivityTimeout?: number,
     loginDevice?: string,
-    tag?: object,
+    tag?: string,
     username: string,
     avatar: string,
     resourceCodeList: string[],
@@ -152,7 +152,7 @@ export type LoginReturnType = {
     tokenSessionTimeout?: number,
     tokenActivityTimeout?: number,
     loginDevice?: string,
-    tag?: object,
+    tag?: string,
 }
 
 // 用户信息返回的类型
