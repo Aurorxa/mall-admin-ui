@@ -3,7 +3,7 @@
     <el-col :lg="16" :md="12" class="!flex items-center justify-center flex-col bg-img">
       <div class="font-bold text-5xl text-light-50 mb-4 select-none">{{ APP_TITLE }}</div>
       <div class="text-2xl text-light-blue-400 mb-2">
-        《基于 Vite + Vue3.x + Element Plus + Windi css + pinia 等技术》
+        《基于 Vite + Vue3.x + Element Plus + Windi Css + Pinia 等技术》
       </div>
     </el-col>
     <el-col :lg="8" :md="12" class="bg-light-50 !flex items-center justify-center flex-col">
@@ -117,6 +117,9 @@ const loginRules = reactive<FormRules>({
 const loading = ref<boolean>(false)
 
 const onSubmit = () => {
+
+  loginFormRef.value?.validate().then((result: any) => console.log('result', result)).catch((error: any) => console.log('error', error))
+
   // 进行表单验证
   loginFormRef.value?.validate(async (valid: boolean) => {
     if (!valid) { // 如果表单验证失败，就返回 false

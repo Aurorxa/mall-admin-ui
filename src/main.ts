@@ -1,6 +1,7 @@
 import {createApp} from 'vue'
 import dialogService from '@caroundsky/el-plus-dialog-service'
-import router from "@/permission"
+import router from "@/router"
+import '@/permission'
 import App from '@/App.vue'
 import pinia from '@/store'
 import '@/styles/index.scss'
