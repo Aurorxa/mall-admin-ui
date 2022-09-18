@@ -166,6 +166,7 @@ import AdminView from '@/components/System/Admin/View/index.vue'
 import AdminAdd from '@/components/System/Admin/Add/index.vue'
 import AdminEdit from '@/components/System/Admin/Edit/index.vue'
 import {ElMessage} from "element-plus"
+import go from 'await-handler-ts'
 
 // 搜索条件
 const searchOptions = reactive<QueryFormType>({
@@ -234,16 +235,15 @@ const handleEdit = (index: number, row: PageListReturnType) => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          try {
-            const result: ResponseData<null> = await component.submitForm()
-            if (result) {
-              ElMessage.success(result.msg)
-              // 分页查询
-              await paginationQuery()
-              vm.hide()
-            }
-          } catch (e) {
-            console.error(e)
+          // 如果表单验证失败 error 就是 null ,result 是 undefined
+          // 如果表单验证成功，逻辑正确； error 就是 null ，result 是 json 对象
+          // 如果表单验证成功，逻辑失败，error 是错误的 json 对象，result 是 null
+          let [error, result] = await go<any, ResponseData>(component.submitForm())
+          if (!error && result) {
+            ElMessage.success(result.msg)
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
           }
         },
       }
@@ -263,11 +263,7 @@ const handleView = (index: number, row: PageListReturnType) => {
         label: '确定 ',
         type: 'primary',
         onClick: ({vm}: DialogConfig) => {
-          try {
-            vm.hide()
-          } catch (e) {
-            console.error(e)
-          }
+          vm.hide()
         },
       },
     ],
@@ -317,16 +313,15 @@ const handleAdd = () => {
         label: '确定 ',
         type: 'primary',
         onClick: async ({vm, ctx, component}: DialogConfig) => {
-          try {
-            const result: ResponseData<null> = await component.submitForm()
-            if (result) {
-              ElMessage.success(result.msg)
-              // 分页查询
-              await paginationQuery()
-              vm.hide()
-            }
-          } catch (e) {
-            console.error(e)
+          // 如果表单验证失败 error 就是 null ,result 是 undefined
+          // 如果表单验证成功，逻辑正确； error 就是 null ，result 是 json 对象
+          // 如果表单验证成功，逻辑失败，error 是错误的 json 对象，result 是 null
+          let [error, result] = await go<any, ResponseData>(component.submitForm())
+          if (!error && result) {
+            ElMessage.success(result.msg)
+            // 分页查询
+            await paginationQuery()
+            vm.hide()
           }
         }
       },

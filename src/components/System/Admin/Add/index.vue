@@ -177,7 +177,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string
 
 // 提交
 const submitForm = async () => {
-  // 进行表单验证
+  // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
   let [error] = await go(addFormRef.value?.validate())
   // 如果校验成功，进行表单提交
   if (!error) {
