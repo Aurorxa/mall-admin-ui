@@ -67,6 +67,8 @@ import type {FormInstance, FormRules, UploadProps} from 'element-plus'
 import {adminAddApi} from "@/api/ums/admin";
 import {AddFormType} from "@/types/ums/admin"
 import {ResponseDataCodeEnum} from "@/utils/global"
+import go from 'await-handler-ts'
+import {ElMessage} from "element-plus"
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
@@ -176,15 +178,12 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: { type: string
 // 提交
 const submitForm = async () => {
   // 进行表单验证
-  const validateForm = new Promise<boolean>((resolve, reject) => {
-    addFormRef.value?.validate((valid: boolean) => {
-      resolve(valid)
-    })
-  })
-  let validateResult: boolean = await validateForm
-  if (validateResult) {
+  let [error] = await go(addFormRef.value?.validate())
+  // 如果校验成功，进行表单提交
+  if (!error) {
     return await adminAddApi(addForm)
   }
+
 }
 
 // 重置
