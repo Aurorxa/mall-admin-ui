@@ -7,7 +7,7 @@ import 'accessible-nprogress/dist/accessible-nprogress.min.css'
 // 白名单
 const whiteList = ['/login']
 
-// 路由前置守卫
+// 路由前置守卫：实现认证拦截（认证：判断用户是否登录过，如果登录过，就放行；如果没有登录，则强制让其跳转到登录页面）
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
     const {saTokenInfo: {tokenValue}} = useAdminStore()
