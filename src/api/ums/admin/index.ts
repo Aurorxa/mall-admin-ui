@@ -5,7 +5,7 @@ import {
     EditFormType,
     LoginFormType,
     LoginReturnType,
-    PageListReturnType,
+    PageListReturnType, ProfileType,
     QueryFormType,
     ViewReturnType
 } from "@/types/ums/admin"
@@ -16,8 +16,13 @@ export const loginApi: (data: LoginFormType) => Promise<ResponseData<LoginReturn
     return request.post('/ums/admin/doLogin', data)
 }
 
+/* 用户信息 */
+export const profileApi: () => Promise<ResponseData<ProfileType>> = () => {
+    return request.get('/ums/admin/profile')
+}
+
 /* 退出登录 */
-export const logoutApi = () => {
+export const logoutApi: () => Promise<ResponseData<null>> = () => {
     return request.post('/ums/admin/logout')
 }
 

@@ -15,7 +15,7 @@ const instance: AxiosInstance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
     // 从 store 中获取 token
-    const {saTokenInfo: {tokenValue, tokenName}} = useAdminStore()
+    const {tokenValue, tokenName} = useAdminStore()
     if (tokenValue) {
         config.headers = {[tokenName as string]: `Bearer ${tokenValue}`, ...config.headers}
     }

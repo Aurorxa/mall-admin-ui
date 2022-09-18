@@ -117,9 +117,31 @@ export interface ActionType {
     logout(): Promise<void>
 
     clear(): Promise<void>
+
+    setProfile(): Promise<void>
 }
 
-export type SaTokenInfoType = {
+// store 中 storeType 的类型
+export type StoreType = {
+    tokenName?: string,
+    tokenValue?: string,
+    isLogin?: boolean,
+    loginId?: string,
+    loginType?: string,
+    tokenTimeout?: number,
+    sessionTimeout?: number,
+    tokenSessionTimeout?: number,
+    tokenActivityTimeout?: number,
+    loginDevice?: string,
+    tag?: object,
+    username: string,
+    avatar: string,
+    resourceCodeList: string[],
+    roleCodeList: string[]
+}
+
+// 登录返回的类型
+export type LoginReturnType = {
     tokenName?: string,
     tokenValue?: string,
     isLogin?: boolean,
@@ -133,19 +155,10 @@ export type SaTokenInfoType = {
     tag?: object,
 }
 
-// store 中 storeType 的类型
-export type StoreType = {
-    saTokenInfo: SaTokenInfoType,
-    resourceCode: string[],
-    menuList: object[],
-    username: string,
-    avatar: string
-}
-
-// 登录返回的类型
-export type LoginReturnType = {
-    saTokenInfo: SaTokenInfoType,
+// 用户信息返回的类型
+export type ProfileType = {
     username: string,
     avatar: string,
-    resourceCode: string[]
+    resourceCodeList: string[],
+    roleCodeList: string[]
 }
