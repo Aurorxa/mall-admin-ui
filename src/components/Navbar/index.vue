@@ -4,14 +4,14 @@
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
     </el-col>
-    <el-col :span="15">
+    <el-col :span="14">
       <BreadCrumb></BreadCrumb>
     </el-col>
     <el-col :span="4" style="display: flex;justify-content: flex-end">
       <!-- Search -->
       <HeaderSearch />
     </el-col>
-    <el-col :span="4" style="display:flex;justify-content: space-evenly;align-items: center">
+    <el-col :span="5" style="display:flex;justify-content: space-evenly;align-items: center">
       <!-- 全屏 -->
       <Fullscreen />
       <!-- 消息提示 -->
@@ -22,7 +22,7 @@
               style="display: flex;justify-content: center;align-items: center;cursor: pointer">
           <el-avatar :size="25" shape="circle"
                      :src="avatar" oncontextmenu="return false;" ondragstart="return false;"/>
-          <span style="margin-left: 10px">{{ username }}</span>
+          <span style="margin-left: 10px">{{ nickName }}</span>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -70,7 +70,9 @@ const adminStore = useAdminStore()
 const sidebarStore = useSidebarStore()
 const tagsViewStore = useTagsViewStore()
 
-const {username, avatar} = storeToRefs(adminStore)
+const {nickName, avatar} = storeToRefs(adminStore)
+
+console.log('nickName',nickName)
 
 // 处理侧边栏展开和收缩
 const {sidebarOpened} = storeToRefs(sidebarStore)

@@ -135,10 +135,11 @@ export type StoreType = {
     tokenActivityTimeout?: number,
     loginDevice?: string,
     tag?: string,
-    username: string,
-    avatar: string,
-    resourceCodeList: string[],
-    roleCodeList: string[]
+    username?: string,
+    nickName?: string,
+    avatar?: string,
+    resourceCodeList?: string[],
+    roleCodeList?: string[]
 }
 
 // 登录返回的类型
@@ -154,6 +155,7 @@ export type LoginReturnType = {
     tokenActivityTimeout?: number,
     loginDevice?: string,
     tag?: string,
+
 }
 
 // 用户信息返回的类型
@@ -161,5 +163,6 @@ export type ProfileType = {
     username: string,
     avatar: string,
     resourceCodeList: string[],
-    roleCodeList: string[]
+    roleCodeList: string[],
+    nickName?: string,
 }

@@ -21,7 +21,8 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                 roleCodeList: [],
                 menuList: [],
                 username: '',
-                avatar: ''
+                avatar: '',
+                nickName: ''
             }
         },
         actions: {
@@ -48,6 +49,7 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                 this.avatar = result.data?.avatar
                 this.resourceCodeList = result.data?.resourceCodeList
                 this.roleCodeList = result.data?.roleCodeList
+                this.nickName = result.data?.nickName
             }
         },
         getters: {},
@@ -58,6 +60,7 @@ export const useAdminStore = defineStore<string, StoreType, _GettersTree<StoreTy
                     storage: localStorage,
                     paths: [
                         'tokenName',
+                        'nickName',
                         'tokenValue',
                         'isLogin',
                         'loginId',
