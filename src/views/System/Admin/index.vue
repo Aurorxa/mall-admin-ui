@@ -18,7 +18,7 @@
         <el-button type="primary" @click="handleSearch" icon="i-ep-search">
           搜索
         </el-button>
-        <el-button type="primary" @click="handleReset" icon="i-ep-refresh" color="#fc9b5c" :dark="false" style="color: #fff">
+        <el-button type="primary" @click="handleReset" icon="i-ep-refresh" color="#ff9214" :dark="false" style="color: #fff">
           重置
         </el-button>
       </el-form-item>
