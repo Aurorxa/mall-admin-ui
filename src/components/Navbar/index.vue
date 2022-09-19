@@ -4,12 +4,14 @@
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
     </el-col>
-    <el-col :span="18">
+    <el-col :span="15">
       <BreadCrumb></BreadCrumb>
     </el-col>
-    <el-col :span="5" style="display:flex;justify-content: space-evenly;align-items: center">
+    <el-col :span="4" style="display: flex;justify-content: flex-end">
       <!-- Search -->
       <HeaderSearch />
+    </el-col>
+    <el-col :span="4" style="display:flex;justify-content: space-evenly;align-items: center">
       <!-- 全屏 -->
       <Fullscreen />
       <!-- 消息提示 -->
