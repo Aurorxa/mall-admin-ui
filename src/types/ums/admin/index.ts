@@ -93,7 +93,8 @@ export type PageListReturnType = {
     email: string,
     status: number,
     avatar: string,
-    sort: number
+    sort: number,
+    created: string
 }
 
 // 详情接口返回类型

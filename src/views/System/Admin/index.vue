@@ -95,6 +95,13 @@
           </div>
         </template>
       </el-table-column>
+      <el-table-column label="创建时间">
+        <template #default="scope">
+          <div style="display: flex; align-items: center">
+            <span style="margin-left: 10px">{{ scope.row.created }}</span>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" fixed="right" width="150">
         <template #default="scope">
           <el-tooltip
@@ -128,7 +135,7 @@
                 type="success"
                 link
                 icon="i-ep-position"
-                @click="handleDelete(scope.$index, scope.row)">
+                @click="handleAllocRole(scope.$index, scope.row)">
             </el-button>
           </el-tooltip>
           <el-popconfirm :title="`确定删除${scope.row.username}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
@@ -340,11 +347,16 @@ const handleAdd = () => {
   })
 }
 
+// 分配角色
+const handleAllocRole = () => {
+
+}
+
 </script>
 
 <style lang="scss" scoped>
 .search {
-  margin: 2vh 0;
+  margin-bottom: 2vh;
 }
 
 .el-row {
