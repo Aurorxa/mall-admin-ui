@@ -37,8 +37,8 @@
           name="file"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          :before-upload="beforeAvatarUpload" oncontextmenu="return false;" ondragstart="return false;">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" oncontextmenu="return false;" ondragstart="return false;"/>
         <div v-else class="avatar-uploader-icon">
           <el-icon :class="['i-ep-plus']"></el-icon>
         </div>
