@@ -63,6 +63,7 @@ import dialogService from '@caroundsky/el-plus-dialog-service'
 import {DialogConfig} from "@caroundsky/el-plus-dialog-service/src/props"
 import {ResponseData} from "@/utils/global"
 import ChangePassword from '@/components/ChangePassword/index.vue'
+import go from 'await-handler-ts'
 
 const router = useRouter()
 const adminStore = useAdminStore()
@@ -80,7 +81,7 @@ const toggleCollapse = () => {
 
 // 修改密码 hooks
 // 处理个人设置、修改密码、退出登录等逻辑
-const handleCommand = (command: string) => {
+const handleCommand = async (command: string) => {
   // 个人设置
   if (command === 'settings') {
     // TODO 个人设置逻辑还没有写
@@ -97,14 +98,16 @@ const handleCommand = (command: string) => {
           label: '确定 ',
           type: 'primary',
           onClick: async ({vm, ctx, component}: DialogConfig) => {
-            try {
-              const result: ResponseData<null> = await component.submitForm()
-              if (result) {
-                ElMessage.success(result.msg)
-                vm.hide()
-              }
-            } catch (e) {
-              console.error(e)
+            // 如果表单验证失败： error 就是 null ,result 是 undefined
+            // 如果表单验证成功，逻辑正确: error 就是 null ，result 是 json 对象
+            // 如果表单验证成功，逻辑失败：error 是错误的 json 对象，result 是 null
+            let [error, result] = await go<any, ResponseData>(component.submitForm())
+            if (!error && result) {
+              ElMessage({
+                message: result.msg,
+                type: 'success',
+              })
+              vm.hide()
             }
           },
         },
@@ -120,22 +123,20 @@ const handleCommand = (command: string) => {
   }
   // 退出登录
   if (command === 'logout') {
-    ElMessageBox.confirm('确认退出登录吗？', {
+    let [error, result] = await go(ElMessageBox.confirm('确认退出登录吗？', '', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
       type: 'warning',
-      autofocus: false
-    }).then(async () => {
+      autofocus: false,
+    }))
+    if (!error && result) {
       // 触发退出登录操作
       await adminStore.logout()
       // 触发清空 tagsView 动作
       await tagsViewStore.clear()
       // 跳转到登录页面
-      await router.push('/login')
-
-    }).catch(() => {
-
-    })
+      router.push('/login')
+    }
   }
 }
 

@@ -252,7 +252,10 @@ const handleEdit = (index: number, row: PageListReturnType) => {
           // 如果表单验证成功，逻辑失败：error 是错误的 json 对象，result 是 null
           let [error, result] = await go<any, ResponseData>(component.submitForm())
           if (!error && result) {
-            ElMessage.success(result.msg)
+            ElMessage({
+              message: result.msg,
+              type: 'success',
+            })
             // 分页查询
             await paginationQuery()
             vm.hide()
@@ -286,7 +289,10 @@ const handleView = (index: number, row: PageListReturnType) => {
 const handleDelete = async (index: number, row: PageListReturnType) => {
   try {
     const result: ResponseData<null> = await adminDeleteApi(row.id)
-    ElMessage.success(result.msg)
+    ElMessage({
+      message: result.msg,
+      type: 'success',
+    })
     // 分页查询
     await paginationQuery()
   } catch (e) {
@@ -330,7 +336,10 @@ const handleAdd = () => {
           // 如果表单验证成功，逻辑失败：error 是错误的 json 对象，result 是 null
           let [error, result] = await go<any, ResponseData>(component.submitForm())
           if (!error && result) {
-            ElMessage.success(result.msg)
+            ElMessage({
+              message: result.msg,
+              type: 'success',
+            })
             // 分页查询
             await paginationQuery()
             vm.hide()
