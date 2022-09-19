@@ -135,7 +135,7 @@ const handleCommand = async (command: string) => {
       // 触发清空 tagsView 动作
       await tagsViewStore.clear()
       // 跳转到登录页面
-      router.push('/login')
+      await router.push('/login')
     }
   }
 }

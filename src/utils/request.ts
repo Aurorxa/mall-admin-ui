@@ -40,7 +40,7 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
             // 调用清空缓存操作
             const {clear} = useAdminStore()
             await clear();
-            router.push('/login')
+            await router.push('/login')
         } else {
             ElMessage.error(result.msg) // 提示错误消息
         }
