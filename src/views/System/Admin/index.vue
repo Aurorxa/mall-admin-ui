@@ -27,7 +27,7 @@
   <el-card shadow="hover">
     <!-- 新增、导入、导出 -->
     <el-row>
-      <el-button @click="handleAdd" icon="i-ep-circle-plus-filled" type="primary">添加用户</el-button>
+      <el-button @click="handleAdd" icon="i-ep-circle-plus-filled" type="primary">添加</el-button>
       <el-button color="#909399" plain icon="i-ep-upload">导入</el-button>
       <el-button color="#feb926" plain icon="i-ep-download" @click="handleExport">导出</el-button>
     </el-row>
