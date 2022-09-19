@@ -18,7 +18,7 @@ const {sidebarOpened} = storeToRefs(sidebarStore)
 
 <style scoped lang="scss">
 .sidebar-header-container {
-  background-color: #545c64;
+  background-color: #334154;
   height: 60px;
   display: flex;
   justify-content: center;

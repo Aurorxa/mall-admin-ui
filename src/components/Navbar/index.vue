@@ -4,10 +4,10 @@
       <el-icon :size="22" style="cursor: pointer" :class="sidebarOpened? 'i-ep-expand': 'i-ep-fold'"
                @click="toggleCollapse"></el-icon>
     </el-col>
-    <el-col :span="16">
+    <el-col :span="18">
       <BreadCrumb></BreadCrumb>
     </el-col>
-    <el-col :span="7" style="display:flex;justify-content: space-evenly;align-items: center">
+    <el-col :span="5" style="display:flex;justify-content: space-evenly;align-items: center">
       <!-- Search -->
       <HeaderSearch />
       <!-- 全屏 -->
