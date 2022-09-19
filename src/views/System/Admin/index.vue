@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="searchOptions.status">
-          <el-option label="禁用" :value="0" />
+          <el-option label="停用" :value="0" />
           <el-option label="启用" :value="1" />
         </el-select>
       </el-form-item>
@@ -18,7 +18,7 @@
         <el-button type="primary" @click="handleSearch" icon="i-ep-search">
           搜索
         </el-button>
-        <el-button type="primary" @click="handleReset" icon="i-ep-refresh">
+        <el-button type="primary" @click="handleReset" icon="i-ep-refresh" color="#fc9b5c" :dark="false" style="color: #fff">
           重置
         </el-button>
       </el-form-item>
