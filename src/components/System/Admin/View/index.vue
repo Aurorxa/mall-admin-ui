@@ -36,7 +36,8 @@
     <el-form-item label="头像">
       <el-avatar :size="178"
                  shape="circle"
-                 :src="data.avatar" />
+                 :src="data.avatar"
+                 oncontextmenu="return false;"/>
     </el-form-item>
     <el-form-item label="排序">
       <el-input v-model="data.sort" disabled />
