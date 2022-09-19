@@ -36,7 +36,6 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
         return result
     } else { // 请求成功，业务失败，给出对应的提示
         if (result.code === ResponseDataCodeEnum.UNAUTHORIZED_CODE) { // 如果 token 过期，token 过时，token 无效等原因，就退出登录
-            ElMessage.error(result.msg) // 提示错误消息
             // 调用清空缓存操作
             const {clear} = useAdminStore()
             await clear();
@@ -44,7 +43,6 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
         } else {
             ElMessage.error(result.msg) // 提示错误消息
         }
-
         return Promise.reject(result)
     }
 
