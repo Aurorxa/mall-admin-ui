@@ -51,7 +51,7 @@ import AppMain from '@/components/AppMain/index.vue'
   }
 
   .main {
-
+    background-color: #f0f2f5;
   }
 }
 </style>
