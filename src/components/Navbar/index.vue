@@ -21,7 +21,7 @@
         <span class="el-dropdown-link"
               style="display: flex;justify-content: center;align-items: center;cursor: pointer">
           <el-avatar :size="25" shape="circle"
-                     :src="avatar" />
+                     :src="avatar" oncontextmenu="return false;" ondragstart="return false;"/>
           <span style="margin-left: 10px">{{ username }}</span>
         </span>
         <template #dropdown>
