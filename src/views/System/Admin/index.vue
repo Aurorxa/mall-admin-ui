@@ -36,7 +36,8 @@
               style="width: 100%"
               stripe
               border
-              table-layout="fixed"
+              table-layout="auto"
+              :highlight-current-row="true"
               :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
       <el-table-column type="index" label="#" />
       <el-table-column label="用户名">
