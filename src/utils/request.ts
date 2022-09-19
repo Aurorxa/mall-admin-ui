@@ -40,6 +40,9 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
             const {clear} = useAdminStore()
             await clear();
             await router.push('/login')
+            // 如果 401 不需要继续将下抛出异常，直接中断即可
+            return new Promise(() => {
+            })
         } else {
             ElMessage.error(result.msg) // 提示错误消息
         }

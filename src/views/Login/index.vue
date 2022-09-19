@@ -137,7 +137,7 @@ const onSubmit = async () => {
       // 跳转到首页
       await router.push('/')
     } catch (e) {
-      console.log(e)
+      console.log('login',e)
     } finally {
       loading.value = false
     }
