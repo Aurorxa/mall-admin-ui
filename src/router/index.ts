@@ -86,6 +86,15 @@ const privateRoutes: Array<RouteRecordRaw> = [
                     icon: ''
                 }
             },
+            {
+                path: '/system/dept',
+                name: 'dept',
+                component: () => import( '@/views/System/Dept/index.vue'),
+                meta: {
+                    title: '部门管理',
+                    icon: ''
+                }
+            },
         ]
     },
 ]

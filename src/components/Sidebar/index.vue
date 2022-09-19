@@ -55,6 +55,12 @@ const menuList = reactive([
         icon: 'i-ep-user',
         path: '/system/menu'
       },
+      {
+        id: '81',
+        title: '部门管理',
+        icon: 'i-ep-user',
+        path: '/system/dept'
+      },
     ]
   },
   {
